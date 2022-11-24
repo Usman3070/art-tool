@@ -207,6 +207,7 @@ export const ModalComponent = (props) => {
             style={{
               backgroundColor: "#fff",
               padding: "10px",
+              borderRadius: "7px",
             }}
           >
             <form onSubmit={handleSubmit}>
@@ -220,13 +221,13 @@ export const ModalComponent = (props) => {
                 spacing={4}
               >
                 <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                  <Typography sx={{ color: "#CECECE", marginBottom: "4%" }}>
+                  <Typography sx={{ color: "#808080", marginBottom: "4%" }}>
                     Supply
                   </Typography>
                   <EditorInput setValues={editValues} />
                 </Grid>
                 <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                  <Typography sx={{ color: "#CECECE", marginBottom: "4%" }}>
+                  <Typography sx={{ color: "#808080", marginBottom: "4%" }}>
                     Height
                   </Typography>
                   <TextField
@@ -234,6 +235,7 @@ export const ModalComponent = (props) => {
                     id='outlined-number'
                     placeholder='0'
                     type='number'
+                    color='#808080'
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -245,7 +247,7 @@ export const ModalComponent = (props) => {
                   />
                 </Grid>
                 <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                  <Typography sx={{ color: "#CECECE", marginBottom: "4%" }}>
+                  <Typography sx={{ color: "#808080", marginBottom: "4%" }}>
                     Width
                   </Typography>
                   <TextField
@@ -272,7 +274,7 @@ export const ModalComponent = (props) => {
                         fontSize: "14px",
                         fontWeight: 500,
                         fontFamily: "poppins-light",
-                        color: "#CECECE",
+                        color: "#808080",
                       }}
                     >
                       Name :
@@ -297,7 +299,7 @@ export const ModalComponent = (props) => {
                         fontSize: "14px",
                         fontWeight: 500,
                         fontFamily: "poppins-light",
-                        color: "#CECECE",
+                        color: "#808080",
                       }}
                     >
                       Symbol :
@@ -322,7 +324,7 @@ export const ModalComponent = (props) => {
                         fontSize: "14px",
                         fontWeight: 500,
                         fontFamily: "poppins-light",
-                        color: "#CECECE",
+                        color: "#808080",
                       }}
                     >
                       Royalty Percent :
@@ -353,7 +355,7 @@ export const ModalComponent = (props) => {
                           fontSize: "14px",
                           fontWeight: 500,
                           fontFamily: "poppins-light",
-                          color: "#CECECE",
+                          color: "#808080",
                         }}
                       >
                         Royalty Wallets :
@@ -419,7 +421,7 @@ export const ModalComponent = (props) => {
                         fontSize: "14px",
                         fontWeight: 500,
                         fontFamily: "poppins-light",
-                        color: "#CECECE",
+                        color: "#808080",
                       }}
                     >
                       External Link (Website):
@@ -447,7 +449,7 @@ export const ModalComponent = (props) => {
                         fontSize: "14px",
                         fontWeight: 500,
                         fontFamily: "poppins-light",
-                        color: "#CECECE",
+                        color: "#808080",
                       }}
                     >
                       Description :

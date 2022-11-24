@@ -142,8 +142,8 @@ const Edit = (props) => {
         lg={12}
         md={12}
         sx={{
-          marginBottom: "5%",
-          marginTop: "3%",
+          paddingBottom: "2%",
+          paddingTop: "3%",
           display: "flex",
           justifyContent: "center",
         }}
@@ -189,7 +189,7 @@ const Edit = (props) => {
           </Button>
         </Grid> */}
       </Grid>
-      <Container>
+      {/* <Container>
         <Grid container xl={12} lg={12} md={12} sm={12} xs={12} spacing={4}>
           <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>
             <Typography variant='h4' sx={{ color: "#fff" }}>
@@ -344,7 +344,6 @@ const Edit = (props) => {
                       variant='contained'
                       sx={{
                         borderRadius: "15px",
-                        // marginTop: "4%",
                         backgroundColor: "red",
                         width: "50%",
                         marginBottom: "4%",
@@ -387,7 +386,6 @@ const Edit = (props) => {
                         >
                           <Button>Upload</Button>
                         </Button>
-                        {/* )} */}
                       </div>
                       <div
                         style={{
@@ -395,7 +393,8 @@ const Edit = (props) => {
                           display: "flex",
                           justifyContent: "center",
                         }}
-                      ></div>
+                      >
+                      </div>
                       <p style={{ color: "red" }}>{error}</p>
                     </div>
                   </Grid>
@@ -431,9 +430,6 @@ const Edit = (props) => {
                                 >
                                   <Grid item xl={3} lg={3} md={3} sm={3} xs={3}>
                                     <img
-                                      // src={`../EditingPage/layers/${JSON.parse(
-                                      //   sessionStorage.uuid
-                                      // )}/${data.folder}/${innerData}`}
                                       src={logo}
                                     />
                                   </Grid>
@@ -482,7 +478,6 @@ const Edit = (props) => {
                       marginTop: "4%",
                       backgroundColor: "red",
                       width: "25%",
-                      // marginBottom: "4%",
                     }}
                     onClick={handleUpload}
                   >
@@ -501,7 +496,7 @@ const Edit = (props) => {
           </Grid>
           <Grid item xl={4} lg={4} md={4}></Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </div>
   );
 };

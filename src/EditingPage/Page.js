@@ -26,6 +26,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Edit from "../NewEditingPage/Edit";
 
 export const Page = (props) => {
   const { objects, dispatch1 } = React.useContext(ObjectContext);
@@ -210,7 +211,7 @@ export const Page = (props) => {
     setShow(true);
   };
   return (
-    <div>
+    <>
       {/* <div
         className='editor-left'
         style={{
@@ -288,7 +289,7 @@ export const Page = (props) => {
               />
             </Hidden>
           </div>
-          <div
+          <
             style={{
               border: "1px solid #32306A",
               borderRadius: "12px",
@@ -442,6 +443,7 @@ export const Page = (props) => {
         />
       </div> */}
       <Container>
+        <Edit />
         <Grid container spacing={2}>
           <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
             <div>
@@ -548,6 +550,6 @@ export const Page = (props) => {
       {/*</div>
         </div>
       </div> */}
-    </div>
+    </>
   );
 };

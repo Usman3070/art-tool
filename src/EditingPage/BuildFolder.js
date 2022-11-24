@@ -16,7 +16,16 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Button, Card, CardContent, Paper, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Paper,
+  Typography,
+  TextField,
+} from "@mui/material";
+import { TreeContext } from "./EditingPage";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -32,6 +41,7 @@ import { Button, Card, CardContent, Paper, Typography } from "@mui/material";
 // ==============
 
 export const Folders = (props) => {
+  const { dispatchMain } = React.useContext(TreeContext);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
   const { selection, dispatch2 } = React.useContext(ObjectSelection);
   const children = props.children;
@@ -65,6 +75,15 @@ export const Folders = (props) => {
 
   console.log(list, "list");
 
+  const handleRaritySet = (folderIndex, subfolderIndex, val) => {
+    dispatchMain({
+      type: "update",
+      value: val,
+      folderIndex: folderIndex,
+      subfolderIndex: subfolderIndex,
+    });
+  };
+
   return (
     <div>
       <Paper style={{ maxHeight: 360, overflow: "auto" }}>
@@ -79,32 +98,33 @@ export const Folders = (props) => {
                         list.map((folder, index1) => (
                           <div style={{}}>
                             <Accordion className='accordian_root'>
-                              <AccordionSummary
-                                expandIcon={
-                                  <ExpandMoreIcon
-                                    style={{ color: "#CECECE" }}
-                                  />
+                              <Draggable
+                                key={
+                                  folder.name.slice(0, 1).toUpperCase() +
+                                  folder.name.slice(1)
                                 }
-                                aria-controls='panel1a-content'
-                                id='panel1a-header'
+                                draggableId={
+                                  folder.name.slice(0, 1).toUpperCase() +
+                                  folder.name.slice(1)
+                                }
+                                index={index1}
                               >
-                                <Typography
+                                {(provided) => (
+                                  <AccordionSummary
+                                    expandIcon={
+                                      <ExpandMoreIcon
+                                        style={{ color: "#CECECE" }}
+                                      />
+                                    }
+                                    aria-controls='panel1a-content'
+                                    id='panel1a-header'
+                                  >
+                                    {/* <Typography
                                   sx={{ fontSize: "10px", marginTop: "5%" }}
                                 >
                                   Rarity %: 0/100
-                                </Typography>
-                                <Draggable
-                                  key={
-                                    folder.name.slice(0, 1).toUpperCase() +
-                                    folder.name.slice(1)
-                                  }
-                                  draggableId={
-                                    folder.name.slice(0, 1).toUpperCase() +
-                                    folder.name.slice(1)
-                                  }
-                                  index={index1}
-                                >
-                                  {(provided) => (
+                                </Typography> */}
+
                                     <ListItem
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
@@ -112,7 +132,7 @@ export const Folders = (props) => {
                                       button
                                       component='a'
                                       href='#'
-                                      style={{ width: "60%" }}
+                                      // style={{ width: "60%" }}
                                     >
                                       <Typography
                                         // style={{  }}
@@ -128,10 +148,10 @@ export const Folders = (props) => {
                                           folder.name.slice(1)}
                                       </Typography>
                                     </ListItem>
-                                  )}
-                                </Draggable>
-                                {provided.placeholder}
-                              </AccordionSummary>
+                                  </AccordionSummary>
+                                )}
+                              </Draggable>
+                              {provided.placeholder}
                               <div>
                                 {folder.children.map((subfolder, index2) => (
                                   <div
@@ -149,14 +169,68 @@ export const Folders = (props) => {
                                           borderBottom: "1px solid #2F2861",
                                         }}
                                       >
-                                        <Typography
-                                          className='elementSubfolder'
-                                          style={{
-                                            fontFamily: "Poppins",
-                                          }}
-                                        >
-                                          {subfolder.name}
-                                        </Typography>
+                                        <Grid container>
+                                          <Grid
+                                            xl={6}
+                                            lg={6}
+                                            md={6}
+                                            sm={6}
+                                            xs={6}
+                                          >
+                                            <Typography
+                                              className='elementSubfolder'
+                                              style={{
+                                                fontFamily: "Poppins",
+                                              }}
+                                            >
+                                              {subfolder.name}
+                                            </Typography>
+                                          </Grid>
+                                          <Grid
+                                            xl={6}
+                                            lg={6}
+                                            md={6}
+                                            sm={6}
+                                            xs={6}
+                                          >
+                                            {/* <Typography
+                                              style={{
+                                                fontFamily: "poppins-light",
+                                                // maxWidth: "10%",
+                                                // marginLeft: "3%",
+                                                color: "rgb(172, 172, 172)",
+                                              }}
+                                            >
+                                              Rarity:
+                                            </Typography> */}
+                                            <div
+                                              style={{
+                                                // width: "25%",
+                                                // paddingLeft: "2%",
+                                                color: "#fff",
+                                              }}
+                                            >
+                                              <TextField
+                                                className='rarityText'
+                                                size='small'
+                                                variant='outlined'
+                                                inputProps={{
+                                                  style: {
+                                                    textAlign: "center",
+                                                  },
+                                                }}
+                                                placeholder='Rarity'
+                                                onBlur={(event) => {
+                                                  handleRaritySet(
+                                                    index1,
+                                                    index2,
+                                                    parseInt(event.target.value)
+                                                  );
+                                                }}
+                                              />
+                                            </div>
+                                          </Grid>
+                                        </Grid>
                                       </ListItem>
                                     </AccordionDetails>
                                   </div>
