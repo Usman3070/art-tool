@@ -463,7 +463,7 @@ export const Page = (props) => {
             xs={12}
             // sx={{ marginLeft: "2%" }}
           >
-            <Typography variant='h3' sx={{ color: "#fff", marginTop: "2%" }}>
+            <Typography variant="h3" sx={{ color: "#fff", marginTop: "2%" }}>
               Traits
             </Typography>
             {show && (
@@ -473,14 +473,14 @@ export const Page = (props) => {
                   <Typography>Name</Typography>
                   <TextField
                     fullWidth
-                    variant='outlined'
-                    placeholder='name'
-                    name='name'
+                    variant="outlined"
+                    placeholder="name"
+                    name="name"
                   />
                 </CardContent>
                 <CardActions>
                   <Button
-                    variant='contained'
+                    variant="contained"
                     sx={{ backgroundColor: "red" }}
                     onClick={handleHide}
                   >
@@ -490,25 +490,25 @@ export const Page = (props) => {
                     <input
                       style={{ zIndex: 2 }}
                       {...getInputProps()}
-                      directory=''
-                      webkitdirectory=''
-                      type='file'
+                      directory=""
+                      webkitdirectory=""
+                      type="file"
                     />
 
                     {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
                     <IconButton
-                      color='primary'
-                      aria-label='upload picture'
-                      component='span'
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
                       style={{
                         zIndex: 2,
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                       }}
-                      size='medium'
+                      size="medium"
                     >
                       {/* <PhotoCamera /> */}
                       Upload
@@ -520,7 +520,7 @@ export const Page = (props) => {
             )}
             <TreesTemp folderData={props.folderStructure} />
             <Button
-              variant='contained'
+              variant="contained"
               sx={{ marginTop: "2%" }}
               onClick={handleShow}
             >
@@ -528,7 +528,7 @@ export const Page = (props) => {
             </Button>
           </Grid>
           <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-            <div id='content'>
+            <div id="content">
               <Items
                 onClick={setCurrentElement}
                 files={props.folderStructure}

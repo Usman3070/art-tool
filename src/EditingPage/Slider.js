@@ -60,18 +60,16 @@ export const SliderComponent = (props) => {
     });
   };
 
-
-
   return !props.marks ? (
-   <>
-     <Slider
-      value={currentSlide}
-      valueLabelDisplay="auto"
-      onChange={changeValue}
-      min={0}
-      max={1000}
-    />
-   </>
+    <>
+      <Slider
+        value={currentSlide}
+        valueLabelDisplay="auto"
+        onChange={changeValue}
+        min={0}
+        max={1000}
+      />
+    </>
   ) : (
     <Slider
       aria-label="Temperature"

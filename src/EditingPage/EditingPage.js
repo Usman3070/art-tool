@@ -30,7 +30,6 @@ export const EditingPage = () => {
     });
     //const data = await response.json();
     setFileData(data.data);
-    console.log(data.data, "ssssssssssssssssssssssss");
   };
 
   React.useEffect(() => {
@@ -39,7 +38,6 @@ export const EditingPage = () => {
 
   const subfoldersLength =
     fileData && fileData.children && fileData.children.length;
-  console.log(subfoldersLength, "subfoldersLength");
   const hashCodeElement = [];
   const pathList = [];
 

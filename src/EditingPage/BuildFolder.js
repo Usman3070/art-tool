@@ -57,6 +57,12 @@ export const Folders = (props) => {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setList(items);
+    dispatch1({
+      type: "update",
+      nameToFind: result?.draggableId,
+      valueToChange: "depth",
+      currentSlide: result?.destination?.index,
+    });
   };
 
   React.useEffect(() => {
@@ -72,27 +78,27 @@ export const Folders = (props) => {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId='characters'>
+                <Droppable droppableId="characters">
                   {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                       {list &&
                         list.map((folder, index1) => (
                           <div style={{}}>
-                            <Accordion className='accordian_root'>
+                            <Accordion className="accordian_root">
                               <AccordionSummary
                                 expandIcon={
                                   <ExpandMoreIcon
                                     style={{ color: "#CECECE" }}
                                   />
                                 }
-                                aria-controls='panel1a-content'
-                                id='panel1a-header'
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
                               >
-                                <Typography
+                                {/* <Typography
                                   sx={{ fontSize: "10px", marginTop: "5%" }}
                                 >
                                   Rarity %: 0/100
-                                </Typography>
+                                </Typography> */}
                                 <Draggable
                                   key={
                                     folder.name.slice(0, 1).toUpperCase() +
@@ -110,13 +116,13 @@ export const Folders = (props) => {
                                       {...provided.dragHandleProps}
                                       ref={provided.innerRef}
                                       button
-                                      component='a'
-                                      href='#'
-                                      style={{ width: "60%" }}
+                                      component="a"
+                                      href="#"
+                                      // style={{ width: "60%" }}
                                     >
                                       <Typography
                                         // style={{  }}
-                                        className='element'
+                                        className="element"
                                         // eslint-disable-next-line react/jsx-no-duplicate-props
                                         style={{
                                           fontWeight: "bold",
@@ -143,14 +149,14 @@ export const Folders = (props) => {
                                       <ListItem
                                         key={index2}
                                         button
-                                        component='a'
-                                        href='#'
+                                        component="a"
+                                        href="#"
                                         style={{
                                           borderBottom: "1px solid #2F2861",
                                         }}
                                       >
                                         <Typography
-                                          className='elementSubfolder'
+                                          className="elementSubfolder"
                                           style={{
                                             fontFamily: "Poppins",
                                           }}
@@ -163,9 +169,9 @@ export const Folders = (props) => {
                                 ))}
                               </div>
                               <TreeItem
-                                nodeId='1'
+                                nodeId="1"
                                 label={
-                                  <ListItem root component='a' href='#'>
+                                  <ListItem root component="a" href="#">
                                     <Typography
                                       styles={{ backgroundColor: "#034b92" }}
                                     >
@@ -183,7 +189,7 @@ export const Folders = (props) => {
               </DragDropContext>
             </CardContent>
             <Button
-              variant='contained'
+              variant="contained"
               sx={{ backgroundColor: "red" }}
               onClick={props.onClick}
             >
