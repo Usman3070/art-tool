@@ -67,6 +67,12 @@ export const Folders = (props) => {
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setList(items);
+    dispatch1({
+      type: "update",
+      nameToFind: result?.draggableId,
+      valueToChange: "depth",
+      currentSlide: result?.destination?.index,
+    });
   };
 
   React.useEffect(() => {
@@ -169,68 +175,14 @@ export const Folders = (props) => {
                                           borderBottom: "1px solid #2F2861",
                                         }}
                                       >
-                                        <Grid container>
-                                          <Grid
-                                            xl={6}
-                                            lg={6}
-                                            md={6}
-                                            sm={6}
-                                            xs={6}
-                                          >
-                                            <Typography
-                                              className='elementSubfolder'
-                                              style={{
-                                                fontFamily: "Poppins",
-                                              }}
-                                            >
-                                              {subfolder.name}
-                                            </Typography>
-                                          </Grid>
-                                          <Grid
-                                            xl={6}
-                                            lg={6}
-                                            md={6}
-                                            sm={6}
-                                            xs={6}
-                                          >
-                                            {/* <Typography
-                                              style={{
-                                                fontFamily: "poppins-light",
-                                                // maxWidth: "10%",
-                                                // marginLeft: "3%",
-                                                color: "rgb(172, 172, 172)",
-                                              }}
-                                            >
-                                              Rarity:
-                                            </Typography> */}
-                                            <div
-                                              style={{
-                                                // width: "25%",
-                                                // paddingLeft: "2%",
-                                                color: "#fff",
-                                              }}
-                                            >
-                                              <TextField
-                                                className='rarityText'
-                                                size='small'
-                                                variant='outlined'
-                                                inputProps={{
-                                                  style: {
-                                                    textAlign: "center",
-                                                  },
-                                                }}
-                                                placeholder='Rarity'
-                                                onBlur={(event) => {
-                                                  handleRaritySet(
-                                                    index1,
-                                                    index2,
-                                                    parseInt(event.target.value)
-                                                  );
-                                                }}
-                                              />
-                                            </div>
-                                          </Grid>
-                                        </Grid>
+                                        <Typography
+                                          className='elementSubfolder'
+                                          style={{
+                                            fontFamily: "Poppins",
+                                          }}
+                                        >
+                                          {subfolder.name}
+                                        </Typography>
                                       </ListItem>
                                     </AccordionDetails>
                                   </div>

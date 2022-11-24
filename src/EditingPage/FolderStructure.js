@@ -30,7 +30,6 @@ export default function TreesTemp(props) {
     setTreeData(null);
   };
   React.useEffect(() => {
-    console.log("xdhgfhsdgfhsdj");
     if (props.folderData) {
       setTreeData(props.folderData);
     }
@@ -48,7 +47,7 @@ export default function TreesTemp(props) {
       {treeData && (
         <List>
           <TreeView
-            aria-label='file system navigator'
+            aria-label="file system navigator"
             defaultCollapseIcon={<IconButton />}
             defaultExpandIcon={<MenuIcon />}
             sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
