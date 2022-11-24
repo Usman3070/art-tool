@@ -1,0 +1,1 @@
+const baseURL = `${process.env.REACT_APP_SERVERURL/JSON.parse(sessionStorage.uuid)}`;

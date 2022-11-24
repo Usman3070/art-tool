@@ -1,0 +1,20 @@
+.carouselElement {
+    margin: 20px;
+    font-family: poppins-light;
+    padding: 5px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    min-height: 450px;
+    color: #CECECE !important;
+    
+    /* backdrop-filter: blur(50px) !important; */
+}
+.react-multiple-carousel__arrow{
+    background: rgba(78, 57, 215, 0.5);
+border-radius: 12px;
+}
+/* .carouselElement:hover {
+    background-color: rgba(216, 216, 216, 0.562);
+    font-weight: bold;
+    
+} */
