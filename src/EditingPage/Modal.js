@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, Fade, InputBase, TextField } from "@material-ui/core";
+import { Fade, InputBase, TextField } from "@material-ui/core";
 import { NumberOfCopies, ObjectContext, TreeContext } from "./EditingPage";
 import { ToastContainer, toast } from "react-toastify";
 import AddIcon from "@material-ui/icons/Add";
@@ -11,7 +11,7 @@ import { signUpSchema } from "../schemas";
 import TotalCopies from "./totalCopies";
 import { EditorInput } from "./EditorInput";
 import { ObjectSelection } from "./EditingPage";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 
 const initialValues = {
   name: "",
@@ -479,16 +479,7 @@ export const ModalComponent = (props) => {
                 }}
               >
                 <Button
-                  style={{
-                    background:
-                      "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
-                    padding: "10px 44px",
-                    borderRadius: "0",
-                    fontFamily: "poppins-light",
-                  }}
                   variant='contained'
-                  color='secondary'
-                  size='large'
                   onClick={() => {
                     handleSubmit();
                     handleClick();
