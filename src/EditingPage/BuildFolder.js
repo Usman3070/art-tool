@@ -175,14 +175,58 @@ export const Folders = (props) => {
                                           borderBottom: "1px solid #2F2861",
                                         }}
                                       >
-                                        <Typography
-                                          className='elementSubfolder'
-                                          style={{
-                                            fontFamily: "Poppins",
-                                          }}
-                                        >
-                                          {subfolder.name}
-                                        </Typography>
+                                        <Grid container>
+                                          <Grid
+                                            item
+                                            xl={6}
+                                            lg={6}
+                                            md={6}
+                                            sm={6}
+                                            xs={6}
+                                          >
+                                            <Typography
+                                              className='elementSubfolder'
+                                              style={{
+                                                fontFamily: "Poppins",
+                                              }}
+                                            >
+                                              {subfolder.name}
+                                            </Typography>
+                                          </Grid>
+                                          <Grid
+                                            item
+                                            xl={6}
+                                            lg={6}
+                                            md={6}
+                                            sm={6}
+                                            xs={6}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#fff",
+                                              }}
+                                            >
+                                              <TextField
+                                                className='rarityText'
+                                                size='small'
+                                                variant='outlined'
+                                                inputProps={{
+                                                  style: {
+                                                    textAlign: "center",
+                                                  },
+                                                }}
+                                                placeholder='out of 100'
+                                                onBlur={(event) => {
+                                                  handleRaritySet(
+                                                    index1,
+                                                    index2,
+                                                    parseInt(event.target.value)
+                                                  );
+                                                }}
+                                              />
+                                            </div>
+                                          </Grid>
+                                        </Grid>
                                       </ListItem>
                                     </AccordionDetails>
                                   </div>
