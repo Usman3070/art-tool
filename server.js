@@ -34,7 +34,6 @@ const dirTree = require("directory-tree");
 app.get("/getFolderTree", (req, res) => {
   const uuid = req.query.uuid;
   const tree = dirTree(`src/EditingPage/layers/${uuid}`);
-  console.log(tree, "qwert");
   res.send(JSON.stringify(tree));
 });
 
@@ -233,7 +232,6 @@ app.post("/submitDetails", (request, response) => {
         JSON.parse(layerData[index].height)
       );
       const buffer = canvas.toBuffer("image/png", 0);
-      console.log(buffer, "bufferrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
       fs.writeFileSync(__dirname + `/generated/${uuid}/${hash}.png`, buffer);
 
       if (tree.children.length === index + 1) {
