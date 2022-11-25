@@ -15,7 +15,7 @@ body {
   /* background-color: #2f1486; */
   background-image: linear-gradient(#44327e, #44327e);
   /* background-size: cover; */
-  height: 120%;
+  height: 130%;
 }
 @media (max-width: 1586px) {
   body {

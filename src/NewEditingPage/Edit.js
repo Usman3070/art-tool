@@ -136,20 +136,7 @@ const Edit = (props) => {
   };
   return (
     <div>
-      <Grid
-        container
-        xl={12}
-        lg={12}
-        md={12}
-        sx={{
-          paddingBottom: "2%",
-          paddingTop: "3%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Grid item xl={4} lg={4} md={4}>
-          <Button
+      {/* <Button
             sx={{
               backgroundColor: "#fff",
               color: "#000",
@@ -161,34 +148,33 @@ const Edit = (props) => {
             variant='contained'
           >
             Help, I need a guide
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: "#111",
-              marginLeft: "2%",
-              "&:hover": {
-                //you want this to be the same as the backgroundColor above
-                backgroundColor: "#111",
-              },
-            }}
-            variant='contained'
-          >
-            <a
-              href={`${process.env.REACT_APP_SERVERURL}/Silly_Sausages_4.zip`}
-              download
-              target='_blank'
-              style={{ textDecoration: "none" }}
-            >
-              <Typography sx={{ color: "#fff" }}>Load an example</Typography>
-            </a>
-          </Button>
-        </Grid>
-        {/* <Grid item xl={4} lg={4} md={4}>
+          </Button> */}
+      <Button
+        sx={{
+          backgroundColor: "#111",
+          marginRight: "5%",
+          float: "right",
+          "&:hover": {
+            //you want this to be the same as the backgroundColor above
+            backgroundColor: "#111",
+          },
+        }}
+        variant='contained'
+      >
+        <a
+          href={`${process.env.REACT_APP_SERVERURL}/Silly_Sausages_4.zip`}
+          download
+          target='_blank'
+          style={{ textDecoration: "none" }}
+        >
+          <Typography sx={{ color: "#fff" }}>Load an example</Typography>
+        </a>
+      </Button>
+      {/* <Grid item xl={4} lg={4} md={4}>
           <Button sx={{ backgroundColor: "#111" }} variant='contained'>
             Load an example
           </Button>
         </Grid> */}
-      </Grid>
       {/* <Container>
         <Grid container xl={12} lg={12} md={12} sm={12} xs={12} spacing={4}>
           <Grid item xl={4} lg={4} md={4} sm={6} xs={12}>

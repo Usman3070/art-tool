@@ -444,7 +444,7 @@ export const Page = (props) => {
         />
       </div> */}
       <NavHomePage />
-      <Container>
+      <Typography sx={{ paddingLeft: "7%", paddingRight: "7%" }}>
         <Edit />
         <Grid container spacing={2}>
           <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
@@ -467,7 +467,9 @@ export const Page = (props) => {
             xs={12}
             // sx={{ marginLeft: "2%" }}
           >
-            <Typography variant='h3' sx={{ color: "#fff", marginTop: "2%" }}>
+            <Typography
+              sx={{ color: "#fff", fontSize: "26px", marginBottom: "1%" }}
+            >
               Traits
             </Typography>
             {show && (
@@ -485,12 +487,15 @@ export const Page = (props) => {
                 <CardActions>
                   <Button
                     variant='contained'
-                    sx={{ backgroundColor: "red" }}
+                    sx={{ backgroundColor: "red", borderRadius: "18px" }}
                     onClick={handleHide}
                   >
                     -
                   </Button>
-                  <div style={{ zIndex: 2 }} {...getRootProps()}>
+                  <div
+                    style={{ zIndex: 2, marginLeft: "40%" }}
+                    {...getRootProps()}
+                  >
                     <input
                       style={{ zIndex: 2 }}
                       {...getInputProps()}
@@ -515,7 +520,16 @@ export const Page = (props) => {
                       size='medium'
                     >
                       {/* <PhotoCamera /> */}
-                      Upload
+                      <Button
+                        variant='contained'
+                        sx={{
+                          fontSize: "12px",
+                          width: "100%",
+                          padding: "7px",
+                        }}
+                      >
+                        Select Folder
+                      </Button>
                     </IconButton>
                     {/* )} */}
                   </div>
@@ -525,7 +539,7 @@ export const Page = (props) => {
             <TreesTemp folderData={props.folderStructure} />
             <Button
               variant='contained'
-              sx={{ marginTop: "2%" }}
+              sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}
               onClick={handleShow}
             >
               +
@@ -545,7 +559,7 @@ export const Page = (props) => {
             </div>
           </Grid>
         </Grid>
-      </Container>
+      </Typography>
       <div>
         <LoadingModalComponent isOpen={loadingModal} />
       </div>
