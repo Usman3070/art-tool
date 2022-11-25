@@ -27,6 +27,7 @@ import {
   Typography,
 } from "@mui/material";
 import Edit from "../NewEditingPage/Edit";
+import { NavHomePage } from "../ThreeDIntro.js/navigationBar";
 
 export const Page = (props) => {
   const { objects, dispatch1 } = React.useContext(ObjectContext);
@@ -442,6 +443,7 @@ export const Page = (props) => {
           folderStructure={props.folderStructure}
         />
       </div> */}
+      <NavHomePage />
       <Container>
         <Edit />
         <Grid container spacing={2}>
