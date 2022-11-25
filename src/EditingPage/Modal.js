@@ -39,6 +39,7 @@ export const ModalComponent = (props) => {
       validationSchema: signUpSchema,
       onSubmit: (values) => {
         console.log(values);
+        handleClick();
       },
     });
 
@@ -232,10 +233,10 @@ export const ModalComponent = (props) => {
                   </Typography>
                   <TextField
                     // className='editor_textfield mid_textFields'
-                    id='outlined-number'
-                    placeholder='0'
-                    type='number'
-                    color='#808080'
+                    id="outlined-number"
+                    placeholder="0"
+                    type="number"
+                    color="#808080"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -252,9 +253,9 @@ export const ModalComponent = (props) => {
                   </Typography>
                   <TextField
                     // className='editor_textfield mid_textFields'
-                    id='outlined-number'
-                    placeholder='0'
-                    type='number'
+                    id="outlined-number"
+                    placeholder="0"
+                    type="number"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -281,9 +282,9 @@ export const ModalComponent = (props) => {
                     </div>
                     <TextField
                       fullWidth
-                      variant='outlined'
-                      placeholder='name'
-                      name='name'
+                      variant="outlined"
+                      placeholder="name"
+                      name="name"
                       value={values.name}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -306,9 +307,9 @@ export const ModalComponent = (props) => {
                     </div>
                     <TextField
                       fullWidth
-                      variant='outlined'
-                      placeholder='symbol'
-                      name='symbol'
+                      variant="outlined"
+                      placeholder="symbol"
+                      name="symbol"
                       value={values.symbol}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -331,9 +332,9 @@ export const ModalComponent = (props) => {
                     </div>
                     <TextField
                       fullWidth
-                      variant='outlined'
-                      placeholder=' Royalty Percent'
-                      name='royaltyPercent'
+                      variant="outlined"
+                      placeholder=" Royalty Percent"
+                      name="royaltyPercent"
                       value={values.royaltyPercent}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -364,9 +365,9 @@ export const ModalComponent = (props) => {
                         <> */}
                       <TextField
                         fullWidth
-                        variant='outlined'
-                        placeholder='Royalty Wallets'
-                        name='royaltyWallet'
+                        variant="outlined"
+                        placeholder="Royalty Wallets"
+                        name="royaltyWallet"
                         value={values.royaltyWallet}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -383,9 +384,9 @@ export const ModalComponent = (props) => {
                       ) : null}
                       <TextField
                         fullWidth
-                        variant='outlined'
-                        placeholder='share'
-                        name='share'
+                        variant="outlined"
+                        placeholder="share"
+                        name="share"
                         value={values.share}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -428,9 +429,9 @@ export const ModalComponent = (props) => {
                     </div>
                     <TextField
                       fullWidth
-                      variant='outlined'
-                      placeholder='URL'
-                      name='external'
+                      variant="outlined"
+                      placeholder="URL"
+                      name="external"
                       value={values.external}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -456,9 +457,9 @@ export const ModalComponent = (props) => {
                     </div>
                     <TextField
                       fullWidth
-                      placeholder='description'
-                      variant='outlined'
-                      name='description'
+                      placeholder="description"
+                      variant="outlined"
+                      name="description"
                       value={values.description}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -479,10 +480,9 @@ export const ModalComponent = (props) => {
                 }}
               >
                 <Button
-                  variant='contained'
+                  variant="contained"
                   onClick={() => {
                     handleSubmit();
-                    handleClick();
                   }}
                 >
                   Create
@@ -492,9 +492,9 @@ export const ModalComponent = (props) => {
           </div>
         </>
       </Box>
-      <div className='form-group'>
+      <div className="form-group">
         <ToastContainer
-          position='bottom-right'
+          position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={true}
