@@ -124,7 +124,6 @@ const Edit = (props) => {
       // alert("you are uploading zip file or an empty folder");
     }
   }, []);
-  console.log(foldersData, "dfghdgfdjjhj");
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedFiles) => onDrop(acceptedFiles),
     accept: "image/jpeg, image/png, image/jpg,",
@@ -159,12 +158,12 @@ const Edit = (props) => {
             backgroundColor: "#111",
           },
         }}
-        variant='contained'
+        variant="contained"
       >
         <a
           href={`${process.env.REACT_APP_SERVERURL}/Silly_Sausages_4.zip`}
           download
-          target='_blank'
+          target="_blank"
           style={{ textDecoration: "none" }}
         >
           <Typography sx={{ color: "#fff" }}>Load an example</Typography>

@@ -25,7 +25,6 @@ export default function TreesTemp(props) {
   const theme = useTheme();
   const classes = useStyles(theme);
   // const treeData = props.folderData;
-  console.log(treeData, "ssssssssssssss treeData");
   const handleFolders = () => {
     setTreeData(null);
   };

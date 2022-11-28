@@ -154,6 +154,7 @@ app.post("/submitDetails", (request, response) => {
   const seller_fee_basis_points = data.sellerFee;
   const description = data.description;
   const URL = data.URL;
+  console.log(creators, "sdflksdhfk");
   const context = canvas.getContext("2d", {
     patternQuality: "bilinear",
     quality: "bilinear",

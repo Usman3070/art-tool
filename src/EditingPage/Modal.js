@@ -25,8 +25,6 @@ const initialValues = {
   name: "",
   symbol: "",
   royaltyPercent: "",
-  creator: "",
-  share: "",
   userWithShare: [{ creator: "", share: "" }],
   external: "",
   description: "",
@@ -42,17 +40,6 @@ export const ModalComponent = (props) => {
 
   const [totalCopies, setTotalCopies] = React.useState({ value: 0 });
 
-  const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: signUpSchema,
-      onSubmit: (values) => {
-        console.log(values, "testing");
-        handleClick();
-        console.log(values.name, "nameeee");
-      },
-    });
-
   const { objects } = React.useContext(ObjectContext);
   const { total } = React.useContext(NumberOfCopies);
   const { fileData } = React.useContext(TreeContext);
@@ -67,20 +54,22 @@ export const ModalComponent = (props) => {
   const [URL, setURL] = React.useState("");
   const [next, setNext] = React.useState(false);
   const [code, setCode] = React.useState("");
-  // const [canvasHeight, setCanvasHeight] = React.useState({
-  //   value: 600,
-  // });
-  // const [canvasWidth, setCanvasWidth] = React.useState({
-  //   value: 600,
-  // });
 
+  const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signUpSchema,
+      onSubmit: (values) => {
+        handleClick();
+      },
+    });
   const handleClick = async () => {
     const data = {
       objects: objects,
       total: total,
       sellerFee,
       symbol: values.symbol,
-      creators: values.royaltyWallet,
+      creators: inputFields,
       uuid: JSON.parse(sessionStorage.uuid),
       canvasHeight: 300,
       canvasWidth: 300,
@@ -254,10 +243,10 @@ export const ModalComponent = (props) => {
                         </Typography>
                         <TextField
                           // className='editor_textfield mid_textFields'
-                          id='outlined-number'
-                          placeholder='0'
-                          type='number'
-                          color='#808080'
+                          id="outlined-number"
+                          placeholder="0"
+                          type="number"
+                          color="#808080"
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -280,9 +269,9 @@ export const ModalComponent = (props) => {
                         </Typography>
                         <TextField
                           // className='editor_textfield mid_textFields'
-                          id='outlined-number'
-                          placeholder='0'
-                          type='number'
+                          id="outlined-number"
+                          placeholder="0"
+                          type="number"
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -309,9 +298,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant='outlined'
-                            placeholder='eg. WhatsForLaunch'
-                            name='name'
+                            variant="outlined"
+                            placeholder="eg. WhatsForLaunch"
+                            name="name"
                             value={values.name}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -334,9 +323,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant='outlined'
-                            placeholder='eg. WFL'
-                            name='symbol'
+                            variant="outlined"
+                            placeholder="eg. WFL"
+                            name="symbol"
                             value={values.symbol}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -359,9 +348,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant='outlined'
-                            placeholder='eg. WhatsForLaunch'
-                            name='royaltyPercent'
+                            variant="outlined"
+                            placeholder="eg. WhatsForLaunch"
+                            name="royaltyPercent"
                             value={values.royaltyPercent}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -394,13 +383,15 @@ export const ModalComponent = (props) => {
                               <>
                                 <TextField
                                   fullWidth
-                                  variant='outlined'
+                                  variant="outlined"
                                   // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder='Royalty Wallets'
-                                  name='creator'
+                                  placeholder="Royalty Wallets"
+                                  name="creator"
                                   value={values.royaltyWallet}
                                   onChange={handleChange}
-                                  onBlur={handleBlur}
+                                  onBlur={(event) => {
+                                    handleFormChange(index, event);
+                                  }}
                                   style={{
                                     width: "100%",
                                     borderRadius: "10px",
@@ -415,10 +406,10 @@ export const ModalComponent = (props) => {
                                 ) : null}
                                 <TextField
                                   fullWidth
-                                  variant='outlined'
+                                  variant="outlined"
                                   // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder='share'
-                                  name='share'
+                                  placeholder="share"
+                                  name="share"
                                   onBlur={(event) => {
                                     handleFormChange(index, event);
                                   }}
@@ -448,9 +439,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant='outlined'
-                            placeholder='URL'
-                            name='external'
+                            variant="outlined"
+                            placeholder="URL"
+                            name="external"
                             value={values.external}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -476,9 +467,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            placeholder='eg. 777 of the WhatsForLaunch'
-                            variant='outlined'
-                            name='description'
+                            placeholder="eg. 777 of the WhatsForLaunch"
+                            variant="outlined"
+                            name="description"
                             value={values.description}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -505,7 +496,7 @@ export const ModalComponent = (props) => {
                         //   height: "40px",
                         // }}
                         onClick={(e) => addFields(e)}
-                        variant='contained'
+                        variant="contained"
                         sx={{ borderRadius: "18px" }}
                       >
                         <AddIcon />
@@ -517,7 +508,7 @@ export const ModalComponent = (props) => {
                       }}
                     >
                       <Button
-                        variant='contained'
+                        variant="contained"
                         onClick={() => {
                           handleSubmit();
                         }}
@@ -532,9 +523,9 @@ export const ModalComponent = (props) => {
           </Paper>
         </>
       </Box>
-      <div className='form-group'>
+      <div className="form-group">
         <ToastContainer
-          position='bottom-right'
+          position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={true}
