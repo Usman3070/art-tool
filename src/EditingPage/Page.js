@@ -485,13 +485,19 @@ export const Page = (props) => {
                   />
                 </CardContent>
                 <CardActions>
-                  <Button
+                  <button
                     variant='contained'
-                    sx={{ backgroundColor: "red", borderRadius: "18px" }}
+                    style={{
+                      backgroundColor: "red",
+                      width: "10%",
+                      borderRadius: "8px",
+                      color: "#fff",
+                      border: "none",
+                    }}
                     onClick={handleHide}
                   >
                     -
-                  </Button>
+                  </button>
                   <div
                     style={{ zIndex: 2, marginLeft: "40%" }}
                     {...getRootProps()}
@@ -545,19 +551,45 @@ export const Page = (props) => {
               +
             </Button>
           </Grid>
-          <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-            <div id='content'>
-              <Items
-                onClick={setCurrentElement}
-                files={props.folderStructure}
-                hashedFolder={props.hashedElements}
-                imageHeight={canvasHeight.value}
-                imageWidth={canvasWidth.value}
-                setCoord={setCoord}
-                parent={parentRef}
-              />
-            </div>
-          </Grid>
+          {props.folderStructure && (
+            <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
+              <div id='content'>
+                <Items
+                  onClick={setCurrentElement}
+                  files={props.folderStructure}
+                  hashedFolder={props.hashedElements}
+                  imageHeight={canvasHeight.value}
+                  imageWidth={canvasWidth.value}
+                  setCoord={setCoord}
+                  parent={parentRef}
+                />
+              </div>
+            </Grid>
+          )}
+          {!props.folderStructure && (
+            <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
+              <div id='content'>
+                <Typography
+                  sx={{
+                    height: "300px",
+                    width: "300px",
+                    backgroundColor: "#C5C5C5",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      display: "flex",
+                      marginTop: "50%",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Generation Will appear here
+                  </Typography>
+                </Typography>
+              </div>
+            </Grid>
+          )}
         </Grid>
       </Typography>
       <div>
