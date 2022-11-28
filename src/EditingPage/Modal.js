@@ -233,7 +233,7 @@ export const ModalComponent = (props) => {
                       <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                         <Typography
                           sx={{
-                            color: "#808080",
+                            color: "#2E2E2E",
                             marginBottom: "4%",
                             fontSize: "14px",
                           }}
@@ -245,7 +245,7 @@ export const ModalComponent = (props) => {
                       <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                         <Typography
                           sx={{
-                            color: "#808080",
+                            color: "#2E2E2E",
                             marginBottom: "4%",
                             fontSize: "14px",
                           }}
@@ -271,7 +271,7 @@ export const ModalComponent = (props) => {
                       <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                         <Typography
                           sx={{
-                            color: "#808080",
+                            color: "#2E2E2E",
                             marginBottom: "4%",
                             fontSize: "14px",
                           }}
@@ -302,7 +302,7 @@ export const ModalComponent = (props) => {
                               fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
-                              color: "#808080",
+                              color: "#2E2E2E",
                               marginTop: "1%",
                               marginBottom: "1%",
                             }}
@@ -329,7 +329,7 @@ export const ModalComponent = (props) => {
                               fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
-                              color: "#808080",
+                              color: "#2E2E2E",
                               marginTop: "1%",
                               marginBottom: "1%",
                             }}
@@ -356,7 +356,7 @@ export const ModalComponent = (props) => {
                               fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
-                              color: "#808080",
+                              color: "#2E2E2E",
                               marginTop: "1%",
                               marginBottom: "1%",
                             }}
@@ -391,7 +391,7 @@ export const ModalComponent = (props) => {
                                 fontSize: "14px",
                                 fontWeight: 500,
                                 fontFamily: "poppins-light",
-                                color: "#808080",
+                                color: "#2E2E2E",
                                 marginTop: "1%",
                                 marginBottom: "1%",
                               }}
@@ -449,7 +449,7 @@ export const ModalComponent = (props) => {
                               fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
-                              color: "#808080",
+                              color: "#2E2E2E",
                               marginTop: "1%",
                               marginBottom: "1%",
                             }}
@@ -479,7 +479,7 @@ export const ModalComponent = (props) => {
                               fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
-                              color: "#808080",
+                              color: "#2E2E2E",
                               marginTop: "1%",
                               marginBottom: "1%",
                             }}
