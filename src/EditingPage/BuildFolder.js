@@ -92,7 +92,7 @@ export const Folders = (props) => {
 
   return (
     <div>
-      <Paper style={{ maxHeight: 360, overflow: "auto" }}>
+      <Paper style={{ maxHeight: 465, overflow: "auto" }}>
         <List>
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -252,13 +252,6 @@ export const Folders = (props) => {
                 </Droppable>
               </DragDropContext>
             </CardContent>
-            <Button
-              variant='contained'
-              sx={{ backgroundColor: "red" }}
-              onClick={props.onClick}
-            >
-              -
-            </Button>
           </Card>
         </List>
       </Paper>

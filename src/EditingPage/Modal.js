@@ -206,8 +206,8 @@ export const ModalComponent = (props) => {
         <>
           <div
             style={{
-              fontWeight: "bold",
-              fontSize: "24px",
+              fontWeight: "500",
+              fontSize: "22px",
               // fontFamily: "Muller-ExtraBold",
               marginBottom: "2%",
               color: "white",
@@ -235,7 +235,7 @@ export const ModalComponent = (props) => {
                           sx={{
                             color: "#808080",
                             marginBottom: "4%",
-                            fontSize: "12px",
+                            fontSize: "14px",
                           }}
                         >
                           Supply
@@ -247,7 +247,7 @@ export const ModalComponent = (props) => {
                           sx={{
                             color: "#808080",
                             marginBottom: "4%",
-                            fontSize: "12px",
+                            fontSize: "14px",
                           }}
                         >
                           Height
@@ -273,7 +273,7 @@ export const ModalComponent = (props) => {
                           sx={{
                             color: "#808080",
                             marginBottom: "4%",
-                            fontSize: "12px",
+                            fontSize: "14px",
                           }}
                         >
                           Width
@@ -299,10 +299,12 @@ export const ModalComponent = (props) => {
                         <div>
                           <div
                             style={{
-                              fontSize: "12px",
+                              fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
                               color: "#808080",
+                              marginTop: "1%",
+                              marginBottom: "1%",
                             }}
                           >
                             Name prefix(ie.__#69)
@@ -324,10 +326,12 @@ export const ModalComponent = (props) => {
                         <div>
                           <div
                             style={{
-                              fontSize: "12px",
+                              fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
                               color: "#808080",
+                              marginTop: "1%",
+                              marginBottom: "1%",
                             }}
                           >
                             Symbol
@@ -349,10 +353,12 @@ export const ModalComponent = (props) => {
                         <div>
                           <div
                             style={{
-                              fontSize: "12px",
+                              fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
                               color: "#808080",
+                              marginTop: "1%",
+                              marginBottom: "1%",
                             }}
                           >
                             Percent fee(%)
@@ -382,10 +388,12 @@ export const ModalComponent = (props) => {
                           <div style={{ width: "100%" }}>
                             <div
                               style={{
-                                fontSize: "12px",
+                                fontSize: "14px",
                                 fontWeight: 500,
                                 fontFamily: "poppins-light",
                                 color: "#808080",
+                                marginTop: "1%",
+                                marginBottom: "1%",
                               }}
                             >
                               Royalty Wallets
@@ -438,10 +446,12 @@ export const ModalComponent = (props) => {
                         <div>
                           <div
                             style={{
-                              fontSize: "12px",
+                              fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
                               color: "#808080",
+                              marginTop: "1%",
+                              marginBottom: "1%",
                             }}
                           >
                             External Link (Website):
@@ -466,10 +476,12 @@ export const ModalComponent = (props) => {
                         <div>
                           <div
                             style={{
-                              fontSize: "12px",
+                              fontSize: "14px",
                               fontWeight: 500,
                               fontFamily: "poppins-light",
                               color: "#808080",
+                              marginTop: "1%",
+                              marginBottom: "1%",
                             }}
                           >
                             Description :
@@ -494,22 +506,20 @@ export const ModalComponent = (props) => {
                       </div>
                     </div>
                     <div style={{ marginTop: "3%" }}>
-                      <Button
-                        // style={{
-                        //   width: "60px",
-                        //   background:
-                        //     "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
-                        //   borderRadius: "8px",
-                        //   color: "#CECECE",
-                        //   borderColor: "rgba(39, 36, 52, 0.5)",
-                        //   height: "40px",
-                        // }}
+                      <button
+                        style={{
+                          width: "40px",
+                          background: "#1565C0",
+                          borderRadius: "8px",
+                          color: "#fff",
+                          borderColor: "#1565C0",
+                          height: "30px",
+                          cursor: "pointer",
+                        }}
                         onClick={(e) => addFields(e)}
-                        variant='contained'
-                        sx={{ borderRadius: "18px" }}
                       >
                         <AddIcon />
-                      </Button>
+                      </button>
                     </div>
                     <div
                       style={{
