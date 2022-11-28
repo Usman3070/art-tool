@@ -485,7 +485,7 @@ export const Page = (props) => {
                   />
                 </CardContent>
                 <CardActions>
-                  <button
+                  {/* <button
                     variant='contained'
                     style={{
                       backgroundColor: "red",
@@ -496,12 +496,9 @@ export const Page = (props) => {
                     }}
                     onClick={handleHide}
                   >
-                    -
-                  </button>
-                  <div
-                    style={{ zIndex: 2, marginLeft: "40%" }}
-                    {...getRootProps()}
-                  >
+                    <Typography sx={{ fontSize: "20px" }}>-</Typography>
+                  </button> */}
+                  <div style={{ zIndex: 2 }} {...getRootProps()}>
                     <input
                       style={{ zIndex: 2 }}
                       {...getInputProps()}
@@ -543,13 +540,13 @@ export const Page = (props) => {
               </Card>
             )}
             <TreesTemp folderData={props.folderStructure} />
-            <Button
+            {/* <Button
               variant='contained'
               sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}
               onClick={handleShow}
             >
               +
-            </Button>
+            </Button> */}
           </Grid>
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>

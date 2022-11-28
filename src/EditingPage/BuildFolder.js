@@ -92,7 +92,7 @@ export const Folders = (props) => {
 
   return (
     <div>
-      <Paper style={{ maxHeight: 360, overflow: "auto" }}>
+      <Paper style={{ maxHeight: 465, overflow: "auto" }}>
         <List>
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -119,7 +119,7 @@ export const Folders = (props) => {
                                   <AccordionSummary
                                     expandIcon={
                                       <ExpandMoreIcon
-                                        style={{ color: "#CECECE" }}
+                                        style={{ color: "#111" }}
                                       />
                                     }
                                     aria-controls='panel1a-content'
@@ -175,7 +175,7 @@ export const Folders = (props) => {
                                           borderBottom: "1px solid #2F2861",
                                         }}
                                       >
-                                        <Grid container>
+                                        <Grid container spacing={2}>
                                           <Grid
                                             item
                                             xl={6}
@@ -184,14 +184,20 @@ export const Folders = (props) => {
                                             sm={6}
                                             xs={6}
                                           >
-                                            <Typography
+                                            {/* <Typography
                                               className='elementSubfolder'
                                               style={{
                                                 fontFamily: "Poppins",
                                               }}
-                                            >
-                                              {subfolder.name}
-                                            </Typography>
+                                            > */}
+                                            <TextField
+                                              fullWidth
+                                              variant='filled'
+                                              type='text'
+                                              value={subfolder.name}
+                                            />
+                                            {/* {subfolder.name} */}
+                                            {/* </Typography> */}
                                           </Grid>
                                           <Grid
                                             item
@@ -252,13 +258,6 @@ export const Folders = (props) => {
                 </Droppable>
               </DragDropContext>
             </CardContent>
-            <Button
-              variant='contained'
-              sx={{ backgroundColor: "red" }}
-              onClick={props.onClick}
-            >
-              -
-            </Button>
           </Card>
         </List>
       </Paper>
