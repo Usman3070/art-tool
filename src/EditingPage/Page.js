@@ -477,13 +477,13 @@ export const Page = (props) => {
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                   <Typography>Rarity %: {number}/100</Typography>
-                  <Typography>Name</Typography>
-                  <TextField
+                  {/* <Typography>Name</Typography> */}
+                  {/* <TextField
                     fullWidth
                     variant='outlined'
                     placeholder='name'
                     name='name'
-                  />
+                  /> */}
                 </CardContent>
                 <CardActions>
                   {/* <button
@@ -499,44 +499,46 @@ export const Page = (props) => {
                   >
                     <Typography sx={{ fontSize: "20px" }}>-</Typography>
                   </button> */}
-                  <div style={{ zIndex: 2 }} {...getRootProps()}>
-                    <input
-                      style={{ zIndex: 2 }}
-                      {...getInputProps()}
-                      directory=''
-                      webkitdirectory=''
-                      type='file'
-                    />
+                  {!props.folderStructure && (
+                    <div style={{ zIndex: 2 }} {...getRootProps()}>
+                      <input
+                        style={{ zIndex: 2 }}
+                        {...getInputProps()}
+                        directory=''
+                        webkitdirectory=''
+                        type='file'
+                      />
 
-                    {/* { isDragActive ? (
+                      {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
-                    <IconButton
-                      color='primary'
-                      aria-label='upload picture'
-                      component='span'
-                      style={{
-                        zIndex: 2,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      size='medium'
-                    >
-                      {/* <PhotoCamera /> */}
-                      <Button
-                        variant='contained'
-                        sx={{
-                          fontSize: "12px",
-                          width: "100%",
-                          padding: "7px",
+                      <IconButton
+                        color='primary'
+                        aria-label='upload picture'
+                        component='span'
+                        style={{
+                          zIndex: 2,
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
+                        size='medium'
                       >
-                        Select Folder
-                      </Button>
-                    </IconButton>
-                    {/* )} */}
-                  </div>
+                        {/* <PhotoCamera /> */}
+                        <Button
+                          variant='contained'
+                          sx={{
+                            fontSize: "12px",
+                            width: "100%",
+                            padding: "7px",
+                          }}
+                        >
+                          Select Folder
+                        </Button>
+                      </IconButton>
+                      {/* )} */}
+                    </div>
+                  )}
                 </CardActions>
               </Card>
             )}
