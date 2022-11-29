@@ -34,7 +34,6 @@ export const EditingPage = () => {
   };
 
   React.useEffect(() => {
-    console.log("zxcnm,zxncm,nz,x");
     getTree();
   }, [flag]);
 
