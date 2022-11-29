@@ -54,6 +54,8 @@ export const ModalComponent = (props) => {
   const [URL, setURL] = React.useState("");
   const [next, setNext] = React.useState(false);
   const [code, setCode] = React.useState("");
+  const [creatorError, setCreatorError] = React.useState(false);
+  const [shareError, setShareError] = React.useState(false);
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
@@ -118,6 +120,21 @@ export const ModalComponent = (props) => {
     let data = [...inputFields];
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
+
+    if (event.target.name == "creator") {
+      if (event.target.value.length == 44) {
+        setCreatorError(false);
+      } else {
+        setCreatorError(true);
+      }
+    }
+    if (event.target.name == "share") {
+      if (event.target.value.length > 3) {
+        setShareError(true);
+      } else {
+        setShareError(false);
+      }
+    }
   };
 
   // Rarity Section
@@ -243,10 +260,10 @@ export const ModalComponent = (props) => {
                         </Typography>
                         <TextField
                           // className='editor_textfield mid_textFields'
-                          id="outlined-number"
-                          placeholder="0"
-                          type="number"
-                          color="#808080"
+                          id='outlined-number'
+                          placeholder='0'
+                          type='number'
+                          color='#808080'
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -269,9 +286,9 @@ export const ModalComponent = (props) => {
                         </Typography>
                         <TextField
                           // className='editor_textfield mid_textFields'
-                          id="outlined-number"
-                          placeholder="0"
-                          type="number"
+                          id='outlined-number'
+                          placeholder='0'
+                          type='number'
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -300,9 +317,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant="outlined"
-                            placeholder="eg. WhatsForLaunch"
-                            name="name"
+                            variant='outlined'
+                            placeholder='eg. WhatsForLaunch'
+                            name='name'
                             value={values.name}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -327,9 +344,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant="outlined"
-                            placeholder="eg. WFL"
-                            name="symbol"
+                            variant='outlined'
+                            placeholder='eg. WFL'
+                            name='symbol'
                             value={values.symbol}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -354,9 +371,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant="outlined"
-                            placeholder="eg. WhatsForLaunch"
-                            name="royaltyPercent"
+                            variant='outlined'
+                            placeholder='eg. WhatsForLaunch'
+                            name='royaltyPercent'
                             value={values.royaltyPercent}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -391,10 +408,10 @@ export const ModalComponent = (props) => {
                               <>
                                 <TextField
                                   fullWidth
-                                  variant="outlined"
+                                  variant='outlined'
                                   // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder="Royalty Wallets"
-                                  name="creator"
+                                  placeholder='Royalty Wallets'
+                                  name='creator'
                                   value={values.royaltyWallet}
                                   onChange={handleChange}
                                   onBlur={(event) => {
@@ -406,18 +423,17 @@ export const ModalComponent = (props) => {
                                     padding: "10px 0 15px 0",
                                   }}
                                 />
-                                {errors.royaltyWallet &&
-                                touched.royaltyWallet ? (
-                                  <p style={{ color: "red" }}>
-                                    {errors.royaltyWallet}
-                                  </p>
-                                ) : null}
+                                {creatorError && (
+                                  <span style={{ color: "red" }}>
+                                    You're wallet is not correct
+                                  </span>
+                                )}
                                 <TextField
                                   fullWidth
-                                  variant="outlined"
+                                  variant='outlined'
                                   // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder="share"
-                                  name="share"
+                                  placeholder='share'
+                                  name='share'
                                   onBlur={(event) => {
                                     handleFormChange(index, event);
                                   }}
@@ -430,6 +446,11 @@ export const ModalComponent = (props) => {
                                     padding: "0 0 15px 0",
                                   }}
                                 />
+                                {shareError && (
+                                  <span style={{ color: "red" }}>
+                                    Share value is not valid
+                                  </span>
+                                )}
                               </>
                             ))}
                           </div>
@@ -449,9 +470,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            variant="outlined"
-                            placeholder="URL"
-                            name="external"
+                            variant='outlined'
+                            placeholder='URL'
+                            name='external'
                             value={values.external}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -479,9 +500,9 @@ export const ModalComponent = (props) => {
                           </div>
                           <TextField
                             fullWidth
-                            placeholder="eg. 777 of the WhatsForLaunch"
-                            variant="outlined"
-                            name="description"
+                            placeholder='eg. 777 of the WhatsForLaunch'
+                            variant='outlined'
+                            name='description'
                             value={values.description}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -518,7 +539,7 @@ export const ModalComponent = (props) => {
                       }}
                     >
                       <Button
-                        variant="contained"
+                        variant='contained'
                         onClick={() => {
                           handleSubmit();
                         }}
@@ -533,9 +554,9 @@ export const ModalComponent = (props) => {
           </Paper>
         </>
       </Box>
-      <div className="form-group">
+      <div className='form-group'>
         <ToastContainer
-          position="bottom-right"
+          position='bottom-right'
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={true}
