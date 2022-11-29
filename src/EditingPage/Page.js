@@ -55,6 +55,7 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
+  const [number, setNumber] = useState(0);
   const setCurrentElement = (val) => {
     dispatch2({
       type: "update",
@@ -475,7 +476,7 @@ export const Page = (props) => {
             {show && (
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
-                  <Typography>Rarity %: 0/100</Typography>
+                  <Typography>Rarity %: {number}/100</Typography>
                   <Typography>Name</Typography>
                   <TextField
                     fullWidth
@@ -539,7 +540,11 @@ export const Page = (props) => {
                 </CardActions>
               </Card>
             )}
-            <TreesTemp folderData={props.folderStructure} />
+            <TreesTemp
+              folderData={props.folderStructure}
+              setNumber={setNumber}
+              number={number}
+            />
             {/* <Button
               variant='contained'
               sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}

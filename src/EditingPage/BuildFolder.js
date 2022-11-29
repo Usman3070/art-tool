@@ -82,6 +82,7 @@ export const Folders = (props) => {
   console.log(list, "list");
 
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
+    props.setNumber(val + props.number);
     dispatchMain({
       type: "update",
       value: val,
@@ -216,6 +217,7 @@ export const Folders = (props) => {
                                                 className='rarityText'
                                                 size='small'
                                                 variant='outlined'
+                                                type='number'
                                                 inputProps={{
                                                   style: {
                                                     textAlign: "center",

@@ -46,7 +46,7 @@ export default function TreesTemp(props) {
       {treeData && (
         <List>
           <TreeView
-            aria-label="file system navigator"
+            aria-label='file system navigator'
             defaultCollapseIcon={<IconButton />}
             defaultExpandIcon={<MenuIcon />}
             sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
@@ -54,6 +54,8 @@ export default function TreesTemp(props) {
             <Folders
               children={treeData && treeData.children}
               onClick={handleFolders}
+              setNumber={props.setNumber}
+              number={props.number}
             />
           </TreeView>
         </List>
