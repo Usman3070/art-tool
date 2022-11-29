@@ -31,6 +31,13 @@ const dirTree = require("directory-tree");
 //   res.send("Working");
 // });
 
+app.post("/renameFile", (req, res) => {
+  fs.rename(req.body.from, req.body.to, function (err) {
+    if (err) console.log("ERROR: " + err);
+  });
+  return res.send("done");
+});
+
 app.get("/getFolderTree", (req, res) => {
   const uuid = req.query.uuid;
   const tree = dirTree(`src/EditingPage/layers/${uuid}`);

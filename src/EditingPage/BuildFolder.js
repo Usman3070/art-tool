@@ -7,6 +7,7 @@ import { NumberOfCopies, ObjectContext, ObjectSelection } from "./EditingPage";
 import { useTheme } from "@material-ui/core/styles";
 import { TreeView } from "@material-ui/lab";
 import TreeItem from "@material-ui/lab/TreeItem";
+import axios from "axios";
 import "./buildFolder.css";
 
 // ===========
@@ -91,7 +92,25 @@ export const Folders = (props) => {
       subfolderIndex: subfolderIndex,
     });
   };
+  const handleRenameArray = (e, i, j) => {
+    setList((tempArray) => {
+      const newPerson = [...tempArray];
+      newPerson[i].children[j].name = e.target.value;
+      return newPerson;
+    });
+  };
 
+  const handleRename = async (e, path) => {
+    let from = path.replaceAll("\\", "/");
+    let indexForName = from.lastIndexOf("/");
+    let to = from.slice(0, indexForName + 1) + e.target.value;
+    let body = {
+      from,
+      to,
+    };
+    const baseURL = `${process.env.REACT_APP_SERVERURL}/renameFile`;
+    await axios.post(baseURL, body);
+  };
   return (
     <div>
       <Paper style={{ maxHeight: 465, overflow: "auto" }}>
@@ -196,6 +215,19 @@ export const Folders = (props) => {
                                               fullWidth
                                               variant="filled"
                                               type="text"
+                                              onChange={(e) => {
+                                                handleRenameArray(
+                                                  e,
+                                                  index1,
+                                                  index2
+                                                );
+                                              }}
+                                              onBlur={(e) => {
+                                                handleRename(
+                                                  e,
+                                                  subfolder?.path
+                                                );
+                                              }}
                                               value={subfolder.name}
                                             />
                                             {/* {subfolder.name} */}
