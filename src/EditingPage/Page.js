@@ -499,50 +499,50 @@ export const Page = (props) => {
                   >
                     <Typography sx={{ fontSize: "20px" }}>-</Typography>
                   </button> */}
-                  {!props.folderStructure && (
-                    <div style={{ zIndex: 2 }} {...getRootProps()}>
-                      <input
-                        style={{ zIndex: 2 }}
-                        {...getInputProps()}
-                        directory=''
-                        webkitdirectory=''
-                        type='file'
-                      />
+                  <div style={{ zIndex: 2 }} {...getRootProps()}>
+                    <input
+                      style={{ zIndex: 2 }}
+                      {...getInputProps()}
+                      directory=''
+                      webkitdirectory=''
+                      type='file'
+                    />
 
-                      {/* { isDragActive ? (
+                    {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
-                      <IconButton
-                        color='primary'
-                        aria-label='upload picture'
-                        component='span'
-                        style={{
-                          zIndex: 2,
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
+                    <IconButton
+                      color='primary'
+                      aria-label='upload picture'
+                      component='span'
+                      style={{
+                        zIndex: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      size='medium'
+                    >
+                      {/* <PhotoCamera /> */}
+                      <Button
+                        variant='contained'
+                        sx={{
+                          fontSize: "12px",
+                          width: "100%",
+                          padding: "7px",
                         }}
-                        size='medium'
                       >
-                        {/* <PhotoCamera /> */}
-                        <Button
-                          variant='contained'
-                          sx={{
-                            fontSize: "12px",
-                            width: "100%",
-                            padding: "7px",
-                          }}
-                        >
-                          Select Folder
-                        </Button>
-                      </IconButton>
-                      {/* )} */}
-                    </div>
-                  )}
+                        Select Folder
+                      </Button>
+                    </IconButton>
+                    {/* )} */}
+                  </div>
                 </CardActions>
               </Card>
             )}
             <TreesTemp
+              flag={props.flag}
+              setFlag={props.setFlag}
               folderData={props.folderStructure}
               setNumber={setNumber}
               number={number}

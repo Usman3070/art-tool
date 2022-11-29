@@ -52,6 +52,8 @@ export default function TreesTemp(props) {
             sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
           >
             <Folders
+              flag={props.flag}
+              setFlag={props.setFlag}
               children={treeData && treeData.children}
               onClick={handleFolders}
               setNumber={props.setNumber}
