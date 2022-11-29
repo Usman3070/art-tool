@@ -19,6 +19,7 @@ export const EditingPage = () => {
   const baseURL = `${process.env.REACT_APP_SERVERURL}/getFolderTree`;
 
   const [fileData, setFileData] = React.useState(null);
+  const [flag, setFlag] = React.useState(false);
 
   let selection = null;
   let objects = [];
@@ -33,8 +34,9 @@ export const EditingPage = () => {
   };
 
   React.useEffect(() => {
+    console.log("zxcnm,zxncm,nz,x");
     getTree();
-  }, []);
+  }, [flag]);
 
   const subfoldersLength =
     fileData && fileData.children && fileData.children.length;
@@ -116,6 +118,8 @@ export const EditingPage = () => {
               </div> */}
               <div>
                 <Page
+                  flag={flag}
+                  setFlag={setFlag}
                   folderStructure={fileData}
                   selection={selection}
                   hashedElements={objects}

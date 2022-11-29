@@ -479,9 +479,9 @@ export const Page = (props) => {
                   <Typography>Name</Typography>
                   <TextField
                     fullWidth
-                    variant='outlined'
-                    placeholder='name'
-                    name='name'
+                    variant="outlined"
+                    placeholder="name"
+                    name="name"
                   />
                 </CardContent>
                 <CardActions>
@@ -502,29 +502,29 @@ export const Page = (props) => {
                     <input
                       style={{ zIndex: 2 }}
                       {...getInputProps()}
-                      directory=''
-                      webkitdirectory=''
-                      type='file'
+                      directory=""
+                      webkitdirectory=""
+                      type="file"
                     />
 
                     {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
                     <IconButton
-                      color='primary'
-                      aria-label='upload picture'
-                      component='span'
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
                       style={{
                         zIndex: 2,
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                       }}
-                      size='medium'
+                      size="medium"
                     >
                       {/* <PhotoCamera /> */}
                       <Button
-                        variant='contained'
+                        variant="contained"
                         sx={{
                           fontSize: "12px",
                           width: "100%",
@@ -539,7 +539,11 @@ export const Page = (props) => {
                 </CardActions>
               </Card>
             )}
-            <TreesTemp folderData={props.folderStructure} />
+            <TreesTemp
+              flag={props.flag}
+              setFlag={props.setFlag}
+              folderData={props.folderStructure}
+            />
             {/* <Button
               variant='contained'
               sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}
@@ -550,7 +554,7 @@ export const Page = (props) => {
           </Grid>
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <div id='content'>
+              <div id="content">
                 <Items
                   onClick={setCurrentElement}
                   files={props.folderStructure}
@@ -565,7 +569,7 @@ export const Page = (props) => {
           )}
           {!props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <div id='content'>
+              <div id="content">
                 <Typography
                   sx={{
                     height: "300px",

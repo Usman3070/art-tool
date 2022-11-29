@@ -110,6 +110,7 @@ export const Folders = (props) => {
     };
     const baseURL = `${process.env.REACT_APP_SERVERURL}/renameFile`;
     await axios.post(baseURL, body);
+    props.setFlag(!props.flag);
   };
   return (
     <div>
