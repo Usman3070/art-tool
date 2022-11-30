@@ -84,7 +84,7 @@ export const Folders = (props) => {
     props?.number?.array[folderIndex].map((innerData) => {
       num += innerData;
     });
-    if (num + parseFloat(val) > 100) {
+    if (num + parseFloat(val) > 101) {
       alert("value greater then 100 not allowed");
       return;
     }
