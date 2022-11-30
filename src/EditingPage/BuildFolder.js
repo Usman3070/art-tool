@@ -80,11 +80,19 @@ export const Folders = (props) => {
   }, [children]);
 
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
+    let num = 0;
+    props?.number?.array[folderIndex].map((innerData) => {
+      num += innerData;
+    });
+    if (num + parseFloat(val) > 100) {
+      alert("value greater then 100 not allowed");
+      return;
+    }
     if (isNaN(parseFloat(val))) {
       val = 0;
     }
     props.setNumber((data) => {
-      let tempData = [...data.array];
+      let tempData = [...data?.array];
       if (tempData[folderIndex] === undefined) {
         tempData[folderIndex] = [];
       }
