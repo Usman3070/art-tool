@@ -20,6 +20,7 @@ import TotalCopies from "./totalCopies";
 import { EditorInput } from "./EditorInput";
 import { ObjectSelection } from "./EditingPage";
 import { Grid, Typography, Button } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const initialValues = {
   name: "",
@@ -63,6 +64,9 @@ export const ModalComponent = (props) => {
       validationSchema: signUpSchema,
       onSubmit: (values) => {
         handleClick();
+        if (props.closeLoadingModal) {
+          handleClickGenerate();
+        }
       },
     });
   const handleClick = async () => {
@@ -85,7 +89,9 @@ export const ModalComponent = (props) => {
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/submitDetails`, data)
       .then(function (response) {
-        window.location.href = "/loading";
+        // window.location.href = "/loading";
+        props.closeLoadingModal();
+
         console.log(response);
       })
       .catch(function (error) {
@@ -114,6 +120,13 @@ export const ModalComponent = (props) => {
     let newfield = { creator: "", share: "" };
 
     setInputFields([...inputFields, newfield]);
+  };
+
+  const removeFields = (e) => {
+    let tempData = [...inputFields];
+    e.preventDefault();
+    tempData.splice(tempData?.length - 1, 1);
+    setInputFields(tempData);
   };
 
   const handleFormChange = (index, event) => {
@@ -204,6 +217,22 @@ export const ModalComponent = (props) => {
 
       setTotalCopies({ value: input4.value });
     }
+  };
+
+  const handleClickGenerate = async () => {
+    const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
+
+    const response = await axios
+      .get(baseURL, {
+        params: { uuid: JSON.parse(sessionStorage.uuid) },
+      })
+      .then(function (response) {
+        toast.success("Compresssion success");
+      })
+      .catch(function (error) {
+        toast.info(error);
+        toast.error("Compression fail");
+      });
   };
 
   return (
@@ -390,71 +419,7 @@ export const ModalComponent = (props) => {
                             marginBottom: "10px",
                             alignItems: "center",
                           }}
-                        >
-                          <div style={{ width: "100%" }}>
-                            <div
-                              style={{
-                                fontSize: "14px",
-                                fontWeight: 500,
-                                fontFamily: "poppins-light",
-                                color: "#2E2E2E",
-                                marginTop: "1%",
-                                marginBottom: "1%",
-                              }}
-                            >
-                              Royalty Wallets
-                            </div>
-                            {inputFields.map((input, index) => (
-                              <>
-                                <TextField
-                                  fullWidth
-                                  variant='outlined'
-                                  // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder='Royalty Wallets'
-                                  name='creator'
-                                  value={values.royaltyWallet}
-                                  onChange={handleChange}
-                                  onBlur={(event) => {
-                                    handleFormChange(index, event);
-                                  }}
-                                  style={{
-                                    width: "100%",
-                                    borderRadius: "10px",
-                                    padding: "10px 0 15px 0",
-                                  }}
-                                />
-                                {creatorError && (
-                                  <span style={{ color: "red" }}>
-                                    You're wallet is not correct
-                                  </span>
-                                )}
-                                <TextField
-                                  fullWidth
-                                  variant='outlined'
-                                  // inputProps={{ style: { textAlign: "center" } }}
-                                  placeholder='share'
-                                  name='share'
-                                  onBlur={(event) => {
-                                    handleFormChange(index, event);
-                                  }}
-                                  style={{
-                                    justifyContent: "flex-start",
-                                    display: "flex",
-                                    // width: "500px",
-                                    // marginLeft: "5px",
-                                    borderRadius: "10px",
-                                    padding: "0 0 15px 0",
-                                  }}
-                                />
-                                {shareError && (
-                                  <span style={{ color: "red" }}>
-                                    Share value is not valid
-                                  </span>
-                                )}
-                              </>
-                            ))}
-                          </div>
-                        </div>
+                        ></div>
                         <div>
                           <div
                             style={{
@@ -516,22 +481,103 @@ export const ModalComponent = (props) => {
                           ) : null}
                         </div>
                       </div>
+                      <div style={{ width: "100%" }}>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#2E2E2E",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Royalty Wallets
+                        </div>
+                        {inputFields.map((input, index) => (
+                          <>
+                            <TextField
+                              fullWidth
+                              variant='outlined'
+                              // inputProps={{ style: { textAlign: "center" } }}
+                              placeholder='Royalty Wallets'
+                              name='creator'
+                              value={values.royaltyWallet}
+                              onChange={handleChange}
+                              onBlur={(event) => {
+                                handleFormChange(index, event);
+                              }}
+                              style={{
+                                width: "100%",
+                                borderRadius: "10px",
+                                padding: "10px 0 15px 0",
+                              }}
+                            />
+                            {creatorError && (
+                              <span style={{ color: "red" }}>
+                                You're wallet is not correct
+                              </span>
+                            )}
+                            <TextField
+                              fullWidth
+                              variant='outlined'
+                              // inputProps={{ style: { textAlign: "center" } }}
+                              placeholder='share'
+                              name='share'
+                              onBlur={(event) => {
+                                handleFormChange(index, event);
+                              }}
+                              style={{
+                                justifyContent: "flex-start",
+                                display: "flex",
+                                // width: "500px",
+                                // marginLeft: "5px",
+                                borderRadius: "10px",
+                                padding: "0 0 15px 0",
+                              }}
+                            />
+                            {shareError && (
+                              <span style={{ color: "red" }}>
+                                Share value is not valid
+                              </span>
+                            )}
+                          </>
+                        ))}
+                      </div>
                     </div>
-                    <div style={{ marginTop: "3%" }}>
-                      <button
-                        style={{
-                          width: "40px",
-                          background: "#1565C0",
-                          borderRadius: "8px",
-                          color: "#fff",
-                          borderColor: "#1565C0",
-                          height: "30px",
-                          cursor: "pointer",
-                        }}
-                        onClick={(e) => addFields(e)}
-                      >
-                        <AddIcon />
-                      </button>
+                    <div style={{ display: "flex" }}>
+                      <div style={{ marginTop: "3%" }}>
+                        <button
+                          style={{
+                            width: "40px",
+                            backgroundColor: "#1565C0",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "#1565C0",
+                            height: "30px",
+                            cursor: "pointer",
+                          }}
+                          onClick={(e) => addFields(e)}
+                        >
+                          <AddIcon />
+                        </button>
+                      </div>
+                      <div style={{ marginTop: "3%", marginLeft: "2%" }}>
+                        <button
+                          style={{
+                            width: "40px",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "red",
+                            height: "30px",
+                            cursor: "pointer",
+                            background: "red",
+                          }}
+                          onClick={(e) => removeFields(e)}
+                        >
+                          <RemoveIcon />
+                        </button>
+                      </div>
                     </div>
                     <div
                       style={{

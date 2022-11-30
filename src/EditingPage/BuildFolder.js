@@ -251,8 +251,12 @@ export const Folders = (props) => {
                                                   subfolder?.path
                                                 );
                                               }}
-                                              value={subfolder.name}
+                                              value={subfolder.name.replace(
+                                                ".png",
+                                                ""
+                                              )}
                                             />
+                                            {console.log(subfolder, "subbbb")}
                                             {/* {subfolder.name} */}
                                             {/* </Typography> */}
                                           </Grid>
