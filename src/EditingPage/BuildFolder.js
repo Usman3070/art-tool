@@ -256,7 +256,6 @@ export const Folders = (props) => {
                                                 ""
                                               )}
                                             />
-                                            {console.log(subfolder, "subbbb")}
                                             {/* {subfolder.name} */}
                                             {/* </Typography> */}
                                           </Grid>
