@@ -212,13 +212,16 @@ export const Folders = (props) => {
                                             sm={3}
                                             xs={3}
                                           >
-                                            <img
-                                              src={`${
-                                                process.env.REACT_APP_SERVERURL
-                                              }${subfolder.path
-                                                .slice(15)
-                                                .replaceAll("\\", "/")}`}
-                                            />
+                                            <div style={{ marginTop: "-20px" }}>
+                                              <img
+                                                src={`${
+                                                  process.env
+                                                    .REACT_APP_SERVERURL
+                                                }${subfolder.path
+                                                  .slice(15)
+                                                  .replaceAll("\\", "/")}`}
+                                              />
+                                            </div>
                                           </Grid>
                                           <Grid
                                             item
@@ -284,7 +287,7 @@ export const Folders = (props) => {
                                                       textAlign: "center",
                                                     },
                                                   }}
-                                                  placeholder='out of 100'
+                                                  placeholder='eg.'
                                                   value={
                                                     props?.number?.array[
                                                       index1
