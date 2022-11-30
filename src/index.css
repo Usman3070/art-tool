@@ -512,3 +512,15 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 10px !important;
   color: #000 !important;
 }
+/* .MuiList-root {
+  background: #292661;
+}
+.MuiButtonBase-root {
+  color: #fff !important;
+}
+.MuiPaper-root {
+  width: 100% !important;
+}
+.MuiMenu-paper {
+  margin-top: 30px;
+} */

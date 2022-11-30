@@ -158,16 +158,17 @@ const Edit = (props) => {
             backgroundColor: "#111",
           },
         }}
-        variant="contained"
+        variant='contained'
+        onClick={props.onClick}
       >
-        <a
+        {/* <a
           href={`${process.env.REACT_APP_SERVERURL}/Silly_Sausages_4.zip`}
           download
           target="_blank"
           style={{ textDecoration: "none" }}
-        >
-          <Typography sx={{ color: "#fff" }}>Load an example</Typography>
-        </a>
+        > */}
+        <Typography sx={{ color: "#fff" }}>Load an example</Typography>
+        {/* </a> */}
       </Button>
       {/* <Grid item xl={4} lg={4} md={4}>
           <Button sx={{ backgroundColor: "#111" }} variant='contained'>

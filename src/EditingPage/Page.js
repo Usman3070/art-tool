@@ -151,6 +151,10 @@ export const Page = (props) => {
     setLoadingModal(true);
   };
 
+  const closeLoadingModal = () => {
+    setLoadingModal(false);
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
     const formData = new FormData();
     const folderPath = [];
@@ -456,6 +460,7 @@ export const Page = (props) => {
                 setCanvasHeight={setCanvasHeight}
                 setCanvasWidth={setCanvasWidth}
                 openLoadingModal={openLoadingModal}
+                closeLoadingModal={closeLoadingModal}
               />
             </div>
           </Grid>
@@ -557,8 +562,20 @@ export const Page = (props) => {
               +
             </Button> */}
           </Grid>
+
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
+              <Typography
+                variant='h1'
+                sx={{
+                  marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
+                  color: "#fff",
+                  fontSize: "32px",
+                  marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
+                }}
+              >
+                Art Preview
+              </Typography>
               <div id='content'>
                 <Items
                   onClick={setCurrentElement}
@@ -574,6 +591,17 @@ export const Page = (props) => {
           )}
           {!props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
+              <Typography
+                variant='h1'
+                sx={{
+                  marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
+                  color: "#fff",
+                  fontSize: "32px",
+                  marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
+                }}
+              >
+                Art Preview
+              </Typography>
               <div id='content'>
                 <Typography
                   sx={{
