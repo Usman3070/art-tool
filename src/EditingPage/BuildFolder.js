@@ -59,9 +59,6 @@ export const Folders = (props) => {
     });
   };
 
-  // console.log(folderStructure, "structure");
-  console.log(children, "childrens");
-
   const handleDragEnd = (result) => {
     // if (!result.destination) return;
     const items = Array.from(list);
@@ -82,10 +79,18 @@ export const Folders = (props) => {
     setList(children);
   }, [children]);
 
-  console.log(list, "list");
-
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
-    props.setNumber(val + props.number);
+    if (isNaN(parseFloat(val))) {
+      val = 0;
+    }
+    props.setNumber((data) => {
+      let tempData = [...data.array];
+      if (tempData[folderIndex] === undefined) {
+        tempData[folderIndex] = [];
+      }
+      tempData[folderIndex][subfolderIndex] = parseFloat(val);
+      return { index: folderIndex, array: tempData };
+    });
     dispatchMain({
       type: "update",
       value: val,
@@ -95,9 +100,9 @@ export const Folders = (props) => {
   };
   const handleRenameArray = (e, i, j) => {
     setList((tempArray) => {
-      const newPerson = [...tempArray];
-      newPerson[i].children[j].name = e.target.value;
-      return newPerson;
+      const data = [...tempArray];
+      data[i].children[j].name = e.target.value;
+      return data;
     });
   };
 
@@ -120,13 +125,13 @@ export const Folders = (props) => {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId='characters'>
+                <Droppable droppableId="characters">
                   {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
                       {list &&
                         list.map((folder, index1) => (
                           <div style={{}}>
-                            <Accordion className='accordian_root'>
+                            <Accordion className="accordian_root">
                               <Draggable
                                 key={
                                   folder.name.slice(0, 1).toUpperCase() +
@@ -145,8 +150,8 @@ export const Folders = (props) => {
                                         style={{ color: "#111" }}
                                       />
                                     }
-                                    aria-controls='panel1a-content'
-                                    id='panel1a-header'
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
                                   >
                                     {/* <Typography
                                   sx={{ fontSize: "10px", marginTop: "5%" }}
@@ -159,13 +164,13 @@ export const Folders = (props) => {
                                       {...provided.dragHandleProps}
                                       ref={provided.innerRef}
                                       button
-                                      component='a'
-                                      href='#'
+                                      component="a"
+                                      href="#"
                                       // style={{ width: "60%" }}
                                     >
                                       <Typography
                                         // style={{  }}
-                                        className='element'
+                                        className="element"
                                         // eslint-disable-next-line react/jsx-no-duplicate-props
                                         style={{
                                           fontWeight: "bold",
@@ -192,8 +197,8 @@ export const Folders = (props) => {
                                       <ListItem
                                         key={index2}
                                         button
-                                        component='a'
-                                        href='#'
+                                        component="a"
+                                        href="#"
                                         style={{
                                           borderBottom: "1px solid #2F2861",
                                         }}
@@ -201,11 +206,27 @@ export const Folders = (props) => {
                                         <Grid container spacing={2}>
                                           <Grid
                                             item
-                                            xl={6}
-                                            lg={6}
-                                            md={6}
-                                            sm={6}
-                                            xs={6}
+                                            xl={4}
+                                            lg={4}
+                                            md={4}
+                                            sm={4}
+                                            xs={4}
+                                          >
+                                            <img
+                                              src={`${
+                                                process.env.REACT_APP_SERVERURL
+                                              }${subfolder.path
+                                                .slice(15)
+                                                .replaceAll("\\", "/")}`}
+                                            />
+                                          </Grid>
+                                          <Grid
+                                            item
+                                            xl={4}
+                                            lg={4}
+                                            md={4}
+                                            sm={4}
+                                            xs={4}
                                           >
                                             {/* <Typography
                                               className='elementSubfolder'
@@ -215,8 +236,8 @@ export const Folders = (props) => {
                                             > */}
                                             <TextField
                                               fullWidth
-                                              variant='filled'
-                                              type='text'
+                                              variant="filled"
+                                              type="text"
                                               onChange={(e) => {
                                                 handleRenameArray(
                                                   e,
@@ -237,36 +258,72 @@ export const Folders = (props) => {
                                           </Grid>
                                           <Grid
                                             item
-                                            xl={6}
-                                            lg={6}
-                                            md={6}
-                                            sm={6}
-                                            xs={6}
+                                            xl={4}
+                                            lg={4}
+                                            md={4}
+                                            sm={4}
+                                            xs={4}
                                           >
                                             <div
                                               style={{
                                                 color: "#fff",
                                               }}
                                             >
-                                              <TextField
-                                                className='rarityText'
-                                                size='small'
-                                                variant='outlined'
-                                                type='number'
-                                                inputProps={{
-                                                  style: {
-                                                    textAlign: "center",
-                                                  },
-                                                }}
-                                                placeholder='out of 100'
-                                                onBlur={(event) => {
-                                                  handleRaritySet(
-                                                    index1,
-                                                    index2,
-                                                    parseInt(event.target.value)
-                                                  );
-                                                }}
-                                              />
+                                              {props?.number?.array[index1] !==
+                                              undefined ? (
+                                                <TextField
+                                                  className="rarityText"
+                                                  size="small"
+                                                  variant="outlined"
+                                                  type="number"
+                                                  inputProps={{
+                                                    style: {
+                                                      textAlign: "center",
+                                                    },
+                                                  }}
+                                                  placeholder="out of 100"
+                                                  value={
+                                                    props?.number?.array[
+                                                      index1
+                                                    ][index2]
+                                                  }
+                                                  onMouseEnter={(event) => {
+                                                    handleRaritySet(
+                                                      index1,
+                                                      index2,
+                                                      event.target.value
+                                                    );
+                                                  }}
+                                                  onChange={(event) => {
+                                                    handleRaritySet(
+                                                      index1,
+                                                      index2,
+                                                      event.target.value
+                                                    );
+                                                  }}
+                                                />
+                                              ) : (
+                                                <TextField
+                                                  className="rarityText"
+                                                  size="small"
+                                                  variant="outlined"
+                                                  type="number"
+                                                  inputProps={{
+                                                    style: {
+                                                      textAlign: "center",
+                                                    },
+                                                  }}
+                                                  placeholder="out of 100"
+                                                  value={0}
+                                                  onChange={(event) => {
+                                                    handleRaritySet(
+                                                      index1,
+                                                      index2,
+                                                      event.target.value
+                                                    );
+                                                  }}
+                                                />
+                                              )}
                                             </div>
                                           </Grid>
                                         </Grid>
@@ -276,9 +333,9 @@ export const Folders = (props) => {
                                 ))}
                               </div>
                               <TreeItem
-                                nodeId='1'
+                                nodeId="1"
                                 label={
-                                  <ListItem root component='a' href='#'>
+                                  <ListItem root component="a" href="#">
                                     <Typography
                                       styles={{ backgroundColor: "#034b92" }}
                                     >

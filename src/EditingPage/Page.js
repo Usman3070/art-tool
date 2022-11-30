@@ -55,7 +55,7 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState({ index: 0, array: [[]] });
   const setCurrentElement = (val) => {
     dispatch2({
       type: "update",
@@ -476,7 +476,24 @@ export const Page = (props) => {
             {show && (
               <Card sx={{ minWidth: 275 }}>
                 <CardContent>
-                  <Typography>Rarity %: {number}/100</Typography>
+                  {number?.array?.map((outer, i) => {
+                    if (number.index === i) {
+                      var num = 0;
+                      outer?.map((inner) => {
+                        num += inner;
+                      });
+                      if (num > 100) {
+                        return (
+                          <Typography>
+                            Rarity %:{" "}
+                            <span style={{ color: "red" }}>{num}</span>/100
+                          </Typography>
+                        );
+                      } else {
+                        return <Typography>Rarity %: {num}/100</Typography>;
+                      }
+                    }
+                  })}
                   {/* <Typography>Name</Typography> */}
                   {/* <TextField
                     fullWidth
@@ -504,29 +521,29 @@ export const Page = (props) => {
                       <input
                         style={{ zIndex: 2 }}
                         {...getInputProps()}
-                        directory=''
-                        webkitdirectory=''
-                        type='file'
+                        directory=""
+                        webkitdirectory=""
+                        type="file"
                       />
 
                       {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
                       <IconButton
-                        color='primary'
-                        aria-label='upload picture'
-                        component='span'
+                        color="primary"
+                        aria-label="upload picture"
+                        component="span"
                         style={{
                           zIndex: 2,
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                         }}
-                        size='medium'
+                        size="medium"
                       >
                         {/* <PhotoCamera /> */}
                         <Button
-                          variant='contained'
+                          variant="contained"
                           sx={{
                             fontSize: "12px",
                             width: "100%",
@@ -559,7 +576,7 @@ export const Page = (props) => {
           </Grid>
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <div id='content'>
+              <div id="content">
                 <Items
                   onClick={setCurrentElement}
                   files={props.folderStructure}
@@ -574,7 +591,7 @@ export const Page = (props) => {
           )}
           {!props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <div id='content'>
+              <div id="content">
                 <Typography
                   sx={{
                     height: "300px",
