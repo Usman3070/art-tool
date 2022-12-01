@@ -55,6 +55,7 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
+  const [download, setDownload] = useState(false);
   const [generate, setGenerate] = useState(false);
   const [number, setNumber] = useState({ index: 0, array: [[]] });
   const setCurrentElement = (val) => {
@@ -229,6 +230,7 @@ export const Page = (props) => {
       })
       .then(function (response) {
         toast.success("Compression success");
+        setDownload(true);
       })
       .catch(function (error) {
         toast.info(error);
@@ -546,29 +548,29 @@ export const Page = (props) => {
                       <input
                         style={{ zIndex: 2 }}
                         {...getInputProps()}
-                        directory=''
-                        webkitdirectory=''
-                        type='file'
+                        directory=""
+                        webkitdirectory=""
+                        type="file"
                       />
 
                       {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
                       <IconButton
-                        color='primary'
-                        aria-label='upload picture'
-                        component='span'
+                        color="primary"
+                        aria-label="upload picture"
+                        component="span"
                         style={{
                           zIndex: 2,
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                         }}
-                        size='medium'
+                        size="medium"
                       >
                         {/* <PhotoCamera /> */}
                         <Button
-                          variant='contained'
+                          variant="contained"
                           sx={{
                             fontSize: "12px",
                             width: "100%",
@@ -603,7 +605,7 @@ export const Page = (props) => {
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
               <Typography
-                variant='h1'
+                variant="h1"
                 sx={{
                   marginBottom: { lg: "-40%", md: "-40%", sm: "0%", xs: "0%" },
                   color: "#fff",
@@ -613,7 +615,7 @@ export const Page = (props) => {
               >
                 Art Preview
               </Typography>
-              <div id='content'>
+              <div id="content">
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <Items
                     onClick={setCurrentElement}
@@ -626,7 +628,7 @@ export const Page = (props) => {
                   />
                   {generate && (
                     <Button
-                      variant='contained'
+                      variant="contained"
                       sx={{
                         marginTop: "2%",
                         backgroundColor: "#111",
@@ -641,6 +643,39 @@ export const Page = (props) => {
                       Generate
                     </Button>
                   )}
+                  {download && (
+                    <a
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontSize: "30px",
+                        fontWeight: "bold",
+                      }}
+                      href={`${process.env.REACT_APP_SERVERURL}/${JSON.parse(
+                        sessionStorage.uuid
+                      )}.zip`}
+                      target="_blank"
+                      download
+                    >
+                      <Button
+                        style={{
+                          background:
+                            "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
+                          padding: "15px 60px",
+                          fontFamily: "poppins-light",
+                        }}
+                        onClick={null}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        // className={classes.button}
+                        // startIcon={<SaveIcon />}
+                      >
+                        DOWNLOAD
+                      </Button>
+                    </a>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -648,7 +683,7 @@ export const Page = (props) => {
           {!props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
               <Typography
-                variant='h1'
+                variant="h1"
                 sx={{
                   marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
                   color: "#fff",
@@ -658,7 +693,7 @@ export const Page = (props) => {
               >
                 Art Preview
               </Typography>
-              <div id='content'>
+              <div id="content">
                 <Typography
                   sx={{
                     height: "300px",
