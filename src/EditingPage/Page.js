@@ -630,6 +630,7 @@ export const Page = (props) => {
                       sx={{
                         marginTop: "2%",
                         backgroundColor: "#111",
+                        fontWeight: "600",
                         "&:hover": {
                           //you want this to be the same as the backgroundColor above
                           backgroundColor: "#111",

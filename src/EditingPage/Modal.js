@@ -515,7 +515,7 @@ export const ModalComponent = (props) => {
                             />
                             {creatorError && (
                               <span style={{ color: "red" }}>
-                                You're wallet is not correct
+                                You're wallet should be valid of 44 length
                               </span>
                             )}
                             <TextField
