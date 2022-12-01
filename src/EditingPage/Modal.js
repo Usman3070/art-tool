@@ -64,9 +64,9 @@ export const ModalComponent = (props) => {
       validationSchema: signUpSchema,
       onSubmit: (values) => {
         handleClick();
-        if (props.closeLoadingModal) {
-          handleClickGenerate();
-        }
+        // if (props.closeLoadingModal) {
+        //   handleClickGenerate();
+        // }
       },
     });
   const handleClick = async () => {
@@ -219,21 +219,21 @@ export const ModalComponent = (props) => {
     }
   };
 
-  const handleClickGenerate = async () => {
-    const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
+  // const handleClickGenerate = async () => {
+  //   const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
 
-    const response = await axios
-      .get(baseURL, {
-        params: { uuid: JSON.parse(sessionStorage.uuid) },
-      })
-      .then(function (response) {
-        toast.success("Compresssion success");
-      })
-      .catch(function (error) {
-        toast.info(error);
-        toast.error("Compression fail");
-      });
-  };
+  //   const response = await axios
+  //     .get(baseURL, {
+  //       params: { uuid: JSON.parse(sessionStorage.uuid) },
+  //     })
+  //     .then(function (response) {
+  //       toast.success("Compresssion success");
+  //     })
+  //     .catch(function (error) {
+  //       toast.info(error);
+  //       toast.error("Compression fail");
+  //     });
+  // };
 
   return (
     <div>

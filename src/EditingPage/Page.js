@@ -216,6 +216,21 @@ export const Page = (props) => {
   const handleShow = () => {
     setShow(true);
   };
+  const handleClickGenerate = async () => {
+    const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
+
+    const response = await axios
+      .get(baseURL, {
+        params: { uuid: JSON.parse(sessionStorage.uuid) },
+      })
+      .then(function (response) {
+        toast.success("Compression success");
+      })
+      .catch(function (error) {
+        toast.info(error);
+        toast.error("Compression fail");
+      });
+  };
   return (
     <>
       {/* <div
@@ -526,29 +541,29 @@ export const Page = (props) => {
                       <input
                         style={{ zIndex: 2 }}
                         {...getInputProps()}
-                        directory=""
-                        webkitdirectory=""
-                        type="file"
+                        directory=''
+                        webkitdirectory=''
+                        type='file'
                       />
 
                       {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
                       <IconButton
-                        color="primary"
-                        aria-label="upload picture"
-                        component="span"
+                        color='primary'
+                        aria-label='upload picture'
+                        component='span'
                         style={{
                           zIndex: 2,
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
                         }}
-                        size="medium"
+                        size='medium'
                       >
                         {/* <PhotoCamera /> */}
                         <Button
-                          variant="contained"
+                          variant='contained'
                           sx={{
                             fontSize: "12px",
                             width: "100%",
@@ -583,9 +598,9 @@ export const Page = (props) => {
           {props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
               <Typography
-                variant="h1"
+                variant='h1'
                 sx={{
-                  marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
+                  marginBottom: { lg: "-40%", md: "-40%", sm: "0%", xs: "0%" },
                   color: "#fff",
                   fontSize: "32px",
                   marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
@@ -593,23 +608,32 @@ export const Page = (props) => {
               >
                 Art Preview
               </Typography>
-              <div id="content">
-                <Items
-                  onClick={setCurrentElement}
-                  files={props.folderStructure}
-                  hashedFolder={props.hashedElements}
-                  imageHeight={canvasHeight.value}
-                  imageWidth={canvasWidth.value}
-                  setCoord={setCoord}
-                  parent={parentRef}
-                />
+              <div id='content'>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Items
+                    onClick={setCurrentElement}
+                    files={props.folderStructure}
+                    hashedFolder={props.hashedElements}
+                    imageHeight={canvasHeight.value}
+                    imageWidth={canvasWidth.value}
+                    setCoord={setCoord}
+                    parent={parentRef}
+                  />
+                  <Button
+                    variant='contained'
+                    sx={{ marginTop: "2%", backgroundColor: "#111" }}
+                    onClick={handleClickGenerate}
+                  >
+                    Generate
+                  </Button>
+                </div>
               </div>
             </Grid>
           )}
           {!props.folderStructure && (
             <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
               <Typography
-                variant="h1"
+                variant='h1'
                 sx={{
                   marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
                   color: "#fff",
@@ -619,7 +643,7 @@ export const Page = (props) => {
               >
                 Art Preview
               </Typography>
-              <div id="content">
+              <div id='content'>
                 <Typography
                   sx={{
                     height: "300px",
