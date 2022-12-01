@@ -91,7 +91,7 @@ export const ModalComponent = (props) => {
       .then(function (response) {
         // window.location.href = "/loading";
         props.closeLoadingModal();
-
+        props.generateBTN();
         console.log(response);
       })
       .catch(function (error) {
