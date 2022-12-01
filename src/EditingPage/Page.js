@@ -55,6 +55,7 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
+  const [generate, setGenerate] = useState(false);
   const [number, setNumber] = useState({ index: 0, array: [[]] });
   const setCurrentElement = (val) => {
     dispatch2({
@@ -153,6 +154,9 @@ export const Page = (props) => {
 
   const closeLoadingModal = () => {
     setLoadingModal(false);
+  };
+  const generateBTN = () => {
+    setGenerate(true);
   };
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -476,6 +480,7 @@ export const Page = (props) => {
                 setCanvasWidth={setCanvasWidth}
                 openLoadingModal={openLoadingModal}
                 closeLoadingModal={closeLoadingModal}
+                generateBTN={generateBTN}
               />
             </div>
           </Grid>
@@ -619,13 +624,22 @@ export const Page = (props) => {
                     setCoord={setCoord}
                     parent={parentRef}
                   />
-                  <Button
-                    variant='contained'
-                    sx={{ marginTop: "2%", backgroundColor: "#111" }}
-                    onClick={handleClickGenerate}
-                  >
-                    Generate
-                  </Button>
+                  {generate && (
+                    <Button
+                      variant='contained'
+                      sx={{
+                        marginTop: "2%",
+                        backgroundColor: "#111",
+                        "&:hover": {
+                          //you want this to be the same as the backgroundColor above
+                          backgroundColor: "#111",
+                        },
+                      }}
+                      onClick={handleClickGenerate}
+                    >
+                      Generate
+                    </Button>
+                  )}
                 </div>
               </div>
             </Grid>
