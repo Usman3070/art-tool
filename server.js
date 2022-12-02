@@ -32,7 +32,7 @@ const dirTree = require("directory-tree");
 // });
 
 app.post("/renameFile", (req, res) => {
-  fs.rename(req.body.from, req.body.to, function (err) {
+  fs.rename(req.body.from, `${req.body.to}.png`, function (err) {
     if (err) console.log("ERROR: " + err);
   });
   return res.send("done");
