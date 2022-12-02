@@ -242,9 +242,42 @@ app.post("/submitDetails", (request, response) => {
         __dirname + `/generated/${uuid}/${hash - 1}.png`,
         buffer
       );
-
       if (tree.children.length === index + 1) {
         context.clearRect(0, 0, canvas.width, canvas.height);
+        const rarityPercentage = (objRarity / totalRarity) * 100;
+        // Metadata Generation
+        let num = hash - 1;
+        const dataImage = {
+          name: `${name} #${num}`,
+          symbol,
+          seller_fee_basis_points,
+          description: description,
+          external_link: URL,
+          attributes: newData[num],
+          properties: {
+            files: [{ uri: `${num}.png`, type: "image/png" }],
+            category: "image",
+            creators: creators,
+          },
+          traits: {
+            rarity: rarityPercentage,
+          },
+        };
+        let newFile = JSON.stringify(dataImage);
+        fs.writeFile(
+          `generated/${uuid}/${num}.json`,
+          newFile,
+          "utf8",
+          function (err) {
+            if (err) {
+              console.log(
+                "An error occured while writing JSON Object to File."
+              );
+              return console.log(err);
+            }
+          }
+        );
+        metadata.push(dataImage);
         if (hash === data.total.value) {
           const jsonContent = JSON.stringify(metadata);
           fs.writeFile(
@@ -265,41 +298,6 @@ app.post("/submitDetails", (request, response) => {
           return response.json("Success").status(200);
         }
 
-        const rarityPercentage = (objRarity / totalRarity) * 100;
-        // Metadata Generation
-        let num = hash - 1;
-        const dataImage = {
-          name: `${name} #${num}`,
-          symbol,
-          seller_fee_basis_points,
-          description: description,
-          external_link: URL,
-          attributes: newData[num],
-          properties: {
-            files: [{ uri: `${num}.png`, type: "image/png" }],
-            category: "image",
-            creators: creators,
-          },
-          traits: {
-            rarity: rarityPercentage,
-          },
-        };
-
-        let newFile = JSON.stringify(dataImage);
-        fs.writeFile(
-          `generated/${uuid}/${num}.json`,
-          newFile,
-          "utf8",
-          function (err) {
-            if (err) {
-              console.log(
-                "An error occured while writing JSON Object to File."
-              );
-              return console.log(err);
-            }
-          }
-        );
-        metadata.push(dataImage);
         hash += 1;
       }
     });

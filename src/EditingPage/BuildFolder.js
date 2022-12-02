@@ -104,6 +104,12 @@ export const Folders = (props) => {
       tempData[folderIndex][subfolderIndex] = parseFloat(val);
       return { index: folderIndex, array: tempData };
     });
+    dispatchMain({
+      type: "update",
+      value: val,
+      folderIndex: folderIndex,
+      subfolderIndex: subfolderIndex,
+    });
   };
   const handleRenameArray = (e, i, j) => {
     setList((tempArray) => {
