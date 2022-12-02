@@ -57,6 +57,7 @@ export const ModalComponent = (props) => {
   const [code, setCode] = React.useState("");
   const [creatorError, setCreatorError] = React.useState(false);
   const [shareError, setShareError] = React.useState(false);
+  const [rarityNumber, setRarityNumber] = React.useState(0);
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
@@ -237,368 +238,377 @@ export const ModalComponent = (props) => {
 
   return (
     <div>
-      <Box>
-        <>
-          <div
-            style={{
-              fontWeight: "500",
-              fontSize: "22px",
-              // fontFamily: "Muller-ExtraBold",
-              marginBottom: "2%",
-              color: "white",
-            }}
-          >
-            PARAMETERS
-          </div>
-
-          <Paper style={{ maxHeight: 670, overflow: "auto" }}>
+      <Box className='modalForm'>
+        <div style={{ paddingTop: "17%" }}>
+          <Paper style={{ maxHeight: 770, overflow: "auto" }}>
             <List>
-              <Card>
-                <CardContent>
-                  <form onSubmit={handleSubmit}>
-                    <Grid
-                      container
-                      xl={12}
-                      lg={12}
-                      md={12}
-                      sm={12}
-                      xs={12}
-                      spacing={4}
-                    >
-                      <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                        <Typography
-                          sx={{
-                            color: "#2E2E2E",
-                            marginBottom: "4%",
-                            fontSize: "14px",
-                          }}
-                        >
-                          Supply
-                        </Typography>
-                        <EditorInput setValues={editValues} />
-                      </Grid>
-                      <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                        <Typography
-                          sx={{
-                            color: "#2E2E2E",
-                            marginBottom: "4%",
-                            fontSize: "14px",
-                          }}
-                        >
-                          Height
-                        </Typography>
-                        <TextField
-                          // className='editor_textfield mid_textFields'
-                          id='outlined-number'
-                          placeholder='0'
-                          type='number'
-                          color='#808080'
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          onChange={(event) => {
-                            props.setCanvasHeight({
-                              value: JSON.parse(event.target.value),
-                            });
-                          }}
-                        />
-                      </Grid>
-                      <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
-                        <Typography
-                          sx={{
-                            color: "#2E2E2E",
-                            marginBottom: "4%",
-                            fontSize: "14px",
-                          }}
-                        >
-                          Width
-                        </Typography>
-                        <TextField
-                          // className='editor_textfield mid_textFields'
-                          id='outlined-number'
-                          placeholder='0'
-                          type='number'
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          onChange={(event) => {
-                            props.setCanvasWidth({
-                              value: JSON.parse(event.target.value),
-                            });
-                          }}
-                        />
-                      </Grid>
+              <div
+                style={{
+                  fontWeight: "500",
+                  fontSize: "22px",
+                  // fontFamily: "Muller-ExtraBold",
+                  marginBottom: "-8%",
+                  color: "white",
+                  padding: "10px",
+                }}
+              >
+                <Typography variant='h5'>Parameters</Typography>
+              </div>
+
+              {/* <Card> */}
+              {/* <CardContent> */}
+              <div style={{ padding: "10px" }}>
+                <form onSubmit={handleSubmit}>
+                  <Grid
+                    container
+                    xl={12}
+                    lg={12}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    spacing={4}
+                  >
+                    <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
+                      <Typography
+                        sx={{
+                          color: "#fff",
+                          marginBottom: "4%",
+                          fontSize: "14px",
+                        }}
+                      >
+                        Supply
+                      </Typography>
+                      <EditorInput setValues={editValues} />
                     </Grid>
+                    <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
+                      <Typography
+                        sx={{
+                          color: "#fff",
+                          marginBottom: "4%",
+                          fontSize: "14px",
+                        }}
+                      >
+                        Height
+                      </Typography>
+                      <TextField
+                        // className='editor_textfield mid_textFields'
+                        id='outlined-number'
+                        placeholder='0'
+                        type='number'
+                        variant='outlined'
+                        color='#808080'
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(event) => {
+                          props.setCanvasHeight({
+                            value: JSON.parse(event.target.value),
+                          });
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
+                      <Typography
+                        sx={{
+                          color: "#fff",
+                          marginBottom: "4%",
+                          fontSize: "14px",
+                        }}
+                      >
+                        Width
+                      </Typography>
+                      <TextField
+                        // className='editor_textfield mid_textFields'
+                        id='outlined-number'
+                        placeholder='0'
+                        variant='outlined'
+                        type='number'
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(event) => {
+                          props.setCanvasWidth({
+                            value: JSON.parse(event.target.value),
+                          });
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <div>
                     <div>
                       <div>
-                        <div>
-                          <div
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: 500,
-                              fontFamily: "poppins-light",
-                              color: "#2E2E2E",
-                              marginTop: "1%",
-                              marginBottom: "1%",
-                            }}
-                          >
-                            Name prefix(ie.__#69)
-                          </div>
-                          <TextField
-                            fullWidth
-                            variant='outlined'
-                            placeholder='eg. WhatsForLaunch'
-                            name='name'
-                            value={values.name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
-                          {errors.name && touched.name ? (
-                            <p style={{ color: "red" }}>{errors.name}</p>
-                          ) : null}
-                        </div>
-
-                        <div>
-                          <div
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: 500,
-                              fontFamily: "poppins-light",
-                              color: "#2E2E2E",
-                              marginTop: "1%",
-                              marginBottom: "1%",
-                            }}
-                          >
-                            Symbol
-                          </div>
-                          <TextField
-                            fullWidth
-                            variant='outlined'
-                            placeholder='eg. WFL'
-                            name='symbol'
-                            value={values.symbol}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
-                          {errors.symbol && touched.symbol ? (
-                            <p style={{ color: "red" }}>{errors.symbol}</p>
-                          ) : null}
-                        </div>
-
-                        <div>
-                          <div
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: 500,
-                              fontFamily: "poppins-light",
-                              color: "#2E2E2E",
-                              marginTop: "1%",
-                              marginBottom: "1%",
-                            }}
-                          >
-                            Percent fee(%)
-                          </div>
-                          <TextField
-                            fullWidth
-                            variant='outlined'
-                            placeholder='eg. WhatsForLaunch'
-                            name='royaltyPercent'
-                            value={values.royaltyPercent}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
-                          {errors.royaltyPercent && touched.royaltyPercent ? (
-                            <p style={{ color: "red" }}>
-                              {errors.royaltyPercent}
-                            </p>
-                          ) : null}
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            marginBottom: "10px",
-                            alignItems: "center",
-                          }}
-                        ></div>
-                        <div>
-                          <div
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: 500,
-                              fontFamily: "poppins-light",
-                              color: "#2E2E2E",
-                              marginTop: "1%",
-                              marginBottom: "1%",
-                            }}
-                          >
-                            External Link (Website):
-                          </div>
-                          <TextField
-                            fullWidth
-                            variant='outlined'
-                            placeholder='URL'
-                            name='external'
-                            value={values.external}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            style={{
-                              borderRadius: "10px",
-                            }}
-                          />
-                          {errors.external && touched.external ? (
-                            <p style={{ color: "red" }}>{errors.external}</p>
-                          ) : null}
-                        </div>
-
-                        <div>
-                          <div
-                            style={{
-                              fontSize: "14px",
-                              fontWeight: 500,
-                              fontFamily: "poppins-light",
-                              color: "#2E2E2E",
-                              marginTop: "1%",
-                              marginBottom: "1%",
-                            }}
-                          >
-                            Description :
-                          </div>
-                          <TextField
-                            fullWidth
-                            placeholder='eg. 777 of the WhatsForLaunch'
-                            variant='outlined'
-                            name='description'
-                            value={values.description}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            multiline={true}
-                            style={{
-                              borderRadius: "10px",
-                            }}
-                          />
-                          {errors.description && touched.description ? (
-                            <p style={{ color: "red" }}>{errors.description}</p>
-                          ) : null}
-                        </div>
-                      </div>
-                      <div style={{ width: "100%" }}>
                         <div
                           style={{
                             fontSize: "14px",
                             fontWeight: 500,
                             fontFamily: "poppins-light",
-                            color: "#2E2E2E",
+                            color: "#fff",
                             marginTop: "1%",
                             marginBottom: "1%",
                           }}
                         >
-                          Royalty Wallets
+                          Name prefix(ie.__#69)
                         </div>
-                        {inputFields.map((input, index) => (
-                          <>
-                            <TextField
-                              fullWidth
-                              variant='outlined'
-                              // inputProps={{ style: { textAlign: "center" } }}
-                              placeholder='Royalty Wallets'
-                              name='creator'
-                              value={values.royaltyWallet}
-                              onChange={handleChange}
-                              onBlur={(event) => {
-                                handleFormChange(index, event);
-                              }}
-                              style={{
-                                width: "100%",
-                                borderRadius: "10px",
-                                padding: "10px 0 15px 0",
-                              }}
-                            />
-                            {creatorError && (
-                              <span style={{ color: "red" }}>
-                                You're wallet should be valid of 44 length
-                              </span>
-                            )}
-                            <TextField
-                              fullWidth
-                              variant='outlined'
-                              // inputProps={{ style: { textAlign: "center" } }}
-                              placeholder='share'
-                              name='share'
-                              onBlur={(event) => {
-                                handleFormChange(index, event);
-                              }}
-                              style={{
-                                justifyContent: "flex-start",
-                                display: "flex",
-                                // width: "500px",
-                                // marginLeft: "5px",
-                                borderRadius: "10px",
-                                padding: "0 0 15px 0",
-                              }}
-                            />
-                            {shareError && (
-                              <span style={{ color: "red" }}>
-                                Share value is not valid
-                              </span>
-                            )}
-                          </>
-                        ))}
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='eg. WhatsForLaunch'
+                          name='name'
+                          value={values.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errors.name && touched.name ? (
+                          <p style={{ color: "red" }}>{errors.name}</p>
+                        ) : null}
+                      </div>
+
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Symbol
+                        </div>
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='eg. WFL'
+                          name='symbol'
+                          value={values.symbol}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errors.symbol && touched.symbol ? (
+                          <p style={{ color: "red" }}>{errors.symbol}</p>
+                        ) : null}
+                      </div>
+
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Percent fee(%)
+                        </div>
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='eg. WhatsForLaunch'
+                          name='royaltyPercent'
+                          value={values.royaltyPercent}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errors.royaltyPercent && touched.royaltyPercent ? (
+                          <p style={{ color: "red" }}>
+                            {errors.royaltyPercent}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginBottom: "10px",
+                          alignItems: "center",
+                        }}
+                      ></div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          External Link (Website):
+                        </div>
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='URL'
+                          name='external'
+                          value={values.external}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          style={{
+                            borderRadius: "10px",
+                          }}
+                        />
+                        {errors.external && touched.external ? (
+                          <p style={{ color: "red" }}>{errors.external}</p>
+                        ) : null}
+                      </div>
+
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Description :
+                        </div>
+                        <TextField
+                          fullWidth
+                          placeholder='eg. 777 of the WhatsForLaunch'
+                          variant='outlined'
+                          name='description'
+                          value={values.description}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          multiline={true}
+                          rows={3}
+                          maxRows={4}
+                          style={{
+                            borderRadius: "10px",
+                          }}
+                        />
+                        {errors.description && touched.description ? (
+                          <p style={{ color: "red" }}>{errors.description}</p>
+                        ) : null}
                       </div>
                     </div>
-                    <div style={{ display: "flex" }}>
-                      <div style={{ marginTop: "3%" }}>
-                        <button
-                          style={{
-                            width: "40px",
-                            backgroundColor: "#1565C0",
-                            borderRadius: "8px",
-                            color: "#fff",
-                            borderColor: "#1565C0",
-                            height: "30px",
-                            cursor: "pointer",
-                          }}
-                          onClick={(e) => addFields(e)}
-                        >
-                          <AddIcon />
-                        </button>
-                      </div>
-                      <div style={{ marginTop: "3%", marginLeft: "2%" }}>
-                        <button
-                          style={{
-                            width: "40px",
-                            borderRadius: "8px",
-                            color: "#fff",
-                            borderColor: "red",
-                            height: "30px",
-                            cursor: "pointer",
-                            background: "red",
-                          }}
-                          onClick={(e) => removeFields(e)}
-                        >
-                          <RemoveIcon />
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "3%",
-                      }}
-                    >
-                      <Button
-                        variant='contained'
-                        onClick={() => {
-                          handleSubmit();
+                    <div style={{ width: "100%" }}>
+                      <div
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          fontFamily: "poppins-light",
+                          color: "#fff",
+                          marginTop: "1%",
+                          marginBottom: "1%",
                         }}
                       >
-                        Create
-                      </Button>
+                        Royalty Wallets
+                      </div>
+                      {inputFields.map((input, index) => (
+                        <>
+                          <TextField
+                            fullWidth
+                            variant='outlined'
+                            // inputProps={{ style: { textAlign: "center" } }}
+                            placeholder='Royalty Wallets'
+                            name='creator'
+                            value={values.royaltyWallet}
+                            onChange={handleChange}
+                            onBlur={(event) => {
+                              handleFormChange(index, event);
+                            }}
+                            style={{
+                              width: "100%",
+                              borderRadius: "10px",
+                              padding: "10px 0 15px 0",
+                            }}
+                          />
+                          {creatorError && (
+                            <span style={{ color: "red" }}>
+                              You're wallet should be valid of 44 length
+                            </span>
+                          )}
+                          <TextField
+                            fullWidth
+                            variant='outlined'
+                            // inputProps={{ style: { textAlign: "center" } }}
+                            placeholder='share'
+                            name='share'
+                            onBlur={(event) => {
+                              handleFormChange(index, event);
+                            }}
+                            style={{
+                              justifyContent: "flex-start",
+                              display: "flex",
+                              // width: "500px",
+                              // marginLeft: "5px",
+                              borderRadius: "10px",
+                              padding: "0 0 15px 0",
+                            }}
+                          />
+                          {shareError && (
+                            <span style={{ color: "red" }}>
+                              Share value is not valid
+                            </span>
+                          )}
+                        </>
+                      ))}
                     </div>
-                  </form>
-                </CardContent>
-              </Card>
+                  </div>
+                  <div style={{ display: "flex" }}>
+                    <div style={{ marginTop: "3%" }}>
+                      <button
+                        style={{
+                          width: "40px",
+                          backgroundColor: "#1565C0",
+                          borderRadius: "8px",
+                          color: "#fff",
+                          borderColor: "#1565C0",
+                          height: "30px",
+                          cursor: "pointer",
+                        }}
+                        onClick={(e) => addFields(e)}
+                      >
+                        <AddIcon />
+                      </button>
+                    </div>
+                    <div style={{ marginTop: "3%", marginLeft: "2%" }}>
+                      <button
+                        style={{
+                          width: "40px",
+                          borderRadius: "8px",
+                          color: "#fff",
+                          borderColor: "red",
+                          height: "30px",
+                          cursor: "pointer",
+                          background: "red",
+                        }}
+                        onClick={(e) => removeFields(e)}
+                      >
+                        <RemoveIcon />
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "3%",
+                    }}
+                  >
+                    <Button
+                      variant='contained'
+                      className='createBtn'
+                      onClick={() => {
+                        handleSubmit();
+                      }}
+                      sx={{ padding: "10px 30px", width: "30%" }}
+                    >
+                      Create
+                    </Button>
+                  </div>
+                </form>
+              </div>
+              {/* </CardContent> */}
+              {/* </Card> */}
             </List>
           </Paper>
-        </>
+        </div>
       </Box>
       <div className='form-group'>
         <ToastContainer

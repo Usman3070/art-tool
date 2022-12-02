@@ -96,6 +96,8 @@ export const EditorInput = (props) => {
         <TextField
           // className='editor_textfield'
           id='outlined-number'
+          variant='outlined'
+          // label='supply'
           placeholder='0'
           type='number'
           InputLabelProps={{

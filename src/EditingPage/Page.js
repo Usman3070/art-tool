@@ -236,7 +236,7 @@ export const Page = (props) => {
       });
   };
   return (
-    <>
+    <div>
       {/* <div
         className='editor-left'
         style={{
@@ -314,7 +314,7 @@ export const Page = (props) => {
               />
             </Hidden>
           </div>
-          <
+          <d
             style={{
               border: "1px solid #32306A",
               borderRadius: "12px",
@@ -472,7 +472,7 @@ export const Page = (props) => {
         <Edit />
         <Grid container spacing={2}>
           <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-            <div>
+            <div style={{ marginRight: "2%" }}>
               <ModalComponent
                 isOpen={open}
                 // handleClose={handleClose}
@@ -484,51 +484,58 @@ export const Page = (props) => {
               />
             </div>
           </Grid>
-          <Grid
-            item
-            xl={4}
-            lg={4}
-            md={4}
-            sm={12}
-            xs={12}
-            // sx={{ marginLeft: "2%" }}
-          >
-            <Typography
-              sx={{ color: "#fff", fontSize: "26px", marginBottom: "1%" }}
-            >
-              Traits
-            </Typography>
-            {show && (
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                  {number?.array?.map((outer, i) => {
-                    if (number.index === i) {
-                      var num = 0;
-                      outer?.map((inner) => {
-                        num += inner;
-                      });
-                      if (num > 100) {
-                        return (
-                          <Typography>
-                            Rarity %:{" "}
-                            <span style={{ color: "red" }}>{num}</span>/100
-                          </Typography>
-                        );
-                      } else {
-                        return <Typography>Rarity %: {num}/100</Typography>;
-                      }
-                    }
-                  })}
-                  {/* <Typography>Name</Typography> */}
-                  {/* <TextField
+          <Grid item xl={8} lg={8} md={8} sm={12} xs={12} className='uploadBG'>
+            <Grid container spacing={2} sx={{ padding: "40px" }}>
+              <Grid
+                item
+                xl={6}
+                lg={6}
+                md={6}
+                sm={12}
+                xs={12}
+                // sx={{ marginLeft: "2%" }}
+              >
+                <Typography
+                  sx={{ color: "#fff", fontSize: "26px", marginBottom: "1%" }}
+                >
+                  Traits
+                </Typography>
+                {show && (
+                  <Card sx={{ minWidth: 275 }}>
+                    <CardContent>
+                      {number?.array?.map((outer, i) => {
+                        if (number.index === i) {
+                          var num = 0;
+                          outer?.map((inner) => {
+                            num += inner;
+                          });
+                          if (num > 100) {
+                            return (
+                              <Typography>
+                                Rarity %:{" "}
+                                <span style={{ color: "red" }}>{num}</span>
+                                /100
+                              </Typography>
+                            );
+                          } else {
+                            return (
+                              <Typography sx={{ color: "#fff" }}>
+                                Rarity %: {num}/100
+                              </Typography>
+                            );
+                          }
+                        }
+                      })}
+                      {/* <Typography>Name</Typography> */}
+                      {/* <TextField
                     fullWidth
                     variant='outlined'
                     placeholder='name'
                     name='name'
                   /> */}
-                </CardContent>
-                <CardActions>
-                  {/* <button
+                    </CardContent>
+                    <CardActions>
+                      {/* <button
                     variant='contained'
                     style={{
                       backgroundColor: "red",
@@ -541,145 +548,162 @@ export const Page = (props) => {
                   >
                     <Typography sx={{ fontSize: "20px" }}>-</Typography>
                   </button> */}
-                  {!props.folderStructure && (
-                    <div style={{ zIndex: 2 }} {...getRootProps()}>
-                      <input
-                        style={{ zIndex: 2 }}
-                        {...getInputProps()}
-                        directory=''
-                        webkitdirectory=''
-                        type='file'
-                      />
+                      {!props.folderStructure && (
+                        <div
+                          style={{ zIndex: 2, width: "100%" }}
+                          {...getRootProps()}
+                        >
+                          <input
+                            style={{ zIndex: 2 }}
+                            {...getInputProps()}
+                            directory=''
+                            webkitdirectory=''
+                            type='file'
+                          />
 
-                      {/* { isDragActive ? (
+                          {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
-                      <IconButton
-                        color='primary'
-                        aria-label='upload picture'
-                        component='span'
-                        style={{
-                          zIndex: 2,
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        size='medium'
-                      >
-                        {/* <PhotoCamera /> */}
-                        <Button
-                          variant='contained'
-                          sx={{
-                            fontSize: "12px",
-                            width: "100%",
-                            padding: "7px",
-                          }}
-                        >
-                          Select Folder
-                        </Button>
-                      </IconButton>
-                      {/* )} */}
-                    </div>
-                  )}
-                </CardActions>
-              </Card>
-            )}
-            <TreesTemp
-              flag={props.flag}
-              setFlag={props.setFlag}
-              folderData={props.folderStructure}
-              setNumber={setNumber}
-              number={number}
-            />
-            {/* <Button
+                          <IconButton
+                            color='primary'
+                            aria-label='upload picture'
+                            component='span'
+                            style={{
+                              zIndex: 2,
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                            size='medium'
+                          >
+                            {/* <PhotoCamera /> */}
+                            <Button
+                              variant='contained'
+                              sx={{
+                                fontSize: "12px",
+                                width: "40%",
+                                padding: "10px 20px",
+                              }}
+                              className='createBtn'
+                            >
+                              Select Folder
+                            </Button>
+                          </IconButton>
+                          {/* )} */}
+                        </div>
+                      )}
+                    </CardActions>
+                  </Card>
+                )}
+                <TreesTemp
+                  flag={props.flag}
+                  setFlag={props.setFlag}
+                  folderData={props.folderStructure}
+                  setNumber={setNumber}
+                  number={number}
+                />
+                {/* <Button
               variant='contained'
               sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}
               onClick={handleShow}
             >
               +
             </Button> */}
-          </Grid>
+              </Grid>
 
-          {props.folderStructure && (
-            <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <Typography
-                variant='h1'
-                sx={{
-                  marginBottom: { lg: "-40%", md: "-40%", sm: "0%", xs: "0%" },
-                  color: "#fff",
-                  fontSize: "32px",
-                  marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
-                }}
-              >
-                Art Preview
-              </Typography>
-              <div id='content'>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Items
-                    onClick={setCurrentElement}
-                    files={props.folderStructure}
-                    hashedFolder={props.hashedElements}
-                    imageHeight={canvasHeight.value}
-                    imageWidth={canvasWidth.value}
-                    setCoord={setCoord}
-                    parent={parentRef}
-                  />
-                  {generate && (
-                    <Button
-                      variant='contained'
-                      sx={{
-                        marginTop: "2%",
-                        backgroundColor: "#111",
-                        fontWeight: "600",
-                        "&:hover": {
-                          //you want this to be the same as the backgroundColor above
-                          backgroundColor: "#111",
-                        },
-                      }}
-                      onClick={handleClickGenerate}
-                    >
-                      Generate
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </Grid>
-          )}
-          {!props.folderStructure && (
-            <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-              <Typography
-                variant='h1'
-                sx={{
-                  marginBottom: { lg: "-45%", md: "-45%", sm: "0%", xs: "0%" },
-                  color: "#fff",
-                  fontSize: "32px",
-                  marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
-                }}
-              >
-                Art Preview
-              </Typography>
-              <div id='content'>
-                <Typography
-                  sx={{
-                    height: "300px",
-                    width: "300px",
-                    backgroundColor: "#C5C5C5",
-                    borderRadius: "10px",
-                  }}
-                >
+              {props.folderStructure && (
+                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
                   <Typography
+                    variant='h1'
                     sx={{
-                      display: "flex",
-                      marginTop: "50%",
-                      justifyContent: "center",
+                      marginBottom: {
+                        lg: "-40%",
+                        md: "-40%",
+                        sm: "0%",
+                        xs: "0%",
+                      },
+                      color: "#fff",
+                      fontSize: "32px",
+                      marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
                     }}
                   >
-                    Generation Will appear here
+                    Art Preview
                   </Typography>
-                </Typography>
-              </div>
+                  <div id='content'>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <Items
+                        onClick={setCurrentElement}
+                        files={props.folderStructure}
+                        hashedFolder={props.hashedElements}
+                        imageHeight={canvasHeight.value}
+                        imageWidth={canvasWidth.value}
+                        setCoord={setCoord}
+                        parent={parentRef}
+                      />
+                      {generate && (
+                        <Button
+                          variant='contained'
+                          sx={{
+                            marginTop: "2%",
+                            backgroundColor: "#111",
+                            fontWeight: "600",
+                            "&:hover": {
+                              //you want this to be the same as the backgroundColor above
+                              backgroundColor: "#111",
+                            },
+                          }}
+                          onClick={handleClickGenerate}
+                          className='createBtn'
+                        >
+                          Generate
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </Grid>
+              )}
+              {!props.folderStructure && (
+                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                  <Typography
+                    variant='h1'
+                    sx={{
+                      marginBottom: {
+                        lg: "-15%",
+                        md: "-15%",
+                        sm: "0%",
+                        xs: "0%",
+                      },
+                      color: "#fff",
+                      fontSize: "32px",
+                      marginTop: { lg: "45%", md: "45%", sm: "0%", xs: "0%" },
+                    }}
+                  >
+                    Art Preview
+                  </Typography>
+                  <div id='content'>
+                    <Typography
+                      sx={{
+                        height: "300px",
+                        width: "300px",
+                        backgroundColor: "#C5C5C5",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          display: "flex",
+                          marginTop: "50%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        Generation Will appear here
+                      </Typography>
+                    </Typography>
+                  </div>
+                </Grid>
+              )}
             </Grid>
-          )}
+          </Grid>
         </Grid>
       </Typography>
       <div>
@@ -688,6 +712,6 @@ export const Page = (props) => {
       {/*</div>
         </div>
       </div> */}
-    </>
+    </div>
   );
 };

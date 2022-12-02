@@ -26,6 +26,7 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
+import { Scrollbars } from "react-custom-scrollbars";
 import { TreeContext } from "./EditingPage";
 
 // const useStyles = makeStyles((theme) => ({
@@ -156,7 +157,7 @@ export const Folders = (props) => {
                                   <AccordionSummary
                                     expandIcon={
                                       <ExpandMoreIcon
-                                        style={{ color: "#111" }}
+                                        style={{ color: "#fff" }}
                                       />
                                     }
                                     aria-controls='panel1a-content'
@@ -248,7 +249,7 @@ export const Folders = (props) => {
                                             > */}
                                             <TextField
                                               fullWidth
-                                              variant='filled'
+                                              variant='outlined'
                                               type='text'
                                               onChange={(e) => {
                                                 handleRenameArray(
