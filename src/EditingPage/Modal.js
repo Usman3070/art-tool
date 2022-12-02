@@ -71,8 +71,22 @@ export const ModalComponent = (props) => {
       },
     });
   const handleClick = async () => {
-    console.log(fileData?.children?.length, "hjhkhk");
-
+    //check is rarity set
+    if (fileData?.children?.length !== props?.rarityData?.array?.length) {
+      alert("You must set the rarity for all layers of all category");
+      return;
+    }
+    props?.rarityData?.array?.map((outerData) => {
+      var sum = 0;
+      outerData?.map((innerData) => {
+        sum += innerData;
+      });
+      if (sum < 100) {
+        alert("Rarity must be equal to 100 for each category");
+        return;
+      }
+    });
+    //
     const data = {
       objects: objects,
       total: total,
@@ -87,7 +101,6 @@ export const ModalComponent = (props) => {
       description: values.description,
       URL: values.external,
     };
-    return;
     props.openLoadingModal();
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/submitDetails`, data)
