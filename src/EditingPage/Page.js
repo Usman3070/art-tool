@@ -55,6 +55,7 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
+  const [download, setDownload] = useState(false);
   const [generate, setGenerate] = useState(false);
   const [number, setNumber] = useState({ index: 0, array: [[]] });
   const setCurrentElement = (val) => {
@@ -229,6 +230,7 @@ export const Page = (props) => {
       })
       .then(function (response) {
         toast.success("Compression success");
+        setDownload(true);
       })
       .catch(function (error) {
         toast.info(error);
@@ -237,236 +239,6 @@ export const Page = (props) => {
   };
   return (
     <div>
-      {/* <div
-        className='editor-left'
-        style={{
-          width: "18%",
-          float: "left",
-          backgroundColor: "#272434",
-          height: "100vh",
-          overflowX: "hidden",
-          overflowY: "auto",
-          zIndex: 20,
-          transition: "width .35s",
-        }}
-      >
-        <TreesTemp folderData={props.folderStructure} />
-      </div> */}
-      {/* <div
-        className='editor-mid'
-        style={{
-          width: "61%",
-          float: "left",
-          minHeight: "100vh",
-          // padding: "5px",
-        }}
-      >
-        <div
-          className='canvas_inputs'
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            gap: "50px",
-            backgroundColor: "rgba(39, 36, 52, 0.5)",
-            color: "#CECECE",
-            fontFamily: "Poppins",
-            // marginTop: "3vh",
-            // paddingRight: "5px",
-            padding: "20px 0 20px 0",
-            margin: "0 50px 0 50px",
-          }}
-        >
-          <div
-            style={{
-              border: "1px solid #32306A",
-              borderRadius: "12px",
-              padding: "0px 20px",
-              width: "30%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <div style={{ width: "250px" }}>
-              Height: <br />
-              <Slider
-                value={canvasHeight.value}
-                valueLabelDisplay='auto'
-                onChange={(event, value) => {
-                  setCanvasHeight({ value });
-                }}
-                min={0}
-                max={1000}
-              />
-            </div>
-            <Hidden smDown>
-              <InputBase
-                className='editor_textfield mid_textFields'
-                type='number'
-                placeholder='0'
-                inputProps={{ "aria-label": "naked" }}
-                onChange={(event) => {
-                  setCanvasHeight({
-                    value: JSON.parse(event.target.value),
-                  });
-                }}
-              />
-            </Hidden>
-          </div>
-          <d
-            style={{
-              border: "1px solid #32306A",
-              borderRadius: "12px",
-              padding: "0px 20px",
-              width: "30%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "5px",
-            }}
-          >
-            <div style={{ width: "250px" }}>
-              Width: <br />
-              <Slider
-                value={canvasWidth.value}
-                valueLabelDisplay='auto'
-                onChange={(event, value) => {
-                  setCanvasWidth({ value });
-                }}
-                min={0}
-                max={1000}
-              />
-            </div>
-
-            {/* <input
-            className="input_field"
-           
-              onChange={(event) => {
-                setCanvasWidth({
-                  value: JSON.parse(event.target.value),
-                });
-              }}
-            /> */}
-      {/* <Hidden smDown>
-              <InputBase
-                className='editor_textfield mid_textFields'
-                type='number'
-                placeholder='0'
-                inputProps={{ "aria-label": "naked" }}
-                onChange={(event) => {
-                  setCanvasWidth({
-                    value: JSON.parse(event.target.value),
-                  });
-                }}
-              />
-            </Hidden> */}
-
-      {/* <div style={{maxWidth:"200px", margin:"0 auto"}}>
-            
-            </div> */}
-      {/* </div> */}
-      {/* </div> */}
-
-      {/* <div id='content'>
-        <Items
-          onClick={setCurrentElement}
-          files={props.folderStructure}
-          hashedFolder={props.hashedElements}
-          imageHeight={canvasHeight.value}
-          imageWidth={canvasWidth.value}
-          setCoord={setCoord}
-          parent={parentRef}
-        />
-      </div> */}
-
-      {/* </div> */}
-      {/* <div
-        className='editor-right'
-        style={{
-          width: "21%",
-          float: "right",
-          // borderRadius: "10px",
-          zIndex: 20,
-          // marginTop: "10px",
-        }}
-      > */}
-      {/* <div
-          style={{
-            backgroundColor: "#272434",
-            height: "100vh",
-            margin: "0px 0px 5px 0px",
-            overflowY: "auto",
-
-          }}
-        > */}
-      {/* <div
-            variant='h6'
-            color='inherit'
-            className='landingNavMenu collection-generator'
-            onClick={(event) => (window.location.href = "/")}
-          >
-            COLLECTION GENERATOR
-          </div> */}
-      {/* <div>
-        <Editor currentValues={props.hashedElements} />
-      </div>
-      <div>
-        <EditorInput setValues={editValues} /> */}
-      {/* <TotalCopies/> */}
-      {/* </div>
-          <div
-            style={{
-              marginTop: "15px",
-              padding: "5px",
-            }}
-          >
-            <div style={{ justifyContent: "center", display: "flex" }}>
-              <Button
-                variant='contained'
-                style={{
-                  // borderRadius: 2,
-                  backgroundColor: "transparent",
-                  border: "1px solid #C615A9",
-                  color: "#fff",
-                  padding: "10px 20px",
-                  fontSize: "13px",
-                }}
-                size='medium'
-                onClick={handleRarityOpen}
-              >
-                💎 Add Rarity
-              </Button>
-            </div>  */}
-      {/* <div
-        style={{
-          justifyContent: "center",
-          display: "flex",
-          marginTop: "15px",
-        }}
-      >
-        <Button
-          variant='contained'
-          style={{
-            background:
-              "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
-            color: "#fff",
-            padding: "10px 36px",
-            fontFamily: "Poppins",
-          }}
-          size='large'
-          onClick={totalCopies && totalCopies.value > 10000 ? null : handleOpen}
-        >
-          Generate
-        </Button>
-      </div> */}
-      {/* <div>
-        <RarityModalComponent
-          isOpen={rarityOpen}
-          handleClose={handleRarityClose}
-          folderStructure={props.folderStructure}
-        />
-      </div> */}
       <NavHomePage />
       <Typography sx={{ paddingLeft: "7%", paddingRight: "7%" }}>
         <Edit />
@@ -612,7 +384,7 @@ export const Page = (props) => {
               </Grid>
 
               {props.folderStructure && (
-                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
                   <Typography
                     variant='h1'
                     sx={{
@@ -653,23 +425,55 @@ export const Page = (props) => {
                             },
                           }}
                           onClick={handleClickGenerate}
-                          className='createBtn'
                         >
                           Generate
                         </Button>
+                      )}
+                      {download && (
+                        <a
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontSize: "30px",
+                            fontWeight: "bold",
+                          }}
+                          href={`${
+                            process.env.REACT_APP_SERVERURL
+                          }/${JSON.parse(sessionStorage.uuid)}.zip`}
+                          target='_blank'
+                          download
+                        >
+                          <Button
+                            style={{
+                              background:
+                                "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
+                              padding: "15px 60px",
+                              fontFamily: "poppins-light",
+                            }}
+                            onClick={null}
+                            variant='contained'
+                            color='primary'
+                            size='large'
+                            // className={classes.button}
+                            // startIcon={<SaveIcon />}
+                          >
+                            DOWNLOAD
+                          </Button>
+                        </a>
                       )}
                     </div>
                   </div>
                 </Grid>
               )}
               {!props.folderStructure && (
-                <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+                <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
                   <Typography
                     variant='h1'
                     sx={{
                       marginBottom: {
-                        lg: "-15%",
-                        md: "-15%",
+                        lg: "-45%",
+                        md: "-45%",
                         sm: "0%",
                         xs: "0%",
                       },

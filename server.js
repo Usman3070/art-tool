@@ -146,7 +146,6 @@ const wr = (w) => {
 };
 
 app.post("/submitDetails", (request, response) => {
-  console.log("Check");
   const data = request.body;
   const uuid = data.uuid;
   const tree = data.folderTree;
@@ -161,7 +160,6 @@ app.post("/submitDetails", (request, response) => {
   const seller_fee_basis_points = data.sellerFee;
   const description = data.description;
   const URL = data.URL;
-  console.log(creators, "sdflksdhfk");
   const context = canvas.getContext("2d", {
     patternQuality: "bilinear",
     quality: "bilinear",
@@ -240,7 +238,10 @@ app.post("/submitDetails", (request, response) => {
         JSON.parse(layerData[index].height)
       );
       const buffer = canvas.toBuffer("image/png", 0);
-      fs.writeFileSync(__dirname + `/generated/${uuid}/${hash}.png`, buffer);
+      fs.writeFileSync(
+        __dirname + `/generated/${uuid}/${hash - 1}.png`,
+        buffer
+      );
 
       if (tree.children.length === index + 1) {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -268,13 +269,15 @@ app.post("/submitDetails", (request, response) => {
         // Metadata Generation
         let num = hash - 1;
         const dataImage = {
-          name: `${name} #${hash}`,
+          name: `${name} #${num}`,
           symbol,
           seller_fee_basis_points,
           description: description,
           external_link: URL,
           attributes: newData[num],
-          property: {
+          properties: {
+            files: [{ uri: `${num}.png`, type: "image/png" }],
+            category: "image",
             creators: creators,
           },
           traits: {
@@ -282,6 +285,20 @@ app.post("/submitDetails", (request, response) => {
           },
         };
 
+        let newFile = JSON.stringify(dataImage);
+        fs.writeFile(
+          `generated/${uuid}/${num}.json`,
+          newFile,
+          "utf8",
+          function (err) {
+            if (err) {
+              console.log(
+                "An error occured while writing JSON Object to File."
+              );
+              return console.log(err);
+            }
+          }
+        );
         metadata.push(dataImage);
         hash += 1;
       }

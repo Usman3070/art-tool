@@ -88,12 +88,10 @@ export const Folders = (props) => {
     if (props?.number?.array[folderIndex] !== undefined) {
       props?.number?.array[folderIndex].map((innerData, i) => {
         if (subfolderIndex !== i) {
-          console.log(innerData, "jsdhfjkdhjk");
           num += innerData;
         }
       });
     }
-    console.log(num + parseFloat(val), "yyyyyyy");
     if (num + parseFloat(val) > 100) {
       alert("value greater then 100 not allowed");
       return;
