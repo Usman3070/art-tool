@@ -112,7 +112,7 @@ export const ThreeData = () => {
         >
           <button
             className='nice'
-            style={{ zIndex: 3, fontFamily: "poppins-light" }}
+            style={{ zIndex: 3, fontFamily: "poppins-light", fontSize: "24px" }}
             onClick={handleClick}
           >
             Enter

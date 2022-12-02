@@ -160,7 +160,7 @@ export const Folders = (props) => {
                                   <AccordionSummary
                                     expandIcon={
                                       <ExpandMoreIcon
-                                        style={{ color: "#111" }}
+                                        style={{ color: "#fff" }}
                                       />
                                     }
                                     aria-controls="panel1a-content"
@@ -252,7 +252,7 @@ export const Folders = (props) => {
                                             > */}
                                             <TextField
                                               fullWidth
-                                              variant="filled"
+                                              variant="outlined"
                                               type="text"
                                               onChange={(e) => {
                                                 handleRenameArray(

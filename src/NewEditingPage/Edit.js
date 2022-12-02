@@ -153,6 +153,8 @@ const Edit = (props) => {
           backgroundColor: "#111",
           marginRight: "5%",
           float: "right",
+          padding: "10px",
+          width: "15%",
           "&:hover": {
             //you want this to be the same as the backgroundColor above
             backgroundColor: "#111",
@@ -160,6 +162,7 @@ const Edit = (props) => {
         }}
         variant='contained'
         onClick={props.onClick}
+        className='createBtn'
       >
         <a
           href={`${process.env.REACT_APP_SERVERURL}/Silly_Sausages_4.zip`}
