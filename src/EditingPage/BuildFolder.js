@@ -28,19 +28,6 @@ import {
 } from "@mui/material";
 import { TreeContext } from "./EditingPage";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: '100%',
-//     backgroundColor: "red !important",
-//   },
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     fontWeight: theme.typography.fontWeightRegular,
-//   },
-// }));
-
-// ==============
-
 export const Folders = (props) => {
   const { dispatchMain } = React.useContext(TreeContext);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
