@@ -528,6 +528,8 @@ input[type="number"]::-webkit-outer-spin-button {
   background-image: url("./assets/images/modalBG.png");
   background-size: cover;
   /* height: 100%; */
+  padding: 15px;
+  border-bottom: 1px solid #c615a9;
 }
 .MuiPaper-root {
   background-color: transparent !important;
@@ -556,6 +558,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .uploadBG {
   background-image: url("./assets/images/uploadBG.png");
   background-size: cover;
+  border-bottom: 1px solid #c615a9;
 }
 .MuiGrid-root {
   margin-top: 1% !important;
