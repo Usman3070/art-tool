@@ -257,7 +257,7 @@ export const Page = (props) => {
             </div>
           </Grid>
           <Grid item xl={8} lg={8} md={8} sm={12} xs={12} className='uploadBG'>
-            <Grid container spacing={2} sx={{ padding: "40px" }}>
+            <Grid container spacing={6} sx={{ padding: "40px" }}>
               <Grid
                 item
                 xl={6}
@@ -389,8 +389,8 @@ export const Page = (props) => {
                     variant='h1'
                     sx={{
                       marginBottom: {
-                        lg: "-40%",
-                        md: "-40%",
+                        lg: "-65%",
+                        md: "-45%",
                         sm: "0%",
                         xs: "0%",
                       },
@@ -425,6 +425,7 @@ export const Page = (props) => {
                             },
                           }}
                           onClick={handleClickGenerate}
+                          className='createBtn'
                         >
                           Generate
                         </Button>
@@ -472,8 +473,8 @@ export const Page = (props) => {
                     variant='h1'
                     sx={{
                       marginBottom: {
-                        lg: "-45%",
-                        md: "-45%",
+                        lg: "-10%",
+                        md: "-10%",
                         sm: "0%",
                         xs: "0%",
                       },
