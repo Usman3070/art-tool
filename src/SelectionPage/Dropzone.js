@@ -9,16 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import img from "../assets/images/Frame.png";
 
-
-
 export function MyDropzone() {
   const [loaded, setLoaded] = React.useState(0);
   const [Toast, setToast] = useState();
 
-  const [error, setError]= useState("");
+  const [error, setError] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
-   
     const formData = new FormData();
     const folderPath = [];
     console.log(sessionStorage.uuid, "sessionStorage.uuid");
@@ -26,7 +23,6 @@ export function MyDropzone() {
 
     acceptedFiles &&
       acceptedFiles.forEach((file) => {
-        
         let path = file.path.split("/")[1];
         formData.append(`${uuid}/${path}`, file);
 
@@ -43,70 +39,65 @@ export function MyDropzone() {
         window.location.href = "/error";
         console.log(error);
       });
-      if (acceptedFiles.length != 0) {
-    axios
-      .post(`${process.env.REACT_APP_SERVERURL}/uploadFiles`, formData, {
-        onUploadProgress: (ProgressEvent) => {
-          setLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        },
-      })
-      
-      .then(function (response) {
-      
+    if (acceptedFiles.length != 0) {
+      axios
+        .post(`${process.env.REACT_APP_SERVERURL}/uploadFiles`, formData, {
+          onUploadProgress: (ProgressEvent) => {
+            setLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+          },
+        })
+
+        .then(function (response) {
           alert(`you are uploading a folder of ${acceptedFiles.length} images`);
           setToast(toast.success("uploaded successfully !"));
-        window.location.href = "/editing";
-        
-        
-      })
-      .catch(function (error) {
-        toast.info(error);
-        toast.info("Each File should be within 10Mb limit");
-        toast.info("Supported Files: jpg, jpeg, png");
-        toast.error("upload fail");
-      })} else{
-        setError("No valid files were submitted!")
-        // alert("you are uploading zip file or an empty folder");
-      };
+          window.location.href = "/editing";
+        })
+        .catch(function (error) {
+          toast.info(error);
+          toast.info("Each File should be within 10Mb limit");
+          toast.info("Supported Files: jpg, jpeg, png");
+          toast.error("upload fail");
+        });
+    } else {
+      setError("No valid files were submitted!");
+      // alert("you are uploading zip file or an empty folder");
+    }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedFiles) => onDrop(acceptedFiles),
-    accept:"image/jpeg, image/png, image/jpg,",
+    accept: "image/jpeg, image/png, image/jpg,",
   });
 
   return (
     <>
-    
       <div style={{ zIndex: 2 }}>
-     
-
         <div style={{ zIndex: 2 }} {...getRootProps()}>
           <input
             style={{ zIndex: 2 }}
             {...getInputProps()}
-            directory=""
-            webkitdirectory=""
-            type="file"
+            directory=''
+            webkitdirectory=''
+            type='file'
           />
 
           {/* { isDragActive ? (
           <p style={{ zIndex: 2 }}>Drop the files here ...</p>
         ) : ( */}
           <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
+            color='primary'
+            aria-label='upload picture'
+            component='span'
             style={{
               zIndex: 2,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
-            size="medium"
+            size='medium'
           >
             {/* <PhotoCamera /> */}
-            <img src={img} alt="" />
+            <img src={img} alt='' />
           </IconButton>
           {/* )} */}
         </div>
@@ -117,9 +108,9 @@ export function MyDropzone() {
             justifyContent: "center",
           }}
         >
-          <CircularProgress variant="determinate" value={loaded} />
+          <CircularProgress variant='determinate' value={loaded} />
         </div>
-        <p style={{color:"red"}}>{error}</p>
+        <p style={{ color: "red" }}>{error}</p>
       </div>
     </>
   );

@@ -4,3 +4,57 @@
   padding: "5px";
   border-radius: "10px";
 }
+.editClass {
+  background-image: url("../assets/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100% !important;
+}
+@media (max-width: 2154px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 130% !important;
+  }
+}
+@media (max-width: 1880px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 133% !important;
+  }
+}
+@media (max-width: 1835px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 163% !important;
+  }
+}
+@media (max-width: 1600px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150% !important;
+  }
+}
+@media (max-width: 1440px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200% !important;
+  }
+}
+@media (max-width: 899px) {
+  .editClass {
+    background-image: url("../assets/images/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300% !important;
+  }
+}

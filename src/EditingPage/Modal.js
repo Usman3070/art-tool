@@ -423,6 +423,7 @@ export const ModalComponent = (props) => {
                           variant='outlined'
                           placeholder='eg. WhatsForLaunch'
                           name='royaltyPercent'
+                          type='number'
                           value={values.royaltyPercent}
                           onChange={handleChange}
                           onBlur={handleBlur}

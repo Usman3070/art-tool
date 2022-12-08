@@ -9,6 +9,7 @@ import { Page } from "./Page";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { NavComponent } from "./Navbar";
 import axios from "axios";
+import "./Editor.css";
 
 export const ObjectContext = React.createContext();
 export const ObjectSelection = React.createContext();
@@ -115,7 +116,7 @@ export const EditingPage = () => {
               {/* <div style={{ maxHeight: "20px", zIndex: 21 }}>
                 <NavComponent folderStructure={fileData} />
               </div> */}
-              <div>
+              <div className='editClass'>
                 <Page
                   flag={flag}
                   setFlag={setFlag}

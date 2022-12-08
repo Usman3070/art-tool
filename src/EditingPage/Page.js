@@ -14,7 +14,7 @@ import axios from "axios";
 import { RarityModalComponent } from "./RarityModal";
 import TotalCopies from "./totalCopies";
 import { useDropzone } from "react-dropzone";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import {
   Button,
@@ -28,6 +28,8 @@ import {
 } from "@mui/material";
 import Edit from "../NewEditingPage/Edit";
 import { NavHomePage } from "../ThreeDIntro.js/navigationBar";
+import { MyDropzone } from "../SelectionPage/Dropzone";
+import { Uploading } from "../SelectionPage/Uploading";
 
 export const Page = (props) => {
   const { objects, dispatch1 } = React.useContext(ObjectContext);
@@ -211,7 +213,7 @@ export const Page = (props) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: (acceptedFiles) => onDrop(acceptedFiles),
-    accept: "image/jpeg, image/png, image/jpg,",
+    // accept: "image/jpeg, image/png, image/jpg,",
   });
 
   const handleHide = () => {
@@ -229,12 +231,12 @@ export const Page = (props) => {
         params: { uuid: JSON.parse(sessionStorage.uuid) },
       })
       .then(function (response) {
-        toast.success("Compression success");
+        toast.success("Download success");
         setDownload(true);
       })
       .catch(function (error) {
         toast.info(error);
-        toast.error("Compression fail");
+        toast.error("Download fail");
       });
   };
   return (
@@ -257,7 +259,7 @@ export const Page = (props) => {
               />
             </div>
           </Grid>
-          <Grid item xl={8} lg={8} md={8} sm={12} xs={12} className="uploadBG">
+          <Grid item xl={8} lg={8} md={8} sm={12} xs={12} className='uploadBG'>
             <Grid container spacing={6} sx={{ padding: "40px" }}>
               <Grid
                 item
@@ -327,42 +329,44 @@ export const Page = (props) => {
                           {...getRootProps()}
                         >
                           <input
-                            style={{ zIndex: 2 }}
+                            type='file'
+                            webkitdirectory=''
+                            directory=''
+                            mozdirectory=''
+                            msdirectory=''
+                            odirectory=''
+                            multiple=''
                             {...getInputProps()}
-                            directory=""
-                            webkitdirectory=""
-                            type="file"
                           />
 
-                          {/* { isDragActive ? (
-          <p style={{ zIndex: 2 }}>Drop the files here ...</p>
-        ) : ( */}
-                          <IconButton
-                            color="primary"
-                            aria-label="upload picture"
-                            component="span"
-                            style={{
-                              zIndex: 2,
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                            size="medium"
-                          >
-                            {/* <PhotoCamera /> */}
-                            <Button
-                              variant="contained"
-                              sx={{
-                                fontSize: "12px",
-                                width: "40%",
-                                padding: "10px 20px",
+                          {isDragActive ? (
+                            <p style={{ zIndex: 2 }}>Drop the files here ...</p>
+                          ) : (
+                            <IconButton
+                              color='primary'
+                              aria-label='upload picture'
+                              component='span'
+                              style={{
+                                zIndex: 2,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
                               }}
-                              className="createBtn"
+                              size='medium'
                             >
-                              Select Folder
-                            </Button>
-                          </IconButton>
-                          {/* )} */}
+                              <Button
+                                variant='contained'
+                                sx={{
+                                  fontSize: "12px",
+                                  width: { lg: "40%", md: "40%", sm: "60%" },
+                                  padding: "10px 20px",
+                                }}
+                                className='createBtn'
+                              >
+                                Select Folder
+                              </Button>
+                            </IconButton>
+                          )}
                         </div>
                       )}
                     </CardActions>
@@ -375,6 +379,56 @@ export const Page = (props) => {
                   setNumber={setNumber}
                   number={number}
                 />
+                {props.folderStructure && (
+                  <Tooltip title='Optional' placement='top'>
+                    <div
+                      style={{ zIndex: 2, width: "100%" }}
+                      {...getRootProps()}
+                    >
+                      <input
+                        type='file'
+                        webkitdirectory=''
+                        directory=''
+                        mozdirectory=''
+                        msdirectory=''
+                        odirectory=''
+                        multiple=''
+                        {...getInputProps()}
+                      />
+                      <IconButton
+                        color='primary'
+                        aria-label='upload picture'
+                        component='span'
+                        style={{
+                          zIndex: 2,
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        size='medium'
+                      >
+                        <Button
+                          variant='contained'
+                          sx={{
+                            marginTop: "2%",
+                            backgroundColor: "#111",
+                            fontWeight: "600",
+                            marginBottom: "4px",
+                            padding: "10px",
+                            width: "100%",
+                            "&:hover": {
+                              //you want this to be the same as the backgroundColor above
+                              backgroundColor: "#111",
+                            },
+                          }}
+                          className='createBtn'
+                        >
+                          None Trait
+                        </Button>
+                      </IconButton>
+                    </div>
+                  </Tooltip>
+                )}
                 {/* <Button
               variant='contained'
               sx={{ marginTop: "2%", borderRadius: "18px", marginLeft: "2%" }}
@@ -387,10 +441,10 @@ export const Page = (props) => {
               {props.folderStructure && (
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
                   <Typography
-                    variant="h1"
+                    variant='h1'
                     sx={{
                       marginBottom: {
-                        lg: "-65%",
+                        lg: "-30%",
                         md: "-45%",
                         sm: "0%",
                         xs: "0%",
@@ -402,7 +456,7 @@ export const Page = (props) => {
                   >
                     Art Preview
                   </Typography>
-                  <div id="content">
+                  <div id='content'>
                     <div style={{ display: "flex", flexDirection: "column" }}>
                       <Items
                         onClick={setCurrentElement}
@@ -414,24 +468,43 @@ export const Page = (props) => {
                         parent={parentRef}
                       />
                       {generate && (
-                        <Button
-                          variant="contained"
-                          sx={{
-                            marginTop: "2%",
-                            backgroundColor: "#111",
-                            fontWeight: "600",
-                            "&:hover": {
-                              //you want this to be the same as the backgroundColor above
-                              backgroundColor: "#111",
-                            },
+                        <a
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontSize: "30px",
+                            fontWeight: "bold",
+                            width: "100%",
                           }}
-                          onClick={handleClickGenerate}
-                          className="createBtn"
+                          href={`${
+                            process.env.REACT_APP_SERVERURL
+                          }/${JSON.parse(sessionStorage.uuid)}.zip`}
+                          target='_blank'
+                          download
                         >
-                          Generate
-                        </Button>
+                          <Button
+                            variant='contained'
+                            sx={{
+                              marginTop: "2%",
+                              backgroundColor: "#111",
+                              fontWeight: "600",
+                              marginBottom: "4px",
+                              padding: "10px",
+                              width: "100%",
+                              "&:hover": {
+                                //you want this to be the same as the backgroundColor above
+                                backgroundColor: "#111",
+                              },
+                            }}
+                            onClick={handleClickGenerate}
+                            className='createBtn'
+                          >
+                            Generate
+                          </Button>
+                        </a>
                       )}
-                      {download && (
+                      {/* {download && (
                         <a
                           style={{
                             display: "flex",
@@ -443,7 +516,7 @@ export const Page = (props) => {
                           href={`${
                             process.env.REACT_APP_SERVERURL
                           }/${JSON.parse(sessionStorage.uuid)}.zip`}
-                          target="_blank"
+                          target='_blank'
                           download
                         >
                           <Button
@@ -452,18 +525,19 @@ export const Page = (props) => {
                                 "linear-gradient(100.86deg, #4E39D7 14.47%, #C615A9 123.62%)",
                               padding: "15px 60px",
                               fontFamily: "poppins-light",
+                              width: "100%",
                             }}
                             onClick={null}
-                            variant="contained"
-                            color="primary"
-                            size="large"
+                            variant='contained'
+                            color='primary'
+                            size='large'
                             // className={classes.button}
                             // startIcon={<SaveIcon />}
                           >
                             DOWNLOAD
                           </Button>
                         </a>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </Grid>
@@ -471,7 +545,7 @@ export const Page = (props) => {
               {!props.folderStructure && (
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
                   <Typography
-                    variant="h1"
+                    variant='h1'
                     sx={{
                       marginBottom: {
                         lg: "-10%",
@@ -486,10 +560,10 @@ export const Page = (props) => {
                   >
                     Art Preview
                   </Typography>
-                  <div id="content">
+                  <div id='content'>
                     <Typography
                       sx={{
-                        height: "300px",
+                        height: "250px",
                         width: "300px",
                         backgroundColor: "#C5C5C5",
                         borderRadius: "10px",
@@ -515,6 +589,7 @@ export const Page = (props) => {
       <div>
         <LoadingModalComponent isOpen={loadingModal} />
       </div>
+
       {/*</div>
         </div>
       </div> */}

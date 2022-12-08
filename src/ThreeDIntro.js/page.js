@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavHomePage } from "./navigationBar";
 import Footer from "../EditingPage/footer";
 import "./style.css";
+import "./newStyle.css";
 import data from "../traffic.json";
 import { AboutModalComponent } from "./AboutModal";
 import { ContactModalComponent } from "./ContactModal";
@@ -33,7 +34,7 @@ export const ThreeData = () => {
     window.location.href = "/editing";
   };
   return (
-    <>
+    <div className='homeClass'>
       <div className='landing-page-main-div'>
         {/* <div style={{background:"red"}}> */}
         <div>
@@ -163,6 +164,6 @@ export const ThreeData = () => {
         </div> */}
         {/* </div> */}
       </div>
-    </>
+    </div>
   );
 };

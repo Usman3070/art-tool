@@ -152,9 +152,9 @@ const Edit = (props) => {
         sx={{
           backgroundColor: "#111",
           marginRight: "5%",
-          float: "right",
+          float: { lg: "right", md: "right", sm: "unset", xs: "unset" },
           padding: "10px",
-          width: "15%",
+          width: { lg: "15%", md: "15%", sm: "25%", xs: "50%" },
           "&:hover": {
             //you want this to be the same as the backgroundColor above
             backgroundColor: "#111",
