@@ -33,7 +33,7 @@ const dirTree = require("directory-tree");
 
 app.post("/renameFile", (req, res) => {
   fs.rename(req.body.from, `${req.body.to}.png`, function (err) {
-    if (err) console.log("ERROR: " + err);
+    if (err) console.log("ERRORs: " + err);
   });
   return res.send("done");
 });
@@ -149,6 +149,7 @@ app.post("/submitDetails", (request, response) => {
   const data = request.body;
   const uuid = data.uuid;
   const tree = data.folderTree;
+  console.log("Tree: ", tree.children[0].children);
   const width = data.canvasWidth;
   const height = data.canvasHeight;
   const canvas = createCanvas(width, height);
@@ -157,6 +158,7 @@ app.post("/submitDetails", (request, response) => {
   const name = data.name;
   const symbol = data.symbol;
   const creators = data.creators;
+  const collection = data.collection;
   const seller_fee_basis_points = data.sellerFee;
   const description = data.description;
   const URL = data.URL;
@@ -208,16 +210,35 @@ app.post("/submitDetails", (request, response) => {
     // eslint-disable-next-line no-loop-func
     tree.children.forEach(async (item, index) => {
       const weights = [];
+      // const NoneObj = {
+      //   path: `src\\assets\\aloo\\None.png`,
+      //   name: "None.png",
+      //   rarity: "100",
+      // };
+
+      // let newArr = item.children;
+      // newArr.push(NoneObj);
+      // item.children = item.children.push(NoneObj);
+      // console.log("Item.children: ", item.children);
       item.children.forEach((item) => {
-        weights.push(item.rarity ? item.rarity : 50);
+        console.log("Item: ", item);
+        weights.push(item?.rarity ? item?.rarity : 50);
       });
+      // newArr.forEach((item) => {
+      //   weights.push(item.rarity ? item.rarity : 50);
+      // });
 
       const idx = wr(weights);
 
       const obj = item.children[idx];
+      // const obj = newArr[idx];
+      console.log("Obj: ", obj);
+      console.log("Obj.path: ", obj.path);
 
       let pathArray = obj.path.split("\\");
       let traitType = pathArray[pathArray.length - 2];
+      console.log(traitType, "traitType");
+      console.log(obj.name, "obj_Name");
       attributesArray.push({ traitType, value: obj.name.replace(".png", "") });
       if (attributesArray.length === tree.children.length) {
         newData.push([...attributesArray]);
@@ -226,6 +247,7 @@ app.post("/submitDetails", (request, response) => {
       objRarity += item.children[idx].rarity
         ? parseInt(item.children[idx].rarity)
         : 50;
+      // objRarity += newArr[idx].rarity ? parseInt(newArr[idx].rarity) : 50;
       totalRarity += 100;
 
       const image = await loadImage(`./${obj.path}`);
@@ -238,6 +260,7 @@ app.post("/submitDetails", (request, response) => {
         JSON.parse(layerData[index].height)
       );
       const buffer = canvas.toBuffer("image/png", 0);
+      // console.log("CHeck");
       fs.writeFileSync(
         __dirname + `/generated/${uuid}/${hash - 1}.png`,
         buffer
@@ -259,6 +282,7 @@ app.post("/submitDetails", (request, response) => {
             category: "image",
             creators: creators,
           },
+          collection: { name: collection },
           traits: {
             rarity: rarityPercentage,
           },
@@ -314,9 +338,29 @@ app.post("/submitDetails", (request, response) => {
   db.set("TotalItems", data.total.value + totalItems).write();
 });
 
-app.get("/compress", (req, res) => {
+app.get("/compress", async (req, res) => {
+  console.log("Check");
   const uuid = req.query.uuid;
   const output = fs.createWriteStream(`generated/${uuid}.zip`);
+  // whatsforlaunchartgen
+  // fs.rename()
+  // if (!fs.existsSync(`generated/new${uuid}`)) {
+  //   console.log("CHecking");
+  //   // Do something
+  //   fs.mkdirSync(`generated/new${uuid}`);
+  // }
+  // fs.rename(
+  //   `generated/${uuid}`,
+  //   `generated/new${uuid}/whatsforlaunchartgen`,
+  //   (err) => {
+  //     // res.status(500).send({ error: err });
+  //     console.log("Error: ", err);
+  //   }
+  // );
+
+  // const output = fs.createWriteStream(
+  //   `generated/${uuid}/whatsforlaunchartgen.zip`
+  // );
   const archive = archiver("zip");
 
   archive.on("error", function (err) {
@@ -328,17 +372,22 @@ app.get("/compress", (req, res) => {
     console.log("Archive wrote %d bytes", archive.pointer());
   });
 
-  //set the archive name
-  res.attachment(`${uuid}.zip`);
-
   //this is the streaming magic
   archive.pipe(output);
 
   archive.directory(`generated/${uuid}`, `${uuid}`);
+  // archive.directory(`generated/new${uuid}/${uuid}`, `whatsforlaunchartgen`);
 
   archive.finalize();
 
-  return res.status(200).json("Success");
+  // output.on("finish", () => {
+  //   res.attachment("whatsforlaunchartgen.zip");
+  // });
+  // console.log("Check: ", check);
+  //set the archive name
+  // res.attachment(`${uuid}.zip`);
+
+  // return res.status(200).json("Success");
 });
 
 app.get("/upload", (req, res, next) => {

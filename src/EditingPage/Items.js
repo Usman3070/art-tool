@@ -2,7 +2,7 @@ import React from "react";
 import { Rnd } from "react-rnd";
 import { ObjectSelection, ObjectContext } from "./EditingPage";
 import "./Items.css";
-
+import None from "../assets/images/None.png";
 export const Items = (props) => {
   const { selection, dispatch2 } = React.useContext(ObjectSelection);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
@@ -13,7 +13,7 @@ export const Items = (props) => {
   }
 
   return (
-    <div>
+    <div className='canvasMargin'>
       <div
         style={{
           height: `${props.imageHeight}px`,
@@ -22,7 +22,7 @@ export const Items = (props) => {
           //           height: `${file.height }`,
           position: "relative",
         }}
-        className="imageDimensions"
+        className='imageDimensions'
         ref={props.parent}
       >
         {elements &&
@@ -32,22 +32,28 @@ export const Items = (props) => {
                 key={index}
                 style={{
                   zIndex: file.depth,
+                  cursor: "pointer",
                 }}
-                onDragStop={(event) => {
-                  // props.setCoord(event, file);
-                }}
+                onDrag={(e) => e.defaultPrevented()}
+                // onDragStop={(event) => {
+                // props.setCoord(event, file);
+                // }}
               >
                 <img
                   // src={require(`.${file.path.slice(12).replaceAll("\\", "/")}`)}
-                  src={`${process.env.REACT_APP_SERVERURL}${file.path.slice(
-                    12
-                  )}`}
-                  alt="x"
+                  src={
+                    file.path.slice(15) !== "None.png"
+                      ? `${process.env.REACT_APP_SERVERURL}${file.path.slice(
+                          12
+                        )}`
+                      : None
+                  }
+                  alt='x'
                   style={{
                     width: file.width,
                     height: file.height,
                   }}
-                  className="items"
+                  className='items'
                 />
               </Rnd>
             </div>

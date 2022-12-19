@@ -9,12 +9,13 @@ import { TreeView } from "@material-ui/lab";
 import TreeItem from "@material-ui/lab/TreeItem";
 import axios from "axios";
 import "./buildFolder.css";
-
+import None from "../assets/images/None.png";
 // ===========
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
@@ -27,17 +28,20 @@ import {
   TextField,
 } from "@mui/material";
 import { TreeContext } from "./EditingPage";
+import NoneTrait from "./NoneTrait";
 
 export const Folders = (props) => {
   const { dispatchMain } = React.useContext(TreeContext);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
-  const { selection, dispatch2 } = React.useContext(ObjectSelection);
+  const { selection, dispatch2, folderName } =
+    React.useContext(ObjectSelection);
   const children = props.children;
   let folderStructure = [];
   // const classes = useStyles();
   const [list, setList] = useState();
+  const [value, setValue] = React.useState("");
+
   const handleClick = (folder, subfolder) => {
-    //console.log(objects, "folder: ", folder, subfolder, "index: ", index);
     dispatch1({
       type: "update",
       nameToFind: folder,
@@ -64,7 +68,7 @@ export const Folders = (props) => {
 
   React.useEffect(() => {
     setList(children);
-  }, [children]);
+  }, [setList.children]);
 
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
     let num = 0;
@@ -101,12 +105,14 @@ export const Folders = (props) => {
   const handleRenameArray = (e, i, j) => {
     setList((tempArray) => {
       const data = [...tempArray];
+      console.log(data, "daaatttaaa");
       data[i].children[j].name = e.target.value;
       return data;
     });
   };
 
   const handleRename = async (e, path) => {
+    console.log("functin exec");
     let from = path.replaceAll("\\", "/");
     let indexForName = from.lastIndexOf("/");
     let to = from.slice(0, indexForName + 1) + e.target.value;
@@ -116,12 +122,48 @@ export const Folders = (props) => {
     };
     const baseURL = `${process.env.REACT_APP_SERVERURL}/renameFile`;
     await axios.post(baseURL, body);
-    props.setFlag(!props.flag);
+    // props.setFlag(!props.flag);
   };
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const addFields = (e, folder) => {
+    console.log(folder.name, "folderKaNaam");
+    let none = {
+      name: "None.png",
+      path: "src\\assets\\images\\None.png",
+    };
+    let tempList = [];
+    list.map((listFolder) => {
+      if (listFolder.name === folder.name) {
+        listFolder.children.push(none);
+        listFolder.children.map((item) => {});
+      }
+      tempList.push(listFolder);
+    });
+    setList(tempList);
+    // handleDragEnd();
+    // folder.children.push(none);
+  };
+  const removeFields = (e, folder) => {
+    console.log(folder, "folder");
+    let templist = [];
+    list.map((listFolder) => {
+      if (listFolder.name === folder.name) {
+        listFolder.children.pop();
+      }
+      templist.push(listFolder);
+    });
+    setList(templist);
+  };
+  const [expand, setExpand] = React.useState("false");
+
   return (
     <div>
-      <Paper style={{ maxHeight: 460, overflow: "auto" }}>
-        <List>
+      <Paper style={{ maxHeight: 460, overflow: "auto", width: "470px" }}>
+        <List sx={{ width: "400px" }}>
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <DragDropContext onDragEnd={handleDragEnd}>
@@ -131,7 +173,11 @@ export const Folders = (props) => {
                       {list &&
                         list.map((folder, index1) => (
                           <div style={{}}>
-                            <Accordion className='accordian_root'>
+                            <Accordion
+                              className='accordian_root'
+                              // defaultExpanded={expand}
+                              // expanded={expand}
+                            >
                               <Draggable
                                 key={
                                   folder.name.slice(0, 1).toUpperCase() +
@@ -147,7 +193,9 @@ export const Folders = (props) => {
                                   <AccordionSummary
                                     expandIcon={
                                       <ExpandMoreIcon
-                                        style={{ color: "#fff" }}
+                                        style={{
+                                          color: "#fff",
+                                        }}
                                       />
                                     }
                                     aria-controls='panel1a-content'
@@ -158,14 +206,13 @@ export const Folders = (props) => {
                                 >
                                   Rarity %: 0/100
                                 </Typography> */}
-
                                     <ListItem
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
                                       ref={provided.innerRef}
                                       button
                                       component='a'
-                                      href='#'
+                                      // href='#'
                                       // style={{ width: "60%" }}
                                     >
                                       <Typography
@@ -200,7 +247,7 @@ export const Folders = (props) => {
                                         key={index2}
                                         button
                                         component='a'
-                                        href='#'
+                                        // href='#'
                                         style={{
                                           borderBottom: "1px solid #2F2861",
                                         }}
@@ -208,30 +255,37 @@ export const Folders = (props) => {
                                         <Grid container spacing={2}>
                                           <Grid
                                             item
-                                            xl={3}
-                                            lg={3}
-                                            md={3}
-                                            sm={3}
-                                            xs={3}
+                                            xl={2.8}
+                                            lg={2.8}
+                                            md={2.8}
+                                            sm={2.8}
+                                            xs={2.8}
                                           >
                                             <div style={{ marginTop: "-15px" }}>
                                               <img
-                                                src={`${
-                                                  process.env
-                                                    .REACT_APP_SERVERURL
-                                                }${subfolder.path
-                                                  .slice(15)
-                                                  .replaceAll("\\", "/")}`}
+                                                src={
+                                                  subfolder?.name !== "None.png"
+                                                    ? `${
+                                                        process.env
+                                                          .REACT_APP_SERVERURL
+                                                      }${subfolder?.path
+                                                        ?.slice(15)
+                                                        ?.replaceAll(
+                                                          "\\",
+                                                          "/"
+                                                        )}`
+                                                    : None
+                                                }
                                               />
                                             </div>
                                           </Grid>
                                           <Grid
                                             item
-                                            xl={5}
-                                            lg={5}
-                                            md={5}
-                                            sm={5}
-                                            xs={5}
+                                            xl={6.2}
+                                            lg={6.2}
+                                            md={6.2}
+                                            sm={6.2}
+                                            xs={6.2}
                                           >
                                             {/* <Typography
                                               className='elementSubfolder'
@@ -256,21 +310,25 @@ export const Folders = (props) => {
                                                   subfolder?.path
                                                 );
                                               }}
-                                              value={subfolder.name.replace(
+                                              value={subfolder?.name?.replace(
                                                 ".png",
                                                 ""
                                               )}
                                             />
+                                            {/* {console.log(
+                                              subfolder.name,
+                                              "subfolderr"
+                                            )} */}
                                             {/* {subfolder.name} */}
                                             {/* </Typography> */}
                                           </Grid>
                                           <Grid
                                             item
-                                            xl={4}
-                                            lg={4}
-                                            md={4}
-                                            sm={4}
-                                            xs={4}
+                                            xl={3}
+                                            lg={3}
+                                            md={3}
+                                            sm={3}
+                                            xs={3}
                                           >
                                             <div
                                               style={{
@@ -283,7 +341,7 @@ export const Folders = (props) => {
                                                   className='rarityText'
                                                   size='small'
                                                   variant='outlined'
-                                                  type='number'
+                                                  // type='number'
                                                   inputProps={{
                                                     style: {
                                                       textAlign: "center",
@@ -315,7 +373,7 @@ export const Folders = (props) => {
                                                   className='rarityText'
                                                   size='small'
                                                   variant='outlined'
-                                                  type='number'
+                                                  // type='number'
                                                   inputProps={{
                                                     style: {
                                                       textAlign: "center",
@@ -339,6 +397,42 @@ export const Folders = (props) => {
                                     </AccordionDetails>
                                   </div>
                                 ))}
+                                <button
+                                  style={{
+                                    width: "40px",
+                                    backgroundColor: "#1565C0",
+                                    borderRadius: "8px",
+                                    color: "#fff",
+                                    borderColor: "#1565C0",
+                                    height: "30px",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={(e) => addFields(e, folder)}
+                                >
+                                  <AddIcon />
+                                </button>
+                                <button
+                                  style={{
+                                    width: "40px",
+                                    backgroundColor: "red",
+                                    borderRadius: "8px",
+                                    color: "#fff",
+                                    borderColor: "red",
+                                    height: "30px",
+                                    cursor: "pointer",
+                                    marginLeft: "2%",
+                                  }}
+                                  onClick={(e) => removeFields(e, folder)}
+                                >
+                                  <RemoveIcon />
+                                </button>
+
+                                {/* <NoneTrait
+                                  folderName={folder.name}
+                                  value={value}
+                                  onChange={handleChange}
+                                  handleFolderName={handleFolderName}
+                                /> */}
                               </div>
                               <TreeItem
                                 nodeId='1'

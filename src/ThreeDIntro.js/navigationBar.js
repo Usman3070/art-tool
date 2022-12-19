@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    background: "#2E2058",
+    background: "#393864 !important",
     color: "white",
   },
 })((props) => (
@@ -157,7 +157,8 @@ export const NavHomePage = (props) => {
           <div
             style={{ display: "flex", paddingTop: "20px", paddingRight: "5%" }}
           >
-            <NavLink to='/'>
+            {/* <NavLink to='/'> */}
+            <a href='https://whatsforlaunch.io/'>
               <div className='eachOne'>
                 <Typography
                   variant='h6'
@@ -173,25 +174,28 @@ export const NavHomePage = (props) => {
                   HOME
                 </Typography>
               </div>
-            </NavLink>
-            <div className='eachOne'>
-              <Typography
-                variant='h6'
-                color='inherit'
-                className='landingNavMenu'
-                style={{
-                  fontFamily: "poppins-light",
-                  fontWeight: 600,
-                  fontSize: "16px",
-                  color: "#fff",
-                }}
-                onClick={() => {
-                  props.setInstructionsOpen(true);
-                }}
-              >
-                MINTING NOW
-              </Typography>
-            </div>
+            </a>
+            {/* </NavLink> */}
+            <a href='https://whatsforlaunch.io/mintingnow'>
+              <div className='eachOne'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  className='landingNavMenu'
+                  style={{
+                    fontFamily: "poppins-light",
+                    fontWeight: 600,
+                    fontSize: "16px",
+                    color: "#fff",
+                  }}
+                  onClick={() => {
+                    props.setInstructionsOpen(true);
+                  }}
+                >
+                  MINTING NOW
+                </Typography>
+              </div>
+            </a>
 
             <div className='eachOne'>
               <Typography
@@ -211,25 +215,26 @@ export const NavHomePage = (props) => {
                 UPCOMING MINTS
               </Typography>
             </div>
-
-            <div className='eachOne'>
-              <Typography
-                variant='h6'
-                color='inherit'
-                className='landingNavMenu'
-                style={{
-                  fontFamily: "poppins-light",
-                  fontWeight: 600,
-                  fontSize: "16px",
-                  color: "#fff",
-                }}
-                onClick={() => {
-                  props.setAboutOpen(true);
-                }}
-              >
-                CREATE
-              </Typography>
-            </div>
+            <a href='https://whatsforlaunch.io/Create'>
+              <div className='eachOne'>
+                <Typography
+                  variant='h6'
+                  color='inherit'
+                  className='landingNavMenu'
+                  style={{
+                    fontFamily: "poppins-light",
+                    fontWeight: 600,
+                    fontSize: "16px",
+                    color: "#fff",
+                  }}
+                  onClick={() => {
+                    props.setAboutOpen(true);
+                  }}
+                >
+                  CREATE
+                </Typography>
+              </div>
+            </a>
             <div className='eachOne'>
               <Button
                 aria-controls='customized-menu'
@@ -256,39 +261,54 @@ export const NavHomePage = (props) => {
                 onClose={handleClose2}
               >
                 <StyledMenuItem>
-                  <ListItemText primary='Raffle' className='nav-drop-down' />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText primary='Raffle' className='nav-drop-down' />
+                  </a>
                 </StyledMenuItem>
                 <Divider />
                 <StyledMenuItem>
-                  <ListItemText primary='Staking' className='nav-drop-down11' />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText
+                      primary='Staking'
+                      className='nav-drop-down11'
+                    />
+                  </a>
                 </StyledMenuItem>
                 <Divider />
                 <StyledMenuItem>
-                  <ListItemText
-                    primary='ANOTHER ACTION'
-                    className='nav-drop-down11'
-                  />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText
+                      primary='ANOTHER ACTION'
+                      className='nav-drop-down11'
+                    />
+                  </a>
                 </StyledMenuItem>
                 <Divider />
                 <StyledMenuItem>
-                  <ListItemText
-                    primary='Mutation'
-                    className='nav-drop-down11'
-                  />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText
+                      primary='Mutation'
+                      className='nav-drop-down11'
+                    />
+                  </a>
                 </StyledMenuItem>
                 <Divider />
                 <StyledMenuItem>
-                  <ListItemText
-                    primary='Art Upgrades'
-                    className='nav-drop-down11'
-                  />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText
+                      primary='Art Upgrades'
+                      className='nav-drop-down11'
+                    />
+                  </a>
                 </StyledMenuItem>
                 <Divider />
                 <StyledMenuItem>
-                  <ListItemText
-                    primary='Chain Games'
-                    className='nav-drop-down12'
-                  />
+                  <a href='https://whatsforlaunch.io/#explore1'>
+                    <ListItemText
+                      primary='Chain Games'
+                      className='nav-drop-down12'
+                    />
+                  </a>
                 </StyledMenuItem>
               </StyledMenu>
             </div>

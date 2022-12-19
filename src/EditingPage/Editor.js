@@ -27,7 +27,6 @@ export const Editor = (props) => {
   const currentValues = React.useRef(
     props.currentValues.find((obj) => obj.name === selection.name)
   );
-  console.log(props, "currentvalues props");
 
   React.useEffect(() => {
     currentValues.current =

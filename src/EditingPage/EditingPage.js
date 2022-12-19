@@ -93,6 +93,7 @@ export const EditingPage = () => {
     TreeReducer,
     fileData?.children
   );
+
   const [ObjectState, dispatch1] = React.useReducer(objectReducer, objects);
   const [SelectionState, dispatch2] = React.useReducer(
     selectionReducer,
@@ -103,11 +104,41 @@ export const EditingPage = () => {
     total
   );
 
+  const [trigger, setTrigger] = React.useState(false);
+
+  const triggerMethod = (val) => {
+    setTrigger(val);
+  };
+
+  const [downloadBtn, setDownloadBtn] = React.useState(true);
+  const downloadHandle = (val) => {
+    setDownloadBtn(val);
+  };
+  const [folderName, setFolderName] = React.useState();
+  const handleFolderName = (val) => {
+    setFolderName(val);
+  };
+  const [shareState, setShareState] = React.useState(false);
+  const shareStateMethod = (val) => {
+    setShareState(val);
+  };
   return (
     <TreeContext.Provider value={{ fileData: TreeState, dispatchMain }}>
       <ObjectContext.Provider value={{ objects: ObjectState, dispatch1 }}>
         <ObjectSelection.Provider
-          value={{ selection: SelectionState, dispatch2 }}
+          value={{
+            selection: SelectionState,
+            dispatch2,
+            trigger,
+            triggerMethod,
+            downloadBtn,
+            downloadHandle,
+            handleFolderName,
+            folderName,
+            shareState,
+            setShareState,
+            shareStateMethod,
+          }}
         >
           <NumberOfCopies.Provider
             value={{ total: NumberOfCopiesState, dispatch3 }}

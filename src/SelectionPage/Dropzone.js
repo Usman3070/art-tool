@@ -18,7 +18,6 @@ export function MyDropzone() {
   const onDrop = useCallback((acceptedFiles) => {
     const formData = new FormData();
     const folderPath = [];
-    console.log(sessionStorage.uuid, "sessionStorage.uuid");
     const uuid = JSON.parse(sessionStorage.uuid);
 
     acceptedFiles &&
@@ -32,12 +31,9 @@ export function MyDropzone() {
 
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/uploadPath`, folderPath)
-      .then(function (response) {
-        console.log(response);
-      })
+      .then(function (response) {})
       .catch(function (error) {
         window.location.href = "/error";
-        console.log(error);
       });
     if (acceptedFiles.length != 0) {
       axios
@@ -50,7 +46,7 @@ export function MyDropzone() {
         .then(function (response) {
           alert(`you are uploading a folder of ${acceptedFiles.length} images`);
           setToast(toast.success("uploaded successfully !"));
-          window.location.href = "/editing";
+          // window.location.href = "/editing";
         })
         .catch(function (error) {
           toast.info(error);

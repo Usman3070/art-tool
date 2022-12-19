@@ -47,7 +47,6 @@ const Edit = (props) => {
   const onDrop = useCallback((acceptedFiles) => {
     const formData = new FormData();
     const folderPath = [];
-    console.log(sessionStorage.uuid, "sessionStorage.uuid");
     const uuid = JSON.parse(sessionStorage.uuid);
 
     acceptedFiles &&
@@ -61,8 +60,6 @@ const Edit = (props) => {
 
     let imgurl = URL.createObjectURL(acceptedFiles[0]);
 
-    console.log(acceptedFiles, "accepted");
-    console.log(imgurl, "accepted");
     let firstIndex = acceptedFiles[0]?.path.lastIndexOf("/");
     let secondIndex = acceptedFiles[0]?.path.lastIndexOf("/", firstIndex - 1);
     var tempFolder = acceptedFiles[0]?.path?.slice(secondIndex + 1, firstIndex);
@@ -93,12 +90,9 @@ const Edit = (props) => {
     setFoldersData(mainArray);
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/uploadPath`, folderPath)
-      .then(function (response) {
-        console.log(response.config.data, "resp");
-      })
+      .then(function (response) {})
       .catch(function (error) {
         window.location.href = "/error";
-        console.log(error);
       });
     if (acceptedFiles.length != 0) {
       axios
@@ -154,7 +148,7 @@ const Edit = (props) => {
           marginRight: "5%",
           float: { lg: "right", md: "right", sm: "unset", xs: "unset" },
           padding: "10px",
-          width: { lg: "15%", md: "15%", sm: "25%", xs: "50%" },
+          width: { xl: "25", lg: "15%", md: "20%", sm: "25%", xs: "50%" },
           "&:hover": {
             //you want this to be the same as the backgroundColor above
             backgroundColor: "#111",

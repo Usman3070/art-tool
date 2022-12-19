@@ -13,7 +13,7 @@ import axios from "axios";
 
 export const Uploading = (Toast) => {
   const handleClick = () => {
-    window.location.href = "/editing";
+    // window.location.href = "/editing";
   };
   return (
     <div>

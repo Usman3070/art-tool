@@ -8,6 +8,7 @@ import {
   List,
   Paper,
   TextField,
+  Tooltip,
 } from "@material-ui/core";
 import { NumberOfCopies, ObjectContext, TreeContext } from "./EditingPage";
 import { ToastContainer, toast } from "react-toastify";
@@ -29,10 +30,18 @@ const initialValues = {
   userWithShare: [{ creator: "", share: "" }],
   external: "",
   description: "",
+  collection: "",
 };
 export const ModalComponent = (props) => {
-  const { selection, dispatch2 } = React.useContext(ObjectSelection);
-
+  const {
+    selection,
+    dispatch2,
+    trigger,
+    downloadHandle,
+    shareState,
+    setShareState,
+    shareStateMethod,
+  } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
 
   const { dispatch1 } = React.useContext(ObjectContext);
@@ -70,7 +79,13 @@ export const ModalComponent = (props) => {
         // }
       },
     });
+  React.useEffect(() => {
+    if (trigger) {
+      handleSubmit();
+    }
+  }, [trigger]);
   const handleClick = async () => {
+    downloadHandle(false);
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
       alert("You must set the rarity for all layers of all category");
@@ -80,12 +95,14 @@ export const ModalComponent = (props) => {
       var sum = 0;
       outerData?.map((innerData) => {
         sum += innerData;
+        downloadHandle(false);
       });
       if (sum < 100) {
         alert("Rarity must be equal to 100 for each category");
         return;
       }
     });
+
     //
     const data = {
       objects: objects,
@@ -100,6 +117,7 @@ export const ModalComponent = (props) => {
       name: values.name,
       description: values.description,
       URL: values.external,
+      collection: values.collection,
     };
     props.openLoadingModal();
     axios
@@ -108,15 +126,12 @@ export const ModalComponent = (props) => {
         // window.location.href = "/loading";
         props.closeLoadingModal();
         props.generateBTN();
-        console.log(response);
       })
       .catch(function (error) {
         alert(error);
         window.location.href = "/error";
-        console.log(error);
       });
   };
-
   const handleFormSubmit = async () => {
     const data = {
       hash: code,
@@ -133,9 +148,13 @@ export const ModalComponent = (props) => {
 
   const addFields = (e) => {
     e.preventDefault();
-    let newfield = { creator: "", share: "" };
+    if (inputFields.length > 3) {
+      alert("Max Royalties should be 4");
+    } else {
+      let newfield = { creator: "", share: "" };
 
-    setInputFields([...inputFields, newfield]);
+      setInputFields([...inputFields, newfield]);
+    }
   };
 
   const removeFields = (e) => {
@@ -158,10 +177,14 @@ export const ModalComponent = (props) => {
       }
     }
     if (event.target.name == "share") {
-      if (event.target.value.length > 3) {
-        setShareError(true);
+      if (event.target.value > 100) {
+        // setShareError(true);
+        return alert("Share value should be 100");
+      } else if (event.target.value < 100) {
+        // setShareError(false);
+        return alert("Share value should be 100");
       } else {
-        setShareError(false);
+        shareStateMethod(true);
       }
     }
   };
@@ -177,7 +200,6 @@ export const ModalComponent = (props) => {
     const positionX = rect.left - parent.left;
     const positionY = rect.top - parent.top;
 
-    //console.log(`width: ${width}, position: ${positionX} , ${positionY}`);
     const values = { x: positionX, y: positionY };
 
     return values;
@@ -281,7 +303,7 @@ export const ModalComponent = (props) => {
                     md={12}
                     sm={12}
                     xs={12}
-                    spacing={4}
+                    spacing={1}
                   >
                     <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                       <Typography
@@ -305,22 +327,34 @@ export const ModalComponent = (props) => {
                       >
                         Height
                       </Typography>
-                      <TextField
-                        // className='editor_textfield mid_textFields'
-                        id='outlined-number'
-                        placeholder='0'
-                        type='number'
-                        variant='outlined'
-                        color='#808080'
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(event) => {
-                          props.setCanvasHeight({
-                            value: JSON.parse(event.target.value),
-                          });
-                        }}
-                      />
+                      <Tooltip
+                        title="600 x 600 is the standard for most NFT's"
+                        placement='top'
+                      >
+                        <TextField
+                          // className='editor_textfield mid_textFields'
+                          id='outlined-number'
+                          placeholder='0'
+                          type='number'
+                          variant='outlined'
+                          color='#808080'
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          onChange={(event) => {
+                            if (JSON.parse(event.target.value) > 600) {
+                              props.setCanvasHeight({
+                                value: 600,
+                              });
+                              return alert("NFT's Height Should be 600px");
+                            } else {
+                              props.setCanvasHeight({
+                                value: JSON.parse(event.target.value),
+                              });
+                            }
+                          }}
+                        />
+                      </Tooltip>
                     </Grid>
                     <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
                       <Typography
@@ -332,21 +366,33 @@ export const ModalComponent = (props) => {
                       >
                         Width
                       </Typography>
-                      <TextField
-                        // className='editor_textfield mid_textFields'
-                        id='outlined-number'
-                        placeholder='0'
-                        variant='outlined'
-                        type='number'
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        onChange={(event) => {
-                          props.setCanvasWidth({
-                            value: JSON.parse(event.target.value),
-                          });
-                        }}
-                      />
+                      <Tooltip
+                        title="600 x 600 is the standard for most NFT's"
+                        placement='top'
+                      >
+                        <TextField
+                          // className='editor_textfield mid_textFields'
+                          id='outlined-number'
+                          placeholder='0'
+                          variant='outlined'
+                          type='number'
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          onChange={(event) => {
+                            if (JSON.parse(event.target.value) > 600) {
+                              props.setCanvasWidth({
+                                value: 600,
+                              });
+                              return alert("NFT's Width Should be 600px");
+                            } else {
+                              props.setCanvasWidth({
+                                value: JSON.parse(event.target.value),
+                              });
+                            }
+                          }}
+                        />
+                      </Tooltip>
                     </Grid>
                   </Grid>
                   <div>
@@ -416,12 +462,12 @@ export const ModalComponent = (props) => {
                             marginBottom: "1%",
                           }}
                         >
-                          Percent fee(%)
+                          Royalty Fee (%)
                         </div>
                         <TextField
                           fullWidth
                           variant='outlined'
-                          placeholder='eg. WhatsForLaunch'
+                          placeholder='5%'
                           name='royaltyPercent'
                           type='number'
                           value={values.royaltyPercent}
@@ -432,6 +478,32 @@ export const ModalComponent = (props) => {
                           <p style={{ color: "red" }}>
                             {errors.royaltyPercent}
                           </p>
+                        ) : null}
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Collection Name
+                        </div>
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='WhatsForLaunch'
+                          name='collection'
+                          value={values.collection}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errors.collection && touched.collection ? (
+                          <p style={{ color: "red" }}>{errors.collection}</p>
                         ) : null}
                       </div>
                       <div
@@ -466,9 +538,9 @@ export const ModalComponent = (props) => {
                             borderRadius: "10px",
                           }}
                         />
-                        {errors.external && touched.external ? (
+                        {/* {errors.external && touched.external ? (
                           <p style={{ color: "red" }}>{errors.external}</p>
-                        ) : null}
+                        ) : null} */}
                       </div>
 
                       <div>
@@ -602,7 +674,7 @@ export const ModalComponent = (props) => {
                       </button>
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     style={{
                       marginTop: "3%",
                     }}
@@ -617,7 +689,7 @@ export const ModalComponent = (props) => {
                     >
                       Create
                     </Button>
-                  </div>
+                  </div> */}
                 </form>
               </div>
               {/* </CardContent> */}
@@ -625,6 +697,9 @@ export const ModalComponent = (props) => {
             </List>
           </Paper>
         </div>
+        {/* <button type='button' onClick={handleClick}>
+          Onsubmit
+        </button> */}
       </Box>
       <div className='form-group'>
         <ToastContainer

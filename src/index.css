@@ -521,9 +521,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .MuiPaper-root {
   width: 100% !important;
 }
-.MuiMenu-paper {
-  margin-top: 30px;
-} */
+ */
 .modalForm {
   background-image: url("./assets/images/modalBG.png");
   background-size: cover;
@@ -533,6 +531,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .MuiPaper-root {
   background-color: transparent !important;
+  width:100%
 }
 .MuiInputBase-input {
   /* background-color: #32306a !important; */
@@ -597,4 +596,43 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .MuiTypography-root {
   color: #fff !important;
+}
+.MuiAccordionDetails-root {
+  background-color: #4b4261;
+  margin-bottom: 5px;
+  border-radius: 8px;
+}
+.canvasMargin{
+  margin-left: 1%;
+}
+@media (max-width: 1603px) {
+  .canvasMargin{
+    margin-left: 30%;
+  }
+}
+@media (max-width: 1603px) {
+  .createBtn{
+    margin-left: 30% !important;
+  }
+}
+@media (max-width: 1370px) {
+  .canvasMargin{
+    margin-left: 35%;
+  }
+}
+@media (max-width: 1370px) {
+  .createBtn{
+    margin-left: 35% !important;
+  }
+}
+@media (max-width: 1405px) {
+  .preview-before{
+    margin-left: 5% !important;
+  }
+}
+@media (max-width: 1357px) {
+  .preview-before{
+    margin-left: 5% !important;
+    padding-left: 5% !important;
+  }
 }
