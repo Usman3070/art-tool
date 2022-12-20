@@ -22,6 +22,7 @@ import { EditorInput } from "./EditorInput";
 import { ObjectSelection } from "./EditingPage";
 import { Grid, Typography, Button } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { Percent } from "@mui/icons-material";
 
 const initialValues = {
   name: "",
@@ -67,6 +68,7 @@ export const ModalComponent = (props) => {
   const [creatorError, setCreatorError] = React.useState(false);
   const [shareError, setShareError] = React.useState(false);
   const [rarityNumber, setRarityNumber] = React.useState(0);
+  const [share, setShare] = React.useState(0);
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
@@ -77,6 +79,13 @@ export const ModalComponent = (props) => {
         // if (props.closeLoadingModal) {
         //   handleClickGenerate();
         // }
+        // if (share > 100) {
+        //   alert("hello world");
+        // } else if (share < 100) {
+        //   alert("good bye world");
+        // } else {
+
+        // }
       },
     });
   React.useEffect(() => {
@@ -86,6 +95,7 @@ export const ModalComponent = (props) => {
   }, [trigger]);
   const handleClick = async () => {
     downloadHandle(false);
+
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
       alert("You must set the rarity for all layers of all category");
@@ -152,10 +162,20 @@ export const ModalComponent = (props) => {
       alert("Max Royalties should be 4");
     } else {
       let newfield = { creator: "", share: "" };
-
       setInputFields([...inputFields, newfield]);
     }
+    let Percent = 0;
+    inputFields.forEach((item) => {
+      Percent = Percent + parseFloat(item.share);
+    });
+    console.log(parseFloat(Percent), "shares holh");
   };
+
+  // for share validation
+
+  React.useEffect(() => {
+    setShare(Percent);
+  }, [Percent]);
 
   const removeFields = (e) => {
     let tempData = [...inputFields];
@@ -168,7 +188,7 @@ export const ModalComponent = (props) => {
     let data = [...inputFields];
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
-
+    console.log(event.target.value, "value");
     if (event.target.name == "creator") {
       if (event.target.value.length == 44) {
         setCreatorError(false);
@@ -176,6 +196,7 @@ export const ModalComponent = (props) => {
         setCreatorError(true);
       }
     }
+
     if (event.target.name == "share") {
       if (event.target.value > 100) {
         // setShareError(true);
@@ -188,7 +209,6 @@ export const ModalComponent = (props) => {
       }
     }
   };
-
   // Rarity Section
   var parentRef = React.useRef(null);
 

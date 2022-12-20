@@ -201,7 +201,8 @@ export const Page = (props) => {
         .then(function (response) {
           alert(`you are uploading a folder of ${acceptedFiles.length} images`);
           setToast(toast.success("uploaded successfully !"));
-          window.location.href = "/editing";
+          props.setFlag(!props.flag);
+          // window.location.href = "/editing";
         })
         .catch(function (error) {
           toast.info(error);
@@ -442,45 +443,45 @@ export const Page = (props) => {
                         setCoord={setCoord}
                         parent={parentRef}
                       />
-                      {/* {generate && ( */}
-                      <a
-                        style={{
-                          // display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          fontSize: "30px",
-                          fontWeight: "bold",
-                          width: "100%",
-                          // marginLeft: "27%",
-                        }}
-                        href={`${process.env.REACT_APP_SERVERURL}/${JSON.parse(
-                          sessionStorage.uuid
-                        )}.zip`}
-                        target='_blank'
-                        download
-                      >
-                        <Button
-                          variant='contained'
-                          sx={{
-                            marginTop: "2%",
-
-                            backgroundColor: "#111",
-                            fontWeight: "600",
-                            marginBottom: "4px",
-                            padding: "10px",
+                      {generate && (
+                        <a
+                          style={{
+                            // display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontSize: "30px",
+                            fontWeight: "bold",
                             width: "100%",
-                            "&:hover": {
-                              //you want this to be the same as the backgroundColor above
-                              backgroundColor: "#111",
-                            },
+                            // marginLeft: "27%",
                           }}
-                          onClick={handleClickGenerate}
-                          className='createBtn'
+                          href={`${
+                            process.env.REACT_APP_SERVERURL
+                          }/${JSON.parse(sessionStorage.uuid)}.zip`}
+                          target='_blank'
+                          download
                         >
-                          Download
-                        </Button>
-                      </a>
-                      {/* )} */}
+                          <Button
+                            variant='contained'
+                            sx={{
+                              marginTop: "2%",
+
+                              backgroundColor: "#111",
+                              fontWeight: "600",
+                              marginBottom: "4px",
+                              padding: "10px",
+                              width: "100%",
+                              "&:hover": {
+                                //you want this to be the same as the backgroundColor above
+                                backgroundColor: "#111",
+                              },
+                            }}
+                            onClick={handleClickGenerate}
+                            className='createBtn'
+                          >
+                            Download
+                          </Button>
+                        </a>
+                      )}
                       <Button
                         variant='contained'
                         sx={{
