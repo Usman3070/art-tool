@@ -229,20 +229,20 @@ export const Page = (props) => {
     setShow(true);
   };
   const handleClickGenerate = async () => {
-    const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
+    // const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
 
-    const response = await axios
-      .get(baseURL, {
-        params: { uuid: JSON.parse(sessionStorage.uuid) },
-      })
-      .then(function (response) {
-        toast.success("Download success");
-        setDownload(true);
-      })
-      .catch(function (error) {
-        toast.info(error);
-        toast.error("Download fail");
-      });
+    // const response = await axios
+    //   .get(baseURL, {
+    //     params: { uuid: JSON.parse(sessionStorage.uuid) },
+    //   })
+    //   .then(function (response) {
+    //     toast.success("Download success");
+    //     setDownload(true);
+    //   })
+    //   .catch(function (error) {
+    //     toast.info(error);
+    //     toast.error("Download fail");
+    //   });
     setGenerate(false);
     downloadHandle(true);
   };
@@ -252,11 +252,9 @@ export const Page = (props) => {
       alert("Share value should be 100");
     } else {
       triggerMethod(true);
+      handleClickGenerate();
     }
   };
-
-  useEffect(() => {}, []);
-
   return (
     <div>
       <NavHomePage />
@@ -430,7 +428,7 @@ export const Page = (props) => {
                     }}
                     className='art-preview'
                   >
-                    Art Previews
+                    Preview
                   </Typography>
                   <div id='content'>
                     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -475,7 +473,7 @@ export const Page = (props) => {
                                 backgroundColor: "#111",
                               },
                             }}
-                            onClick={handleClickGenerate}
+                            // onClick={handleClickGenerate}
                             className='createBtn'
                           >
                             Download

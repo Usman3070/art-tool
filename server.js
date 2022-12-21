@@ -149,7 +149,7 @@ app.post("/submitDetails", (request, response) => {
   const data = request.body;
   const uuid = data.uuid;
   const tree = data.folderTree;
-  console.log("Tree: ", tree.children[0].children);
+  // console.log("Tree: ", tree.children[0].children);
   const width = data.canvasWidth;
   const height = data.canvasHeight;
   const canvas = createCanvas(width, height);
@@ -221,7 +221,7 @@ app.post("/submitDetails", (request, response) => {
       // item.children = item.children.push(NoneObj);
       // console.log("Item.children: ", item.children);
       item.children.forEach((item) => {
-        console.log("Item: ", item);
+        // console.log("Item: ", item);
         weights.push(item?.rarity ? item?.rarity : 50);
       });
       // newArr.forEach((item) => {
@@ -232,13 +232,13 @@ app.post("/submitDetails", (request, response) => {
 
       const obj = item.children[idx];
       // const obj = newArr[idx];
-      console.log("Obj: ", obj);
-      console.log("Obj.path: ", obj.path);
+      // console.log("Obj: ", obj);
+      // console.log("Obj.path: ", obj.path);
 
       let pathArray = obj.path.split("\\");
       let traitType = pathArray[pathArray.length - 2];
-      console.log(traitType, "traitType");
-      console.log(obj.name, "obj_Name");
+      // console.log(traitType, "traitType");
+      // console.log(obj.name, "obj_Name");
       attributesArray.push({ traitType, value: obj.name.replace(".png", "") });
       if (attributesArray.length === tree.children.length) {
         newData.push([...attributesArray]);
@@ -341,7 +341,44 @@ app.post("/submitDetails", (request, response) => {
 app.get("/compress", async (req, res) => {
   console.log("Check");
   const uuid = req.query.uuid;
+
+  console.log(uuid, "uudo");
+
+  // const compressing = async () => {
   const output = fs.createWriteStream(`generated/${uuid}.zip`);
+  const archive = archiver("zip");
+
+  archive.on("error", function (err) {
+    res.status(500).send({ error: err.message });
+  });
+
+  output.on("close", function () {
+    console.log(archive.pointer(), "total bytes");
+  });
+  //on stream closed we can end the request
+  archive.on("end", function () {
+    console.log("Archive wrote %d bytes", archive.pointer());
+  });
+  archive.on("error", function (errr) {
+    console.log(errr, "erooor");
+  });
+
+  //this is the streaming magic
+  archive.pipe(output);
+
+  archive.directory(`generated/${uuid}`, `${uuid}`);
+  // archive.directory(`generated/new${uuid}/${uuid}`, `whatsforlaunchartgen`);
+
+  archive.finalize();
+  // };
+
+  // console.log(compressing(), "compressing");
+
+  // await compressing().then(() => {
+  //   res.attachment("whatsforlaunchartgen.zip");
+  // });
+
+  console.log("done dona done");
   // whatsforlaunchartgen
   // fs.rename()
   // if (!fs.existsSync(`generated/new${uuid}`)) {
@@ -361,24 +398,24 @@ app.get("/compress", async (req, res) => {
   // const output = fs.createWriteStream(
   //   `generated/${uuid}/whatsforlaunchartgen.zip`
   // );
-  const archive = archiver("zip");
+  // const archive = archiver("zip");
 
-  archive.on("error", function (err) {
-    res.status(500).send({ error: err.message });
-  });
+  // archive.on("error", function (err) {
+  //   res.status(500).send({ error: err.message });
+  // });
 
   //on stream closed we can end the request
-  archive.on("end", function () {
-    console.log("Archive wrote %d bytes", archive.pointer());
-  });
+  // archive.on("end", function () {
+  //   console.log("Archive wrote %d bytes", archive.pointer());
+  // });
 
   //this is the streaming magic
-  archive.pipe(output);
+  // archive.pipe(output);
 
-  archive.directory(`generated/${uuid}`, `${uuid}`);
+  // archive.directory(`generated/${uuid}`, `${uuid}`);
   // archive.directory(`generated/new${uuid}/${uuid}`, `whatsforlaunchartgen`);
 
-  archive.finalize();
+  // archive.finalize();
 
   // output.on("finish", () => {
   //   res.attachment("whatsforlaunchartgen.zip");

@@ -130,12 +130,28 @@ export const ModalComponent = (props) => {
       collection: values.collection,
     };
     props.openLoadingModal();
-    axios
+    await axios
       .post(`${process.env.REACT_APP_SERVERURL}/submitDetails`, data)
       .then(function (response) {
         // window.location.href = "/loading";
         props.closeLoadingModal();
         props.generateBTN();
+      })
+      .then(async () => {
+        const baseURL = `${process.env.REACT_APP_SERVERURL}/compress`;
+
+        const response = await axios
+          .get(baseURL, {
+            params: { uuid: JSON.parse(sessionStorage.uuid) },
+          })
+          .then(function (response) {
+            toast.success("Download success");
+            // setDownload(true);
+          })
+          .catch(function (error) {
+            toast.info(error);
+            toast.error("Download fail");
+          });
       })
       .catch(function (error) {
         alert(error);
