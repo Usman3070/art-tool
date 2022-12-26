@@ -64,7 +64,7 @@ export const SliderComponent = (props) => {
     <>
       <Slider
         value={currentSlide}
-        valueLabelDisplay="auto"
+        valueLabelDisplay='auto'
         onChange={changeValue}
         min={0}
         max={1000}
@@ -72,9 +72,9 @@ export const SliderComponent = (props) => {
     </>
   ) : (
     <Slider
-      aria-label="Temperature"
+      aria-label='Temperature'
       defaultValue={0}
-      valueLabelDisplay="auto"
+      valueLabelDisplay='auto'
       value={currentSlide}
       onChange={changeValue}
       step={1}

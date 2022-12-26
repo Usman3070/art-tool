@@ -38,6 +38,8 @@ export const TreeReducer = (state, action) => {
 };
 
 export const selectionReducer = (state, action) => {
+  console.log(action, action.payload, "action");
+  console.log(state, "state");
   switch (action.type) {
     case "update":
       const newState = state;

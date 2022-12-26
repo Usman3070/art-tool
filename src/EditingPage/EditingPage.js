@@ -122,6 +122,10 @@ export const EditingPage = () => {
   const shareStateMethod = (val) => {
     setShareState(val);
   };
+  // const [rarityCheck, setRarityCheck] = React.useState(true);
+  // const rarityCheckMethod = (val) => {
+  //   setShareState(val);
+  // };
   return (
     <TreeContext.Provider value={{ fileData: TreeState, dispatchMain }}>
       <ObjectContext.Provider value={{ objects: ObjectState, dispatch1 }}>
@@ -138,6 +142,8 @@ export const EditingPage = () => {
             shareState,
             setShareState,
             shareStateMethod,
+            // setRarityCheck,
+            // rarityCheckMethod,
           }}
         >
           <NumberOfCopies.Provider

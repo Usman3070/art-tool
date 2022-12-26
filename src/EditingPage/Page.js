@@ -206,7 +206,7 @@ export const Page = (props) => {
         })
         .catch(function (error) {
           toast.info(error);
-          toast.info("Each File should be within 10Mb limit");
+          toast.info("Each File should be within 250Mb limit");
           toast.info("Supported Files: jpg, jpeg, png");
           toast.error("upload fail");
         });
@@ -267,8 +267,8 @@ export const Page = (props) => {
                 isOpen={open}
                 // handleClose={handleClose}
                 rarityData={number}
-                setCanvasHeight={setCanvasHeight}
-                setCanvasWidth={setCanvasWidth}
+                setCanvasHeight={canvasHeight.value}
+                setCanvasWidth={canvasWidth.value}
                 openLoadingModal={openLoadingModal}
                 closeLoadingModal={closeLoadingModal}
                 generateBTN={generateBTN}

@@ -71,6 +71,7 @@ export const Folders = (props) => {
   }, [setList.children]);
 
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
+    // alert(`Value: ${val}`);
     let num = 0;
     if (isNaN(parseFloat(val))) {
       val = 0;
@@ -89,18 +90,22 @@ export const Folders = (props) => {
 
     props.setNumber((data) => {
       let tempData = [...data?.array];
+      console.log(tempData, "tempData");
       if (tempData[folderIndex] === undefined) {
         tempData[folderIndex] = [];
       }
       tempData[folderIndex][subfolderIndex] = parseFloat(val);
       return { index: folderIndex, array: tempData };
     });
-    dispatchMain({
-      type: "update",
-      value: val,
-      folderIndex: folderIndex,
-      subfolderIndex: subfolderIndex,
-    });
+    console.log("val: ", val);
+    console.log("folderIndex: ", folderIndex);
+    console.log("subfolderIndex: ", subfolderIndex);
+    // dispatchMain({
+    //   type: "update",
+    //   value: val,
+    //   folderIndex: folderIndex,
+    //   subfolderIndex: subfolderIndex,
+    // });
   };
   const handleRenameArray = (e, i, j) => {
     setList((tempArray) => {
@@ -341,6 +346,7 @@ export const Folders = (props) => {
                                                   className='rarityText'
                                                   size='small'
                                                   variant='outlined'
+                                                  // value={0}
                                                   // type='number'
                                                   inputProps={{
                                                     style: {

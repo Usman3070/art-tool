@@ -50,7 +50,7 @@ export function MyDropzone() {
         })
         .catch(function (error) {
           toast.info(error);
-          toast.info("Each File should be within 10Mb limit");
+          toast.info("Each File should be within 250Mb limit");
           toast.info("Supported Files: jpg, jpeg, png");
           toast.error("upload fail");
         });

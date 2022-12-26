@@ -17,12 +17,12 @@ export const FoldersRarity = (props) => {
   const children = props.children;
 
   const handleRaritySet = (folderIndex, subfolderIndex, val) => {
-    dispatchMain({
-      type: "update",
-      value: val,
-      folderIndex: folderIndex,
-      subfolderIndex: subfolderIndex,
-    });
+    // dispatchMain({
+    //   type: "update",
+    //   value: val,
+    //   folderIndex: folderIndex,
+    //   subfolderIndex: subfolderIndex,
+    // });
   };
   return (
     <div>

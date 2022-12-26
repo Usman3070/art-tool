@@ -28,7 +28,7 @@ const initialValues = {
   name: "",
   symbol: "",
   royaltyPercent: "",
-  userWithShare: [{ creator: "", share: "" }],
+  userWithShare: [{ address: "", share: "" }],
   external: "",
   description: "",
   collection: "",
@@ -58,7 +58,7 @@ export const ModalComponent = (props) => {
   const [symbol, setSymbol] = React.useState("");
   const [sellerFee, setSellerFee] = React.useState("");
   const [inputFields, setInputFields] = React.useState([
-    { creator: "", share: "" },
+    { address: "", share: "" },
   ]);
   const [creators, setCreators] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -118,6 +118,7 @@ export const ModalComponent = (props) => {
       objects: objects,
       total: total,
       sellerFee,
+      royaltyFee: values.royaltyPercent,
       symbol: values.symbol,
       creators: inputFields,
       uuid: JSON.parse(sessionStorage.uuid),
@@ -177,7 +178,7 @@ export const ModalComponent = (props) => {
     if (inputFields.length > 3) {
       alert("Max Royalties should be 4");
     } else {
-      let newfield = { creator: "", share: "" };
+      let newfield = { address: "", share: "" };
       setInputFields([...inputFields, newfield]);
     }
     let Percent = 0;
@@ -205,7 +206,7 @@ export const ModalComponent = (props) => {
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
     console.log(event.target.value, "value");
-    if (event.target.name == "creator") {
+    if (event.target.name == "address") {
       if (event.target.value.length == 44) {
         setCreatorError(false);
       } else {
@@ -380,7 +381,7 @@ export const ModalComponent = (props) => {
                           onChange={(event) => {
                             if (JSON.parse(event.target.value) > 600) {
                               props.setCanvasHeight({
-                                value: 600,
+                                value: 300,
                               });
                               return alert("NFT's Height Should be 600px");
                             } else {
@@ -417,15 +418,17 @@ export const ModalComponent = (props) => {
                           }}
                           onChange={(event) => {
                             if (JSON.parse(event.target.value) > 600) {
-                              props.setCanvasWidth({
-                                value: 600,
-                              });
+                              // props.setCanvasWidth({
+                              //   value: 300,
+                              // });
                               return alert("NFT's Width Should be 600px");
-                            } else {
-                              props.setCanvasWidth({
-                                value: JSON.parse(event.target.value),
-                              });
                             }
+                            // else {
+                            //   props.setCanvasWidth({
+                            //     value: JSON.parse(event.target.value),
+                            //   });
+                            // }
+                            // console.log(props.canvasWidth, "canvasWidth");
                           }}
                         />
                       </Tooltip>
@@ -433,6 +436,32 @@ export const ModalComponent = (props) => {
                   </Grid>
                   <div>
                     <div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "poppins-light",
+                            color: "#fff",
+                            marginTop: "1%",
+                            marginBottom: "1%",
+                          }}
+                        >
+                          Collection Name
+                        </div>
+                        <TextField
+                          fullWidth
+                          variant='outlined'
+                          placeholder='WhatsForLaunch'
+                          name='collection'
+                          value={values.collection}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        {errors.collection && touched.collection ? (
+                          <p style={{ color: "red" }}>{errors.collection}</p>
+                        ) : null}
+                      </div>
                       <div>
                         <div
                           style={{
@@ -516,32 +545,7 @@ export const ModalComponent = (props) => {
                           </p>
                         ) : null}
                       </div>
-                      <div>
-                        <div
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: 500,
-                            fontFamily: "poppins-light",
-                            color: "#fff",
-                            marginTop: "1%",
-                            marginBottom: "1%",
-                          }}
-                        >
-                          Collection Name
-                        </div>
-                        <TextField
-                          fullWidth
-                          variant='outlined'
-                          placeholder='WhatsForLaunch'
-                          name='collection'
-                          value={values.collection}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
-                        {errors.collection && touched.collection ? (
-                          <p style={{ color: "red" }}>{errors.collection}</p>
-                        ) : null}
-                      </div>
+
                       <div
                         style={{
                           display: "flex",
@@ -632,7 +636,7 @@ export const ModalComponent = (props) => {
                             variant='outlined'
                             // inputProps={{ style: { textAlign: "center" } }}
                             placeholder='Royalty Wallets'
-                            name='creator'
+                            name='address'
                             value={values.royaltyWallet}
                             onChange={handleChange}
                             onBlur={(event) => {
