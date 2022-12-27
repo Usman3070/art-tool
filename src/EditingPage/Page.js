@@ -48,6 +48,8 @@ export const Page = (props) => {
     downloadBtn,
     downloadHandle,
     shareState,
+    rarityCheck,
+    trigger
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
   const [totalCopies, setTotalCopies] = React.useState({ value: 0 });
@@ -250,9 +252,11 @@ export const Page = (props) => {
   const handleGenerate = () => {
     if (shareState === false) {
       alert("Share value should be 100");
-    } else {
-      triggerMethod(true);
-      handleClickGenerate();
+    } else
+    {
+      handleClickGenerate();  
+      triggerMethod(!trigger);
+
     }
   };
   return (
@@ -412,7 +416,105 @@ export const Page = (props) => {
 
               {props.folderStructure && (
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-                  <Typography
+                   <div className='preview-before'>
+                    <div style={{ display: "flex" }}>
+                      <Typography
+                        variant='h1'
+                        sx={{
+                          // marginBottom: {
+                          //   lg: "-20%",
+                          //   md: "-10%",
+                          //   sm: "0%",
+                          //   xs: "0%",
+                          // },
+                          color: "#fff",
+                          fontSize: "32px",
+                          // marginLeft: "-10%",
+                          marginTop: {
+                            lg: "45%",
+                            md: "45%",
+                            sm: "0%",
+                            xs: "0%",
+                          },
+                        }}
+                        className='preview'
+                      >
+                        Preview
+                      </Typography>
+                      {/* <Icon icon='carbon:information' className='clock-icon' /> */}
+                    </div>
+                    <div>
+                    <Items
+                        onClick={setCurrentElement}
+                        files={props.folderStructure}
+                        hashedFolder={props.hashedElements}
+                        imageHeight={canvasHeight.value}
+                        imageWidth={canvasWidth.value}
+                        setCoord={setCoord}
+                        parent={parentRef}
+                      />
+                    {generate && (
+                        <a
+                          style={{
+                            // display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontSize: "30px",
+                            fontWeight: "bold",
+                            width: "303px",
+                            // marginLeft: "27%",
+                          }}
+                          href={`${
+                            process.env.REACT_APP_SERVERURL
+                          }/${JSON.parse(sessionStorage.uuid)}.zip`}
+                          target='_blank'
+                          download
+                        >
+                          <Button
+                            variant='contained'
+                            sx={{
+                              marginTop: "2%",
+
+                              backgroundColor: "#111",
+                              fontWeight: "600",
+                              marginBottom: "4px",
+                              padding: "10px",
+                              width: "303px",
+                              "&:hover": {
+                                //you want this to be the same as the backgroundColor above
+                                backgroundColor: "#111",
+                              },
+                            }}
+                            // onClick={handleClickGenerate}
+                            className='createBtn'
+                          >
+                            Download
+                          </Button>
+                        </a>
+                      )}
+                      <Button
+                        variant='contained'
+                        sx={{
+                          marginTop: "2%",
+                          backgroundColor: "#111",
+                          fontWeight: "600",
+                          marginBottom: "4px",
+                          padding: "10px",
+                          width: "303px",
+                          "&:hover": {
+                            //you want this to be the same as the backgroundColor above
+                            backgroundColor: "#111",
+                          },
+                        }}
+                        onClick={handleGenerate}
+                        className='createBtn'
+                      >
+                        Generate
+                      </Button>
+                    </div>
+                    
+                  </div>
+                  {/* <Typography
                     variant='h1'
                     sx={{
                       marginBottom: {
@@ -534,8 +636,8 @@ export const Page = (props) => {
                           </Button>
                         </a>
                       )} */}
-                    </div>
-                  </div>
+                    {/* </div> */}
+                  {/* </div> */}
                 </Grid>
               )}
               {!props.folderStructure && (
@@ -615,28 +717,6 @@ export const Page = (props) => {
                         Generated and deployed on What's For Launch
                       </Typography>
                     </div>
-
-                    {/* <div id='content' style={{ width: "500px" }}>
-                      <Typography
-                        sx={{
-                          height: "300px",
-                          width: "300px",
-                          backgroundColor: "#C5C5C5",
-                          borderRadius: "10px",
-                          marginLeft: "-20%",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            display: "flex",
-                            marginTop: "50%",
-                            justifyContent: "center",
-                          }}
-                        >
-                          Generation Will appear here
-                        </Typography>
-                      </Typography>
-                    </div> */}
                   </div>
                 </Grid>
               )}

@@ -10,6 +10,7 @@ const s3Actions = require("./s3Actions");
 var multer = require("multer");
 const archiver = require("archiver");
 
+var rimraf = require('rimraf')
 var path = require("path");
 
 require("dotenv").config({ path: "./config.env" });
@@ -74,7 +75,7 @@ const fields = [];
 var filePaths = new Set();
 
 var upload = multer({
-  limits: { fileSize: 10 * 1000 * 1000 },
+  limits: { fileSize: 100 * 1000 * 1000 },
   storage: storage,
 }).fields(fields);
 
@@ -183,9 +184,9 @@ app.post("/submitDetails", (request, response) => {
   var values = data.total.value;
   console.log(values, "valuess");
 
-  // if (values > 10000) {
-  //   return;
-  // }
+  if (values > 10000) {
+    return;
+  }
 
   const folderLayers = tree.children;
 
@@ -385,6 +386,53 @@ app.get("/resolveFiles", function (req, res, next) {
 
   return res.status(200).json("Success");
 });
+
+
+var uploadsDir=__dirname+'/generated'
+fs.readdir(uploadsDir, function(err,files) {
+  files.forEach(function(file,index) {
+    fs.stat(path.join(uploadsDir, file), function(err, stat) {
+      var endTime, now;
+      if(err){
+        return console.log(err);
+      }
+      now= new Date().getTime();
+      endTime= new Date(stat.ctime).getTime() +1800000;
+      if(now>endTime){
+        return rimraf(path.join(uploadsDir, file), function(err) {
+          if(err){
+            return console.log(err);
+          }
+          console.log('successfully deleted');
+        })
+      }
+    })
+  })
+})
+
+var layerDir=__dirname+'/src/EditingPage/layers'
+fs.readdir(layerDir, function(err,files) {
+  files.forEach(function(file,index) {
+    fs.stat(path.join(layerDir, file), function(err, stat) {
+      var endTime, now;
+      if(err){
+        return console.log(err);
+      }
+      now= new Date().getTime();
+      endTime= new Date(stat.ctime).getTime() +3600000;
+      if(now>endTime){
+        return rimraf(path.join(layerDir, file), function(err) {
+          if(err){
+            return console.log(err);
+          }
+          console.log('successfully deleted layers');
+        })
+      }
+    })
+  })
+})
+
+
 app.use("/", express.static(path.join(__dirname, "src/EditingPage/")));
 app.use("/", express.static(path.join(__dirname, "generated/")));
 app.use(express.static("./build"));
