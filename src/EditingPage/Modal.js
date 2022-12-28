@@ -28,7 +28,7 @@ const initialValues = {
   name: "",
   symbol: "",
   royaltyPercent: "",
-  userWithShare: [{ address: "", share: "" }],
+  userWithShare: [{ address: "", share: 0 }],
   external: "",
   description: "",
   collection: "",
@@ -60,7 +60,7 @@ export const ModalComponent = (props) => {
   const [symbol, setSymbol] = React.useState("");
   const [sellerFee, setSellerFee] = React.useState("");
   const [inputFields, setInputFields] = React.useState([
-    { address: "", share: "" },
+    { address: "", share: 0 },
   ]);
   const [creators, setCreators] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -182,13 +182,21 @@ export const ModalComponent = (props) => {
     if (inputFields.length > 3) {
       alert("Max Royalties should be 4");
     } else {
-      let newfield = { address: "", share: "" };
+      let newfield = { address: "", share: 0 };
       setInputFields([...inputFields, newfield]);
     }
   };
 
   // for share validation
-
+  // const handleShare = () =>{
+  //   let Percent = 0;
+  //   inputFields.forEach((item) => {
+  //     Percent = Percent + parseFloat(item.share);
+  //   });
+  //   if(parseFloat(Percent)>100){
+  //     return alert("Share value should be 100")
+  //   }
+  // }
   // React.useEffect(() => {
   //   setShare(Percent);
   // }, [Percent]);
