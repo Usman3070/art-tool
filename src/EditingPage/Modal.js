@@ -28,7 +28,7 @@ const initialValues = {
   name: "",
   symbol: "",
   royaltyPercent: "",
-  userWithShare: [{ address: "", share: "" }],
+  userWithShare: [{ address: "", share: 0 }],
   external: "",
   description: "",
   collection: "",
@@ -42,6 +42,8 @@ export const ModalComponent = (props) => {
     shareState,
     setShareState,
     shareStateMethod,
+    rarityCheckMethod,
+    triggerMethod
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
 
@@ -58,7 +60,7 @@ export const ModalComponent = (props) => {
   const [symbol, setSymbol] = React.useState("");
   const [sellerFee, setSellerFee] = React.useState("");
   const [inputFields, setInputFields] = React.useState([
-    { address: "", share: "" },
+    { address: "", share: 0 },
   ]);
   const [creators, setCreators] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -93,12 +95,14 @@ export const ModalComponent = (props) => {
       handleSubmit();
     }
   }, [trigger]);
+  
   const handleClick = async () => {
     downloadHandle(false);
 
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
-      alert("You must set the rarity for all layers of all category");
+      alert("You must set the rarity for all layers of all category"); triggerMethod(false)
+      
       return;
     }
     props?.rarityData?.array?.map((outerData) => {
@@ -108,7 +112,7 @@ export const ModalComponent = (props) => {
         downloadHandle(false);
       });
       if (sum < 100) {
-        alert("Rarity must be equal to 100 for each category");
+        alert("Rarity must be equal to 100 for each category");triggerMethod(false)
         return;
       }
     });
@@ -178,21 +182,24 @@ export const ModalComponent = (props) => {
     if (inputFields.length > 3) {
       alert("Max Royalties should be 4");
     } else {
-      let newfield = { address: "", share: "" };
+      let newfield = { address: "", share: 0 };
       setInputFields([...inputFields, newfield]);
     }
-    let Percent = 0;
-    inputFields.forEach((item) => {
-      Percent = Percent + parseFloat(item.share);
-    });
-    console.log(parseFloat(Percent), "shares holh");
   };
 
   // for share validation
-
-  React.useEffect(() => {
-    setShare(Percent);
-  }, [Percent]);
+  // const handleShare = () =>{
+  //   let Percent = 0;
+  //   inputFields.forEach((item) => {
+  //     Percent = Percent + parseFloat(item.share);
+  //   });
+  //   if(parseFloat(Percent)>100){
+  //     return alert("Share value should be 100")
+  //   }
+  // }
+  // React.useEffect(() => {
+  //   setShare(Percent);
+  // }, [Percent]);
 
   const removeFields = (e) => {
     let tempData = [...inputFields];
@@ -309,7 +316,13 @@ export const ModalComponent = (props) => {
   //       toast.error("Compression fail");
   //     });
   // };
-
+  // const handleShare = () =>{
+  //   let Percent = 0;
+  //   inputFields.forEach((item) => {
+  //     Percent = Percent + parseFloat(item.share);
+  //   });
+  //   console.log(parseFloat(Percent), "shares holh");
+  // }
   return (
     <div className='modalForm'>
       <Box>
@@ -662,6 +675,7 @@ export const ModalComponent = (props) => {
                             onBlur={(event) => {
                               handleFormChange(index, event);
                             }}
+                            // onChange={handleShare}
                             style={{
                               justifyContent: "flex-start",
                               display: "flex",
@@ -682,7 +696,21 @@ export const ModalComponent = (props) => {
                   </div>
                   <div style={{ display: "flex" }}>
                     <div style={{ marginTop: "3%" }}>
-                      <button
+                      {inputFields.length>3?<button
+                        style={{
+                          width: "40px",
+                          backgroundColor: "#1565C0",
+                          borderRadius: "8px",
+                          color: "#fff",
+                          borderColor: "#1565C0",
+                          height: "30px",
+                          cursor:"not-allowed"
+                        }}
+                        onClick={(e) => addFields(e)}
+                        disabled
+                      >
+                        <AddIcon />
+                      </button>:<button
                         style={{
                           width: "40px",
                           backgroundColor: "#1565C0",
@@ -695,10 +723,24 @@ export const ModalComponent = (props) => {
                         onClick={(e) => addFields(e)}
                       >
                         <AddIcon />
-                      </button>
+                      </button>}
                     </div>
                     <div style={{ marginTop: "3%", marginLeft: "2%" }}>
-                      <button
+                      {inputFields.length<2?<button
+                        style={{
+                          width: "40px",
+                          borderRadius: "8px",
+                          color: "#fff",
+                          borderColor: "red",
+                          height: "30px",
+                          background: "red",
+                          cursor:"not-allowed"
+                        }}
+                        onClick={(e) => removeFields(e)}
+                        disabled
+                      >
+                        <RemoveIcon />
+                      </button>:<button
                         style={{
                           width: "40px",
                           borderRadius: "8px",
@@ -709,9 +751,10 @@ export const ModalComponent = (props) => {
                           background: "red",
                         }}
                         onClick={(e) => removeFields(e)}
+                        
                       >
                         <RemoveIcon />
-                      </button>
+                      </button>}
                     </div>
                   </div>
                   {/* <div
