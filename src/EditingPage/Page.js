@@ -31,6 +31,7 @@ import { NavHomePage } from "../ThreeDIntro.js/navigationBar";
 import { MyDropzone } from "../SelectionPage/Dropzone";
 import { Uploading } from "../SelectionPage/Uploading";
 import { Icon } from "@iconify/react";
+import BasicModal from "./ShareModal";
 
 export const Page = (props) => {
   const { objects, dispatch1 } = React.useContext(ObjectContext);
@@ -50,6 +51,9 @@ export const Page = (props) => {
     shareState,
     rarityCheck,
     trigger,
+    shareModalMethod,
+    shareModal,
+    setShareModal
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
   const [totalCopies, setTotalCopies] = React.useState({ value: 0 });
@@ -67,7 +71,6 @@ export const Page = (props) => {
   const [Toast, setToast] = useState();
   const [error, setError] = useState("");
   const [show, setShow] = useState(true);
-  const [download, setDownload] = useState(false);
   const [generate, setGenerate] = useState(false);
   const [showGenerate, setShowGenerate] = useState(true);
   const [number, setNumber] = useState({ index: 0, array: [[]] });
@@ -251,15 +254,19 @@ export const Page = (props) => {
 
   const handleGenerate = () => {
     if (shareState === false) {
-      alert("Total value of share should be 100");
-    } else {
-      handleClickGenerate();
+      // alert("Share value should be 100");
+      shareModalMethod(true)
+    } else
+    {
+      handleClickGenerate();  
       triggerMethod(!trigger);
+
     }
   };
   return (
     <div>
       <NavHomePage />
+      {shareModal && <BasicModal title='Share value should be 100'/>}
       <Typography sx={{ paddingLeft: "7%", paddingRight: "7%" }}>
         <Edit />
         <Grid container spacing={2}>
@@ -414,7 +421,7 @@ export const Page = (props) => {
 
               {props.folderStructure && (
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-                  <div className='preview-before'>
+                   <div className='preview-before'>
                     <div style={{ display: "flex" }}>
                       <Typography
                         variant='h1'
@@ -442,7 +449,7 @@ export const Page = (props) => {
                       {/* <Icon icon='carbon:information' className='clock-icon' /> */}
                     </div>
                     <div>
-                      <Items
+                    <Items
                         onClick={setCurrentElement}
                         files={props.folderStructure}
                         hashedFolder={props.hashedElements}
@@ -451,7 +458,7 @@ export const Page = (props) => {
                         setCoord={setCoord}
                         parent={parentRef}
                       />
-                      {generate && (
+                    {generate && (
                         <a
                           style={{
                             // display: "flex",
@@ -510,6 +517,7 @@ export const Page = (props) => {
                         Generate
                       </Button>
                     </div>
+                    
                   </div>
                   {/* <Typography
                     variant='h1'
@@ -633,7 +641,7 @@ export const Page = (props) => {
                           </Button>
                         </a>
                       )} */}
-                  {/* </div> */}
+                    {/* </div> */}
                   {/* </div> */}
                 </Grid>
               )}

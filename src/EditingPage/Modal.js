@@ -23,6 +23,7 @@ import { ObjectSelection } from "./EditingPage";
 import { Grid, Typography, Button } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Percent } from "@mui/icons-material";
+import BasicModal from './ShareModal';
 
 const initialValues = {
   name: "",
@@ -39,11 +40,14 @@ export const ModalComponent = (props) => {
     dispatch2,
     trigger,
     downloadHandle,
-    shareState,
-    setShareState,
+    // shareState,
+    // setShareState,
     shareStateMethod,
-    rarityCheckMethod,
+    // rarityCheckMethod,
     triggerMethod,
+    rarityModalMethod,
+    rarityModal
+    
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
 
@@ -101,7 +105,7 @@ export const ModalComponent = (props) => {
 
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
-      alert("You must set the rarity for all layers of all category");
+      rarityModalMethod(true)
       triggerMethod(false);
 
       return;
@@ -113,7 +117,7 @@ export const ModalComponent = (props) => {
         downloadHandle(false);
       });
       if (sum < 100) {
-        alert("Rarity must be equal to 100 for each category");
+        rarityModalMethod(true)
         triggerMethod(false);
         return;
       }
@@ -335,6 +339,7 @@ export const ModalComponent = (props) => {
   return (
     <div className='modalForm'>
       <Box>
+      {rarityModal && <BasicModal title='Rarity must be 100 for each trait'/>}
         <div style={{ paddingTop: "17%" }}>
           <Paper style={{ maxHeight: 770, overflow: "auto" }}>
             <List>

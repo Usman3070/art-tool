@@ -29,11 +29,12 @@ import {
 } from "@mui/material";
 import { TreeContext } from "./EditingPage";
 import NoneTrait from "./NoneTrait";
+import BasicModal from './ShareModal';
 
 export const Folders = (props) => {
   const { dispatchMain } = React.useContext(TreeContext);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
-  const { selection, dispatch2, folderName } =
+  const {rarityModal,rarityModalMethod} =
     React.useContext(ObjectSelection);
   const children = props.children;
   let folderStructure = [];
@@ -84,7 +85,7 @@ export const Folders = (props) => {
       });
     }
     if (num + parseFloat(val) > 100) {
-      alert("value greater then 100 not allowed");
+      rarityModalMethod(true)
       return;
     }
 
@@ -167,6 +168,7 @@ export const Folders = (props) => {
 
   return (
     <div>
+      {rarityModal && <BasicModal title='Rarity must be 100 for each trait'/>}
       <Paper style={{ maxHeight: 460, overflow: "auto", width: "470px" }}>
         <List sx={{ width: "400px" }}>
           <Card sx={{ minWidth: 275 }}>
