@@ -251,7 +251,7 @@ export const Page = (props) => {
 
   const handleGenerate = () => {
     if (shareState === false) {
-      alert("Share value should be 100");
+      alert("Total value of share should be 100");
     } else {
       handleClickGenerate();
       triggerMethod(!trigger);

@@ -223,16 +223,23 @@ export const ModalComponent = (props) => {
       }
     }
 
-    if (event.target.name == "share") {
-      if (event.target.value > 100) {
-        // setShareError(true);
-        return alert("Share value should be 100");
-      } else if (event.target.value < 100) {
-        // setShareError(false);
-        return alert("Share value should be 100");
-      } else {
-        shareStateMethod(true);
-      }
+    // if (event.target.name == "share") {
+    //   if (event.target.value > 100) {
+    //     // setShareError(true);
+    //     return alert("Share value should be 100");
+    //   } else if (event.target.value < 100) {
+    //     // setShareError(false);
+    //     return alert("Share value should be 100");
+    //   } else {
+    //     shareStateMethod(true);
+    //   }
+    // }
+    let Percent = 0;
+    inputFields.forEach((item) => {
+      Percent = Percent + parseFloat(item.share);
+    });
+    if (parseFloat(Percent) === 100) {
+      shareStateMethod(true);
     }
   };
   // Rarity Section
