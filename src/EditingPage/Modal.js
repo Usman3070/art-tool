@@ -43,7 +43,7 @@ export const ModalComponent = (props) => {
     setShareState,
     shareStateMethod,
     rarityCheckMethod,
-    triggerMethod
+    triggerMethod,
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
 
@@ -95,14 +95,15 @@ export const ModalComponent = (props) => {
       handleSubmit();
     }
   }, [trigger]);
-  
+
   const handleClick = async () => {
     downloadHandle(false);
 
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
-      alert("You must set the rarity for all layers of all category"); triggerMethod(false)
-      
+      alert("You must set the rarity for all layers of all category");
+      triggerMethod(false);
+
       return;
     }
     props?.rarityData?.array?.map((outerData) => {
@@ -112,7 +113,8 @@ export const ModalComponent = (props) => {
         downloadHandle(false);
       });
       if (sum < 100) {
-        alert("Rarity must be equal to 100 for each category");triggerMethod(false)
+        alert("Rarity must be equal to 100 for each category");
+        triggerMethod(false);
         return;
       }
     });
@@ -696,65 +698,72 @@ export const ModalComponent = (props) => {
                   </div>
                   <div style={{ display: "flex" }}>
                     <div style={{ marginTop: "3%" }}>
-                      {inputFields.length>3?<button
-                        style={{
-                          width: "40px",
-                          backgroundColor: "#1565C0",
-                          borderRadius: "8px",
-                          color: "#fff",
-                          borderColor: "#1565C0",
-                          height: "30px",
-                          cursor:"not-allowed"
-                        }}
-                        onClick={(e) => addFields(e)}
-                        disabled
-                      >
-                        <AddIcon />
-                      </button>:<button
-                        style={{
-                          width: "40px",
-                          backgroundColor: "#1565C0",
-                          borderRadius: "8px",
-                          color: "#fff",
-                          borderColor: "#1565C0",
-                          height: "30px",
-                          cursor: "pointer",
-                        }}
-                        onClick={(e) => addFields(e)}
-                      >
-                        <AddIcon />
-                      </button>}
+                      {inputFields.length > 3 ? (
+                        <button
+                          style={{
+                            width: "40px",
+                            backgroundColor: "#1565C0",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "#1565C0",
+                            height: "30px",
+                            cursor: "not-allowed",
+                          }}
+                          onClick={(e) => addFields(e)}
+                          disabled
+                        >
+                          <AddIcon />
+                        </button>
+                      ) : (
+                        <button
+                          style={{
+                            width: "40px",
+                            backgroundColor: "#1565C0",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "#1565C0",
+                            height: "30px",
+                            cursor: "pointer",
+                          }}
+                          onClick={(e) => addFields(e)}
+                        >
+                          <AddIcon />
+                        </button>
+                      )}
                     </div>
                     <div style={{ marginTop: "3%", marginLeft: "2%" }}>
-                      {inputFields.length<2?<button
-                        style={{
-                          width: "40px",
-                          borderRadius: "8px",
-                          color: "#fff",
-                          borderColor: "red",
-                          height: "30px",
-                          background: "red",
-                          cursor:"not-allowed"
-                        }}
-                        onClick={(e) => removeFields(e)}
-                        disabled
-                      >
-                        <RemoveIcon />
-                      </button>:<button
-                        style={{
-                          width: "40px",
-                          borderRadius: "8px",
-                          color: "#fff",
-                          borderColor: "red",
-                          height: "30px",
-                          cursor: "pointer",
-                          background: "red",
-                        }}
-                        onClick={(e) => removeFields(e)}
-                        
-                      >
-                        <RemoveIcon />
-                      </button>}
+                      {inputFields.length < 2 ? (
+                        <button
+                          style={{
+                            width: "40px",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "red",
+                            height: "30px",
+                            background: "red",
+                            cursor: "not-allowed",
+                          }}
+                          onClick={(e) => removeFields(e)}
+                          disabled
+                        >
+                          <RemoveIcon />
+                        </button>
+                      ) : (
+                        <button
+                          style={{
+                            width: "40px",
+                            borderRadius: "8px",
+                            color: "#fff",
+                            borderColor: "red",
+                            height: "30px",
+                            cursor: "pointer",
+                            background: "red",
+                          }}
+                          onClick={(e) => removeFields(e)}
+                        >
+                          <RemoveIcon />
+                        </button>
+                      )}
                     </div>
                   </div>
                   {/* <div

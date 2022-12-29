@@ -49,7 +49,7 @@ export const Page = (props) => {
     downloadHandle,
     shareState,
     rarityCheck,
-    trigger
+    trigger,
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
   const [totalCopies, setTotalCopies] = React.useState({ value: 0 });
@@ -252,11 +252,9 @@ export const Page = (props) => {
   const handleGenerate = () => {
     if (shareState === false) {
       alert("Share value should be 100");
-    } else
-    {
-      handleClickGenerate();  
+    } else {
+      handleClickGenerate();
       triggerMethod(!trigger);
-
     }
   };
   return (
@@ -416,7 +414,7 @@ export const Page = (props) => {
 
               {props.folderStructure && (
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={12}>
-                   <div className='preview-before'>
+                  <div className='preview-before'>
                     <div style={{ display: "flex" }}>
                       <Typography
                         variant='h1'
@@ -444,7 +442,7 @@ export const Page = (props) => {
                       {/* <Icon icon='carbon:information' className='clock-icon' /> */}
                     </div>
                     <div>
-                    <Items
+                      <Items
                         onClick={setCurrentElement}
                         files={props.folderStructure}
                         hashedFolder={props.hashedElements}
@@ -453,7 +451,7 @@ export const Page = (props) => {
                         setCoord={setCoord}
                         parent={parentRef}
                       />
-                    {generate && (
+                      {generate && (
                         <a
                           style={{
                             // display: "flex",
@@ -512,7 +510,6 @@ export const Page = (props) => {
                         Generate
                       </Button>
                     </div>
-                    
                   </div>
                   {/* <Typography
                     variant='h1'
@@ -636,7 +633,7 @@ export const Page = (props) => {
                           </Button>
                         </a>
                       )} */}
-                    {/* </div> */}
+                  {/* </div> */}
                   {/* </div> */}
                 </Grid>
               )}
