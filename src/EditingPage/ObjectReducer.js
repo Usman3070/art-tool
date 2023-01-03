@@ -18,6 +18,7 @@ export const objectReducer = (state, action) => {
 export const TreeReducer = (state, action) => {
   switch (action.type) {
     case "update":
+      console.log("state: ", state)
       const children = state.children;
       const newState = [...children];
       const val = newState[action.folderIndex].children[action.subfolderIndex];

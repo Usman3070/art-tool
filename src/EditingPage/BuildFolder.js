@@ -98,9 +98,9 @@ export const Folders = (props) => {
       tempData[folderIndex][subfolderIndex] = parseFloat(val);
       return { index: folderIndex, array: tempData };
     });
-    console.log("val: ", val);
-    console.log("folderIndex: ", folderIndex);
-    console.log("subfolderIndex: ", subfolderIndex);
+    // console.log("val: ", val);
+    // console.log("folderIndex: ", folderIndex);
+    // console.log("subfolderIndex: ", subfolderIndex);
     // dispatchMain({
     //   type: "update",
     //   value: val,
@@ -389,6 +389,13 @@ export const Folders = (props) => {
                                                   }}
                                                   placeholder='out of 100'
                                                   value={0}
+                                                  onMouseEnter={(event) => {
+                                                    handleRaritySet(
+                                                      index1,
+                                                      index2,
+                                                      event.target.value
+                                                    );
+                                                  }}
                                                   onChange={(event) => {
                                                     handleRaritySet(
                                                       index1,
