@@ -23,7 +23,7 @@ import { ObjectSelection } from "./EditingPage";
 import { Grid, Typography, Button } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Percent } from "@mui/icons-material";
-import BasicModal from './ShareModal';
+import BasicModal from "./ShareModal";
 
 const initialValues = {
   name: "",
@@ -46,8 +46,7 @@ export const ModalComponent = (props) => {
     // rarityCheckMethod,
     triggerMethod,
     rarityModalMethod,
-    rarityModal
-    
+    rarityModal,
   } = React.useContext(ObjectSelection);
   const { dispatch3 } = React.useContext(NumberOfCopies);
 
@@ -105,7 +104,7 @@ export const ModalComponent = (props) => {
 
     //check is rarity set
     if (fileData?.children?.length !== props?.rarityData?.array?.length) {
-      rarityModalMethod(true)
+      rarityModalMethod(true);
       triggerMethod(false);
 
       return;
@@ -117,7 +116,7 @@ export const ModalComponent = (props) => {
         downloadHandle(false);
       });
       if (sum < 100) {
-        rarityModalMethod(true)
+        rarityModalMethod(true);
         triggerMethod(false);
         return;
       }
@@ -218,7 +217,7 @@ export const ModalComponent = (props) => {
     let data = [...inputFields];
     data[index][event.target.name] = event.target.value;
     setInputFields(data);
-    console.log(event.target.value, "value");
+    // console.log(event.target.value, "value");
     if (event.target.name == "address") {
       if (event.target.value.length == 44) {
         setCreatorError(false);
@@ -339,7 +338,9 @@ export const ModalComponent = (props) => {
   return (
     <div className='modalForm'>
       <Box>
-      {rarityModal && <BasicModal title='Rarity must be 100 for each trait'/>}
+        {rarityModal && (
+          <BasicModal title='Rarity must be 100 for each trait' />
+        )}
         <div style={{ paddingTop: "17%" }}>
           <Paper style={{ maxHeight: 770, overflow: "auto" }}>
             <List>

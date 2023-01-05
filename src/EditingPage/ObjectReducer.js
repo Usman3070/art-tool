@@ -18,7 +18,8 @@ export const objectReducer = (state, action) => {
 export const TreeReducer = (state, action) => {
   switch (action.type) {
     case "update":
-      console.log("state: ", state)
+      // console.log("update: ", state);
+      // console.log("update: ", action);
       const children = state.children;
       const newState = [...children];
       const val = newState[action.folderIndex].children[action.subfolderIndex];
@@ -33,14 +34,28 @@ export const TreeReducer = (state, action) => {
     case "add":
       const newState1 = action.payload;
       return newState1;
+
+    case "addShuffle":
+      // console.log("update: ", state);
+      // console.log("update: ", action);
+      // const children2 = state.children;
+      // const newState2 = [...children2];
+      // const val2 = newState[action.folderIndex].children[action.subfolderIndex];
+      // newState[action.folderIndex].children[action.subfolderIndex] = {
+      //   ...val2,
+      //   rarity: action.value,
+      // };
+      const finalResult2 = state;
+      finalResult2.children = action.payload;
+      return finalResult2;
     default:
       return state;
   }
 };
 
 export const selectionReducer = (state, action) => {
-  console.log(action, action.payload, "action");
-  console.log(state, "state");
+  // console.log(action, action.payload, "action");
+  // console.log(state, "state");
   switch (action.type) {
     case "update":
       const newState = state;

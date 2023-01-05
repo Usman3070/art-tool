@@ -78,6 +78,7 @@ export const EditingPage = () => {
   objects = getObjects(hashCodeElement);
 
   React.useEffect(() => {
+    // console.log("fileData:", fileData);
     dispatchMain({ type: "add", payload: fileData });
     dispatch1({ type: "add", payload: objects });
     dispatch2({
@@ -151,7 +152,7 @@ export const EditingPage = () => {
             setShareModal,
             shareModalMethod,
             rarityModalMethod,
-            rarityModal
+            rarityModal,
             // setRarityCheck,
             // rarityCheckMethod,
           }}

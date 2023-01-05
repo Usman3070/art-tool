@@ -29,13 +29,12 @@ import {
 } from "@mui/material";
 import { TreeContext } from "./EditingPage";
 import NoneTrait from "./NoneTrait";
-import BasicModal from './ShareModal';
+import BasicModal from "./ShareModal";
 
 export const Folders = (props) => {
   const { dispatchMain } = React.useContext(TreeContext);
   const { objects, dispatch1 } = React.useContext(ObjectContext);
-  const {rarityModal,rarityModalMethod} =
-    React.useContext(ObjectSelection);
+  const { rarityModal, rarityModalMethod } = React.useContext(ObjectSelection);
   const children = props.children;
   let folderStructure = [];
   // const classes = useStyles();
@@ -54,9 +53,11 @@ export const Folders = (props) => {
   const handleDragEnd = (result) => {
     // if (!result.destination) return;
     const items = Array.from(list);
+    // console.log("items: ", items);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
     setList(items);
+    dispatchMain({ type: "addShuffle", payload: items });
     items?.map((data, i) => {
       dispatch1({
         type: "update",
@@ -85,13 +86,13 @@ export const Folders = (props) => {
       });
     }
     if (num + parseFloat(val) > 100) {
-      rarityModalMethod(true)
+      rarityModalMethod(true);
       return;
     }
 
     props.setNumber((data) => {
       let tempData = [...data?.array];
-      console.log(tempData, "tempData");
+      // console.log(tempData, "tempData");
       if (tempData[folderIndex] === undefined) {
         tempData[folderIndex] = [];
       }
@@ -101,24 +102,24 @@ export const Folders = (props) => {
     // console.log("val: ", val);
     // console.log("folderIndex: ", folderIndex);
     // console.log("subfolderIndex: ", subfolderIndex);
-    // dispatchMain({
-    //   type: "update",
-    //   value: val,
-    //   folderIndex: folderIndex,
-    //   subfolderIndex: subfolderIndex,
-    // });
+    dispatchMain({
+      type: "update",
+      value: val,
+      folderIndex: folderIndex,
+      subfolderIndex: subfolderIndex,
+    });
   };
   const handleRenameArray = (e, i, j) => {
     setList((tempArray) => {
       const data = [...tempArray];
-      console.log(data, "daaatttaaa");
+      // console.log(data, "daaatttaaa");
       data[i].children[j].name = e.target.value;
       return data;
     });
   };
 
   const handleRename = async (e, path) => {
-    console.log("functin exec");
+    // console.log("functin exec");
     let from = path.replaceAll("\\", "/");
     let indexForName = from.lastIndexOf("/");
     let to = from.slice(0, indexForName + 1) + e.target.value;
@@ -136,7 +137,7 @@ export const Folders = (props) => {
   };
 
   const addFields = (e, folder) => {
-    console.log(folder.name, "folderKaNaam");
+    // console.log(folder.name, "folderKaNaam");
     let none = {
       name: "None.png",
       path: "src\\assets\\images\\None.png",
@@ -154,7 +155,7 @@ export const Folders = (props) => {
     // folder.children.push(none);
   };
   const removeFields = (e, folder) => {
-    console.log(folder, "folder");
+    // console.log(folder, "folder");
     let templist = [];
     list.map((listFolder) => {
       if (listFolder.name === folder.name) {
@@ -168,7 +169,7 @@ export const Folders = (props) => {
 
   return (
     <div>
-      {rarityModal && <BasicModal title='Rarity must be 100 for each trait'/>}
+      {rarityModal && <BasicModal title='Rarity must be 100 for each trait' />}
       <Paper style={{ maxHeight: 460, overflow: "auto", width: "470px" }}>
         <List sx={{ width: "400px" }}>
           <Card sx={{ minWidth: 275 }}>

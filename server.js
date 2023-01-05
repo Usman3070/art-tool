@@ -217,10 +217,10 @@ app.post("/submitDetails", (request, response) => {
         // console.log("item rarity: ", item.rarity);
         if (typeof item.rarity === "string") {
           // console.log("Parse Int");
-          weights.push(item.rarity ? parseInt(item.rarity) : 50);
+          weights.push(item.rarity ? parseInt(item.rarity) : 0);
         } else {
           // console.log("Not Parse Int");
-          weights.push(item.rarity ? item.rarity : 50);
+          weights.push(item.rarity ? item.rarity : 0);
         }
         // weights.push(item.rarity ? item.rarity : 0);
       });
